@@ -19,7 +19,7 @@ export default function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
-
+        <button className="btn">Click me</button>
         <div className={styles.ctas}>
           <a
             className={styles.primary}

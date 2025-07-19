@@ -1,0 +1,10 @@
+.core-root-input {
+  @apply flex flex-col w-full;
+}
+
+.core-input {
+  @apply rounded-xl border p-2 outline-none bg-purple-100 border-gray-300 h-[3rem] text-black;
+}
+.core-input-label {
+  @apply ml-2;
+}

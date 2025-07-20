@@ -12,10 +12,11 @@ const CoreHeader = () => {
   return (
     <nav className={styles}>
       <CoreMenu />
-      <div>
+      <div className="flex items-center">
         <ThemeSelector />
-
-        <button onClick={() => i18n.changeLanguage("sr")}>Serbian</button>
+        <button className="mx-2" onClick={() => i18n.changeLanguage("sr")}>
+          Serbian
+        </button>
         <button onClick={() => i18n.changeLanguage("en")}>English</button>
       </div>
     </nav>

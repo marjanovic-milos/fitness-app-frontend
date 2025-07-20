@@ -1,4 +1,8 @@
 {
   "welcome": "Welcome",
-  "description": "This is a basic example."
+  "description": "This is a basic example.",
+
+  "core": {
+    "themeSwitch": "change color theme"
+  }
 }

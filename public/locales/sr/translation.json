@@ -1,4 +1,7 @@
 {
   "welcome": "Dobrodošli",
-  "description": "Ovo je osnovni primer."
+  "description": "Ovo je osnovni primer.",
+  "core": {
+    "themeSwitch": "Promeni boju"
+  }
 }

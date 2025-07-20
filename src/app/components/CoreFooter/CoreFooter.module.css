@@ -1,0 +1,3 @@
+.core-footer {
+  @apply flex justify-center bg-red-300 w-full overflow-hidden mt-auto p-5;
+}

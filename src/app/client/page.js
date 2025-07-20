@@ -5,8 +5,11 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
+  const { t } = useTranslation();
+
   // const [startDate, setStartDate] = useState(new Date());
   // const localizer = momentLocalizer(moment);
   // const events = [
@@ -17,7 +20,11 @@ export default function Home() {
   //   },
   // ];
   return (
-    <div className={""}>
+    <div className={"px-12"}>
+      <div className="py-5">
+        <h1>{t("welcome")}</h1>
+        <p>{t("description")}</p>
+      </div>
       {/* <Calendar
         localizer={localizer}
         events={events}

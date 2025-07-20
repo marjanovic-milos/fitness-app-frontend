@@ -1,3 +1,6 @@
 .core-layout {
-  @apply flex flex-col h-[100vh] bg-blue-300 w-full overflow-hidden;
+  @apply flex flex-col h-[100vh]  bg-slate-50 transition-colors duration-300 w-full overflow-hidden text-neutral-600;
+}
+.core-layout-dark {
+  @apply flex flex-col h-[100vh] bg-slate-900 transition-colors duration-300 w-full overflow-hidden text-white;
 }

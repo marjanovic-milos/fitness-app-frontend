@@ -1,15 +1,17 @@
-import React from "react";
+import { useContext } from "react";
 import CoreFooter from "../CoreFooter/CoreFooter";
 import CoreHeader from "../CoreHeader/CoreHeader";
 import CoreNavigation from "../CoreNavigation/CoreNavigation";
+import { ThemeContext } from "@/app/context/theme";
+
 const CoreLayout = ({ children }) => {
+  const { dark } = useContext(ThemeContext);
+  const styles = dark ? "core-layout-dark" : "core-layout";
+
   return (
-    <div className="core-layout">
+    <div className={styles}>
       <CoreHeader />
-      <main className="relative flex">
-        <CoreNavigation />
-        {children}
-      </main>
+      <main className="relative flex">{children}</main>
       <CoreFooter />
     </div>
   );

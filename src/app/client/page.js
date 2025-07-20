@@ -18,7 +18,6 @@ export default function Home() {
   // ];
   return (
     <div className={""}>
-      AAA
       {/* <Calendar
         localizer={localizer}
         events={events}

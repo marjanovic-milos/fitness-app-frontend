@@ -1,11 +1,14 @@
+"use client";
 import "./globals.css";
 import CoreLayout from "./components/CoreLayout/CoreLayout";
-
+import { ThemeProvider } from "./context/theme";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`root-layout`}>
-        <CoreLayout>{children}</CoreLayout>
+        <ThemeProvider>
+          <CoreLayout>{children}</CoreLayout>
+        </ThemeProvider>
       </body>
     </html>
   );

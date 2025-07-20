@@ -1,0 +1,9 @@
+.core-mobile-navigation {
+  display: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .core-mobile-navigation {
+    @apply shadow-2xl shadow-black grid grid-cols-4 content-center items-center absolute bottom-[0rem] h-[5rem] w-full  xl:px-12 px-6;
+  }
+}

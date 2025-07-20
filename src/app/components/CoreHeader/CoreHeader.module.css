@@ -1,9 +1,9 @@
 .core-header-dark {
   @apply flex
-    justify-between gap-[2rem] shadow-xl/4 shadow-white  w-full overflow-hidden py-5 px-12;
+    xl:justify-between justify-end  gap-[2rem] shadow-xl/4 shadow-white  w-full overflow-hidden py-5 xl:px-12 px-6;
 }
 
 .core-header {
   @apply flex
-    justify-between gap-[2rem] shadow-xl/4 shadow-black  w-full overflow-hidden py-5 px-12;
+   xl:justify-between justify-end  gap-[2rem] shadow-xl/4 shadow-black  w-full overflow-hidden py-5 xl:px-12 px-6;
 }

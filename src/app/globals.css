@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "./client/test.module.css";
 @import "./client/login/loginClient.module.css";
 @import "./components/CoreInput/CoreInput.module.css";
 @import "./components/CoreCard/CoreCard.module.css";
@@ -8,7 +7,8 @@
 @import "./components/CoreFooter/CoreFooter.module.css";
 @import "./components/CoreHeader/CoreHeader.module.css";
 @import "./components/CoreNavigation/CoreNavigation.module.css";
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import "./components/CoreMenu/CoreMenu.module.css";
+@import "./components/MobileNavigation/MobileNavigation.module.css";
 
 @layer base {
   h1 {

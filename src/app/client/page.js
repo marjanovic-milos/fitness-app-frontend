@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import defaultClass from "./test.module.css";
+
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import { Calendar, momentLocalizer } from "react-big-calendar";
@@ -20,8 +20,8 @@ export default function Home() {
   //   },
   // ];
   return (
-    <div className={"px-12"}>
-      <div className="py-5">
+    <div className={"xl:px-12 px-6"}>
+      <div className='py-5'>
         <h1>{t("welcome")}</h1>
         <p>{t("description")}</p>
       </div>

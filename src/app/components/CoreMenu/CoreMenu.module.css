@@ -1,0 +1,9 @@
+.core-menu {
+  display: flex;
+}
+
+@media screen and (max-width: 1024px) {
+  .core-menu {
+    display: none;
+  }
+}

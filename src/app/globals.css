@@ -17,4 +17,10 @@
   h2 {
     font-size: var(--text-xl);
   }
+
+  :root {
+    --color-primary: #1d4ed8;
+    --color-danger: #ef4444;
+    --color-accent: #f59e0b;
+  }
 }

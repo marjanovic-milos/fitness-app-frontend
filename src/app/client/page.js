@@ -7,8 +7,8 @@ export default function Home() {
   const { t } = useTranslation();
 
   return (
-    <div className={"xl:px-12 px-6"}>
-      <div className="py-5">
+    <div className={"xl:px-12 px-6 w-full"}>
+      <div className='py-5'>
         <h1>{t("welcome")}</h1>
         <p>{t("description")}</p>
         <CoreCalendar />

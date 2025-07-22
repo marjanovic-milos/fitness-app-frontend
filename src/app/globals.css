@@ -24,3 +24,22 @@
     --color-accent: #f59e0b;
   }
 }
+
+.rbc-day-bg {
+  background-color: lightcyan !important;
+  border: none !important;
+  margin: 1rem;
+  border-radius: 50%;
+}
+
+.rbc-date-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.rbc-row {
+  height: 80px;
+}
+.rbc-month-row {
+  border: none !important;
+}

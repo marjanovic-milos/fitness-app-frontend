@@ -1,9 +1,9 @@
 import React from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-// import "react-big-calendar/lib/sass/styles";
 // import "react-big-calendar/lib/addons/dragAndDrop/styles";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
+import classes from "./CoreCalendar.module.css";
 
 const CoreCalendar = () => {
   const localizer = momentLocalizer(moment);
@@ -15,21 +15,45 @@ const CoreCalendar = () => {
     },
   ];
 
+  const CustomEvent = ({ event }) => {
+    return (
+      <div className='bg-purple-200 p-1 rounded text-sm'>
+        📝 <strong>{event.title}</strong>
+      </div>
+    );
+  };
+
+  const CustomToolbar = (toolbar) => {
+    return (
+      <div className='flex justify-between items-center mb-4'>
+        <button onClick={() => toolbar.onNavigate("PREV")}>← Prev</button>
+        <div>{toolbar.label}</div>
+        <button onClick={() => toolbar.onNavigate("NEXT")}>Next →</button>
+      </div>
+    );
+  };
   return (
-    <Calendar
-      localizer={localizer}
-      events={events}
-      startAccessor="start"
-      endAccessor="end"
-      style={{ height: 500, width: "100%" }}
-      selectable={true}
-      onSelectSlot={(slotInfo) => {
-        console.log("Selected slot", slotInfo);
-      }}
-      //   onSelectEvent={(event) => {
-      //     console.log("Selected event", event);
-      //   }}
-    />
+    <div className={classes.root}>
+      <Calendar
+        localizer={localizer}
+        events={events}
+        startAccessor='start'
+        endAccessor='end'
+        style={{ height: 500 }}
+        selectable={true}
+        onSelectSlot={(slotInfo) => {
+          console.log("Selected slot", slotInfo);
+        }}
+        views={["month"]}
+        components={{
+          event: CustomEvent,
+          toolbar: CustomToolbar,
+        }}
+        //   onSelectEvent={(event) => {
+        //     console.log("Selected event", event);
+        //   }}
+      />
+    </div>
   );
 };
 

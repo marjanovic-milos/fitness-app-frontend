@@ -1,7 +1,10 @@
 .core-menu {
   display: flex;
+  gap: 2rem;
 }
-
+.core-menu-item {
+  @apply flex items-center text-sm  bg-white rounded-full p-3 hover:bg-stone-700 hover:text-white;
+}
 @media screen and (max-width: 1024px) {
   .core-menu {
     display: none;

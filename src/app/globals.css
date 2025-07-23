@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "./client/login/loginClient.module.css";
+@import "./login/loginClient.module.css";
 @import "./components/CoreInput/CoreInput.module.css";
 @import "./components/CoreCard/CoreCard.module.css";
 @import "./components/CoreButton/CoreButton.module.css";

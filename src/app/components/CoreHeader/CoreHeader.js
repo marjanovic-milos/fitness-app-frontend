@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import CoreMenu from "../CoreMenu/CoreMenu";
-import { ThemeContext } from "@/app/context/theme";
-
+// import { ThemeContext } from "@/app/context/theme";
+import { ThemeContext } from "../../context/theme";
 import { Bell } from "lucide-react";
 import Link from "next/link";
 const CoreHeader = () => {

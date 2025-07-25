@@ -1,10 +1,12 @@
 "use client";
 import React from "react";
-import CoreCard from "@/app/components/CoreCard/CoreCard";
-import CoreInput from "@/app/components/CoreInput/CoreInput";
-import CoreButton from "@/app/components/CoreButton/CoreButton";
+// import CoreCard from "@/app/components/CoreCard/CoreCard";
+// import CoreInput from "@/app/components/CoreInput/CoreInput";
+// import CoreButton from "@/app/components/CoreButton/CoreButton";
 import styles from "./loginClient.module.css";
-
+import CoreCard from "../components/CoreCard/CoreCard";
+import CoreInput from "../components/CoreInput/CoreInput";
+import CoreButton from "../components/CoreButton/CoreButton";
 const ClientLogin = () => {
   return (
     <div className={styles.root}>

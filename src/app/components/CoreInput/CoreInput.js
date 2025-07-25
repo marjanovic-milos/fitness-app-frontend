@@ -2,7 +2,8 @@
 
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { ThemeContext } from "@/app/context/theme";
+
+import { ThemeContext } from "src/app/context/theme";
 
 const CoreInput = (props) => {
   const { register } = useForm();

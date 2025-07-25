@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
-import ThemeSelector from "@/app/components/ThemeSelector/ThemeSelector";
+
+import ThemeSelector from "src/app/components/ThemeSelector/ThemeSelector";
 import { useTranslation } from "react-i18next";
 
 const ProfilePage = () => {

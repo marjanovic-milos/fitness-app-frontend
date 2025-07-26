@@ -7,7 +7,8 @@ import { authMe } from "../utils/auth";
 const PageGuard = ({ children }) => {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { data: user, isLoading } = useQuery({
+
+  const { data: user } = useQuery({
     queryKey: ["user"],
     queryFn: authMe,
     retry: false,
@@ -18,8 +19,6 @@ const PageGuard = ({ children }) => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
     },
     onSuccess: (data) => {
-      console.log("User data fetched successfully:", data);
-
       if (!data) {
         queryClient.invalidateQueries({ queryKey: ["user"] });
         localStorage.removeItem("token");
@@ -28,7 +27,7 @@ const PageGuard = ({ children }) => {
     },
     enabled: true,
   });
-  console.log("User data:", user);
+
   if (!user) return null;
 
   return <>{children}</>;

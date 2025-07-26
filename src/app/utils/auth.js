@@ -1,12 +1,11 @@
 import http from "../http";
-import axios from "axios";
 
 export const makeLogin = async ({ data }) => {
   const { email, password } = data;
 
   try {
-    const request = await axios.post(
-      "http://localhost:3001/api/v1/auth/login",
+    const request = await http.post(
+      "/auth/login",
       {
         email,
         password,
@@ -23,4 +22,18 @@ export const makeLogin = async ({ data }) => {
   }
 };
 
-export const authMe = async (token) => {};
+export const authMe = async () => {
+  try {
+    const res = await http.get(
+      "/auth/getMe",
+
+      {
+        skipAuth: false,
+      }
+    );
+
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

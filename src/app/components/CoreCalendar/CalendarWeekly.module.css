@@ -1,0 +1,12 @@
+.weekly-root {
+  @apply xl:grid grid-cols-2 flex flex-col gap-4 items-center xl:p-5 p-0 h-max;
+  /* background-color: lightgreen; */
+}
+
+.week-root {
+  @apply grid grid-cols-7 xl:gap-0 gap-2 h-full;
+}
+
+.day-root {
+  @apply flex items-center justify-center xl:w-[5rem] w-full xl:min-h-[30rem] min-h-[10rem]  rounded-full cursor-pointer bg-[repeating-linear-gradient(45deg,_#f3f4f6_0px,_#f3f4f6_10px,_#e5e7eb_10px,_#e5e7eb_20px)];
+}

@@ -9,6 +9,8 @@
 @import "./components/CoreNavigation/CoreNavigation.module.css";
 @import "./components/CoreMenu/CoreMenu.module.css";
 @import "./components/MobileNavigation/MobileNavigation.module.css";
+@import "./components/CoreCalendar/CalendarWeekly.module.css";
+@import "./components/CoreCalendar/CoreCalendar.module.css";
 
 @layer base {
   h1 {

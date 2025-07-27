@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import { authMe, signOut } from "../utils/auth";
-
+import CoreHeader from "../components/CoreHeader/CoreHeader";
+import CoreFooter from "../components/CoreFooter/CoreFooter";
+import MobileNavigation from "../components/MobileNavigation/MobileNavigation";
 const PageGuard = ({ children }) => {
   const queryClient = useQueryClient();
 
@@ -26,7 +27,14 @@ const PageGuard = ({ children }) => {
 
   if (!user) return null;
 
-  return <>{children}</>;
+  return (
+    <>
+      <CoreHeader />
+      {children}
+      <CoreFooter />
+      <MobileNavigation />
+    </>
+  );
 };
 
 export default PageGuard;

@@ -33,13 +33,13 @@ const CoreCalendar = () => {
     );
   };
   return (
-    <div className={classes.root}>
+    <div className={"size-full"}>
       <Calendar
         localizer={localizer}
         events={events}
         startAccessor='start'
         endAccessor='end'
-        style={{ height: 500 }}
+        // style={{ height: 500 }}
         selectable={true}
         onSelectSlot={(slotInfo) => {
           console.log("Selected slot", slotInfo);

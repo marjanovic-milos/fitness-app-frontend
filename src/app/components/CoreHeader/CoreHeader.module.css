@@ -1,11 +1,12 @@
 .core-header-dark {
   @apply flex
   h-[5rem]
-    xl:justify-between justify-end  gap-[2rem] w-full  py-5 xl:px-12 px-6;
+  text-xl
+    xl:justify-between justify-end gap-[2rem] w-full  py-5 xl:px-12 px-6;
 }
 
 .core-header {
-  @apply flex
+  @apply flex  
   h-[5rem]
  xl:justify-between justify-end  gap-[2rem] w-full py-5 xl:px-12 px-6;
 }

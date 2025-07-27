@@ -1,9 +1,11 @@
 .core-menu {
-  display: flex;
-  gap: 2rem;
+  @apply flex  gap-10;
+}
+.core-menu-links {
+  @apply flex gap-4;
 }
 .core-menu-item {
-  @apply flex items-center text-sm  bg-white rounded-full p-3 hover:bg-stone-700 hover:text-white;
+  @apply flex items-center text-base gap-2  bg-white rounded-full p-4 hover:bg-gray-900 hover:text-white;
 }
 @media screen and (max-width: 1024px) {
   .core-menu {

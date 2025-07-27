@@ -11,6 +11,7 @@
 @import "./components/MobileNavigation/MobileNavigation.module.css";
 @import "./components/CoreCalendar/CalendarWeekly.module.css";
 @import "./components/CoreCalendar/CoreCalendar.module.css";
+@import "./components/CoreBreadcrumbs/CoreBreadcrumbs.module.css";
 
 @layer base {
   h1 {
@@ -25,6 +26,10 @@
     --color-danger: #ef4444;
     --color-accent: #f59e0b;
   }
+}
+
+.container {
+  @apply bg-red-200;
 }
 
 .rbc-day-bg {

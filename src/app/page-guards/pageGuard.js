@@ -31,7 +31,7 @@ const PageGuard = ({ children }) => {
     <>
       <CoreHeader />
       {children}
-      <CoreFooter />
+      {/* <CoreFooter /> */}
       <MobileNavigation />
     </>
   );

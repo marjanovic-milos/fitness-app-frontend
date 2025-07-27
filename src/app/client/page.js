@@ -13,7 +13,9 @@ export default function Home() {
   return (
     <PageGuard>
       <div className={"size-full xl:px-12 px-6 overflow-auto"}>
-        {/* <CoreBreadcrumbs /> */}
+        <div>
+          <h3> Welcome, client name</h3>
+        </div>
         <div className='flex xl:flex-row flex-col gap-10 size-full'>
           <CalendarWeekly />
           <div className='w-2xl size-full'>

@@ -1,9 +1,12 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { Banknote, User, Dumbbell, Soup, Home } from "lucide-react";
+import { Banknote, User, Dumbbell, Soup, Home, LayoutDashboard } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const CoreMenu = () => {
+  const { t } = useTranslation();
+
   return (
     <div className='core-menu'>
       <img
@@ -14,20 +17,20 @@ const CoreMenu = () => {
 
       <div className='core-menu-links'>
         <Link href='/client' className='core-menu-item'>
-          <Home className='w-5 h-5' strokeWidth={1.5} />
+          <LayoutDashboard className='w-5 h-5' strokeWidth={1.5} />
           <p className=''>Dashboard</p>
         </Link>
         <Link href='/client' className={"core-menu-item"}>
-          <Banknote className='w-5 h-5' strokeWidth={1.5} />
-          <span className=''>Billings</span>{" "}
+          <User className='w-5 h-5' strokeWidth={1.5} />
+          <span className=''>Users</span>{" "}
         </Link>
         <Link href='/client' className={"core-menu-item"}>
-          <Banknote className='w-5 h-5' strokeWidth={1.5} />
-          <span className=''>Billings</span>{" "}
+          <Dumbbell className='w-5 h-5' strokeWidth={1.5} />
+          <span className=''>Excercise</span>{" "}
         </Link>
         <Link href='/client' className={"core-menu-item"}>
-          <Banknote className='w-5 h-5' strokeWidth={1.5} />
-          <span className=''>Billings</span>{" "}
+          <Soup className='w-5 h-5' strokeWidth={1.5} />
+          <span className=''>Meal Plans</span>{" "}
         </Link>
         <Link href='/client' className={"core-menu-item"}>
           <Banknote className='w-5 h-5' strokeWidth={1.5} />

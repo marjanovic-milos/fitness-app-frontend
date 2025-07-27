@@ -1,6 +1,6 @@
 import http from "../http";
 
-export const makeLogin = async ({ data }) => {
+export const signIn = async ({ data }) => {
   const { email, password } = data;
 
   try {
@@ -33,6 +33,24 @@ export const authMe = async () => {
     );
 
     return res.data.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const signOut = async (invalidateQuery) => {
+  try {
+    invalidateQuery();
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+
+    return await http.post(
+      "/auth/logout",
+
+      {
+        skipAuth: false,
+      }
+    );
   } catch (error) {
     console.log(error);
   }

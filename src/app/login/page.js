@@ -2,7 +2,7 @@
 import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { makeLogin } from "../utils/auth";
+import { signIn } from "../utils/auth";
 import { useForm } from "react-hook-form";
 import styles from "./loginClient.module.css";
 import CoreInput from "../components/CoreInput/CoreInput";
@@ -18,8 +18,8 @@ const ClientLogin = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const { mutate, isPending, isError, error, data } = useMutation({
-    mutationFn: makeLogin,
+  const { mutate } = useMutation({
+    mutationFn: signIn,
     onSuccess: (data) => {
       queryClient.setQueryData(["user"], data.data.data.user);
       router.push("/client/profile");
@@ -34,19 +34,8 @@ const ClientLogin = () => {
     <div className={styles.root}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={"flex flex-col xl_w-[50%] w-full  text-white"}>
-          <CoreInput
-            name="email"
-            type="email"
-            label="Email"
-            {...register("email")}
-          />
-          <CoreInput
-            classes={{ root: "mt-2" }}
-            name="password"
-            {...register("password")}
-            type="password"
-            label="Password"
-          />
+          <CoreInput name='email' type='email' label='Email' {...register("email")} />
+          <CoreInput classes={{ root: "mt-2" }} name='password' {...register("password")} type='password' label='Password' />
           <CoreButton classes={{ root: styles.button }}>Login</CoreButton>
         </div>
       </form>

@@ -1,11 +1,10 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { authMe } from "../utils/auth";
+import { authMe, signOut } from "../utils/auth";
 
 const PageGuard = ({ children }) => {
-  const router = useRouter();
   const queryClient = useQueryClient();
 
   const { data: user } = useQuery({
@@ -13,16 +12,13 @@ const PageGuard = ({ children }) => {
     queryFn: authMe,
     retry: false,
     staleTime: 1000 * 60 * 5,
-    onError: (error) => {
+    onError: async (error) => {
+      await signOut(queryClient.invalidateQueries({ queryKey: ["user"] }));
       console.error("Error fetching user data:", error);
-      router.push("/login");
-      queryClient.invalidateQueries({ queryKey: ["user"] });
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       if (!data) {
-        queryClient.invalidateQueries({ queryKey: ["user"] });
-        localStorage.removeItem("token");
-        router.push("/login");
+        await signOut(queryClient.invalidateQueries({ queryKey: ["user"] }));
       }
     },
     enabled: true,

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import CoreMenu from "../CoreMenu/CoreMenu";
+import CoreNavigation from "../CoreNavigation/CoreNavigation";
 
 import { ThemeContext } from "../../context/theme";
 import { Bell } from "lucide-react";
@@ -10,13 +10,17 @@ const CoreHeader = () => {
 
   return (
     <nav className={`${styles}`}>
-      <CoreMenu />
-      <div className='flex items-center'>
-        <div className='w-10 h-10 rounded-full flex items-center justify-center  border-1 border-gray-100 cursor-pointer'>
-          <Bell className='w-6 h-6' strokeWidth={1.5} />
+      <CoreNavigation />
+      <div className="flex items-center">
+        <div className="w-10 h-10 rounded-full flex items-center justify-center  border-1 border-gray-100 cursor-pointer">
+          <Bell className="w-6 h-6" strokeWidth={1.5} />
         </div>
-        <Link href='/client/profile' className='flex items-center mx-4'>
-          <img src='https://randomuser.me/api/portraits/men/32.jpg' alt='User Profile' className='w-10 h-10 rounded-full  object-cover' />
+        <Link href="/client/profile" className="flex items-center mx-4">
+          <img
+            src="https://randomuser.me/api/portraits/men/32.jpg"
+            alt="User Profile"
+            className="w-10 h-10 rounded-full  object-cover"
+          />
         </Link>
       </div>
     </nav>

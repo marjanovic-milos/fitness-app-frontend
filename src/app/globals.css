@@ -7,7 +7,6 @@
 @import "./components/CoreFooter/CoreFooter.module.css";
 @import "./components/CoreHeader/CoreHeader.module.css";
 @import "./components/CoreNavigation/CoreNavigation.module.css";
-@import "./components/CoreMenu/CoreMenu.module.css";
 @import "./components/MobileNavigation/MobileNavigation.module.css";
 @import "./components/CoreCalendar/CalendarWeekly.module.css";
 @import "./components/CoreCalendar/CoreCalendar.module.css";
@@ -33,20 +32,26 @@
 }
 
 .rbc-day-bg {
-  background-color: lightcyan !important;
   border: none !important;
   margin: 1rem;
-  border-radius: 50%;
 }
 
 .rbc-date-cell {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+}
+.rbc-row-bg {
+  max-height: 80px;
 }
 .rbc-row {
   height: 80px;
+  padding: 1rem !important;
 }
 .rbc-month-row {
+  max-height: 80px;
   border: none !important;
 }

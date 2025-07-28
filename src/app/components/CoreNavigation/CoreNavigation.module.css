@@ -1,3 +1,14 @@
-.core-navigation {
-  @apply bg-green-300 min-h-[100%];
+.core-menu {
+  @apply flex  gap-10;
+}
+.core-menu-links {
+  @apply flex gap-4;
+}
+.core-menu-item {
+  @apply flex items-center text-base gap-2  bg-white rounded-full p-4 hover:bg-gray-900 hover:text-white;
+}
+@media screen and (max-width: 1024px) {
+  .core-menu {
+    display: none;
+  }
 }

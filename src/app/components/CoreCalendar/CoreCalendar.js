@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 // import "react-big-calendar/lib/addons/dragAndDrop/styles";
@@ -17,28 +18,28 @@ const CoreCalendar = () => {
 
   const CustomEvent = ({ event }) => {
     return (
-      <div className='bg-purple-200 p-1 rounded text-sm'>
+      <div className="bg-purple-200 p-1 rounded text-sm">
         📝 <strong>{event.title}</strong>
       </div>
     );
   };
 
-  const CustomToolbar = (toolbar) => {
-    return (
-      <div className='flex justify-between items-center mb-4'>
-        <button onClick={() => toolbar.onNavigate("PREV")}>← Prev</button>
-        <div>{toolbar.label}</div>
-        <button onClick={() => toolbar.onNavigate("NEXT")}>Next →</button>
-      </div>
-    );
-  };
+  // const CustomToolbar = (toolbar) => {
+  //   return (
+  //     <div className="flex justify-between items-center mb-4">
+  //       <button onClick={() => toolbar.onNavigate("PREV")}>← Prev</button>
+  //       <div>{toolbar.label}</div>
+  //       <button onClick={() => toolbar.onNavigate("NEXT")}>Next →</button>
+  //     </div>
+  //   );
+  // };
   return (
-    <div className={"size-full"}>
+    <div className={"min-w-[50rem] h-auto"}>
       <Calendar
         localizer={localizer}
         events={events}
-        startAccessor='start'
-        endAccessor='end'
+        startAccessor="start"
+        endAccessor="end"
         // style={{ height: 500 }}
         selectable={true}
         onSelectSlot={(slotInfo) => {
@@ -47,7 +48,7 @@ const CoreCalendar = () => {
         views={["month"]}
         components={{
           event: CustomEvent,
-          toolbar: CustomToolbar,
+          // toolbar: CustomToolbar,
         }}
         //   onSelectEvent={(event) => {
         //     console.log("Selected event", event);

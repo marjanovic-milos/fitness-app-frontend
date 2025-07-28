@@ -12,33 +12,32 @@ export default function Home() {
 
   return (
     <PageGuard>
-      <div className={"size-full xl:px-12 px-6 overflow-auto"}>
+      {/* <div className={"size-full xl:px-12 px-6 overflow-auto"}>
         <div>
           <h3> Welcome, client name</h3>
         </div>
-        <div className='flex xl:flex-row flex-col gap-10 size-full'>
+        <div className="flex xl:flex-row flex-col gap-10 size-full">
           <CalendarWeekly />
-          <div className='w-2xl size-full'>
+          <div className="w-2xl size-full">
             <CoreCard>
-              <div className='flex items-center justify-center size-full'>
-                <h2 className='text-2xl text-gray-600 '>Test text</h2>
+              <div className="flex items-center justify-center size-full">
+                <h2 className="text-2xl text-gray-600 ">Test text</h2>
               </div>
             </CoreCard>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      {/* <div className={"size-full xl:px-12 px-6 overflow-auto"}>
-        <CoreBreadcrumbs />
-        <div className='flex xl:flex-row flex-col gap-10 size-full'>
+      <div className={"size-full xl:px-12 px-6 overflow-auto"}>
+        <div className="flex xl:flex-row flex-col gap-10 size-full">
           <CoreCalendar />
-          <div className='xl:w-2xl w-full size-full'>
+          <div className="xl:w-2xl w-full size-full">
             <CoreCard>
-              <h2 className='text-2xl text-gray-600 text-center'>Test text</h2>
+              <h2 className="text-2xl text-gray-600 text-center">Test text</h2>
             </CoreCard>
           </div>
         </div>
-      </div> */}
+      </div>
     </PageGuard>
   );
 }

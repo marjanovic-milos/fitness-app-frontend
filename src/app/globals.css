@@ -1,16 +1,16 @@
 @import "tailwindcss";
 @import "./login/loginClient.module.css";
-@import "./components/CoreInput/CoreInput.module.css";
-@import "./components/CoreCard/CoreCard.module.css";
-@import "./components/CoreButton/CoreButton.module.css";
-@import "./components/CoreLayout/CoreLayout.module.css";
-@import "./components/CoreFooter/CoreFooter.module.css";
-@import "./components/CoreHeader/CoreHeader.module.css";
-@import "./components/CoreNavigation/CoreNavigation.module.css";
-@import "./components/MobileNavigation/MobileNavigation.module.css";
-@import "./components/CoreCalendar/CalendarWeekly.module.css";
-@import "./components/CoreCalendar/CoreCalendar.module.css";
-@import "./components/CoreBreadcrumbs/CoreBreadcrumbs.module.css";
+@import "../components/CoreInput/CoreInput.module.css";
+@import "../components/CoreCard/CoreCard.module.css";
+@import "../components/CoreButton/CoreButton.module.css";
+@import "../components/CoreLayout/CoreLayout.module.css";
+@import "../components/CoreFooter/CoreFooter.module.css";
+@import "../components/CoreHeader/CoreHeader.module.css";
+@import "../components/CoreNavigation/CoreNavigation.module.css";
+@import "../components/MobileNavigation/MobileNavigation.module.css";
+@import "../components/CoreCalendar/CalendarWeekly.module.css";
+@import "../components/CoreCalendar/CoreCalendar.module.css";
+@import "../components/CoreBreadcrumbs/CoreBreadcrumbs.module.css";
 
 @layer base {
   h1 {

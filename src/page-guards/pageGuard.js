@@ -2,8 +2,10 @@
 import React from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { authMe, signOut } from "../utils/auth";
-import CoreHeader from "../components/CoreHeader/CoreHeader";
-import MobileNavigation from "../components/MobileNavigation/MobileNavigation";
+
+import CoreHeader from "src/components/CoreHeader/CoreHeader";
+import MobileNavigation from "src/components/MobileNavigation/MobileNavigation";
+
 import { useRouter } from "next/navigation";
 const PageGuard = (props) => {
   const queryClient = useQueryClient();

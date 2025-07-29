@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
 
-import ThemeSelector from "src/app/components/ThemeSelector/ThemeSelector";
+import ThemeSelector from "src/components/ThemeSelector/ThemeSelector";
 import { useTranslation } from "react-i18next";
-import PageGuard from "src/app/page-guards/pageGuard";
+import PageGuard from "src/page-guards/pageGuard";
 import { useQueryClient, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import CoreCard from "src/app/components/CoreCard/CoreCard";
+import CoreCard from "src/components/CoreCard/CoreCard";
 const ProfilePage = () => {
   const { i18n } = useTranslation();
   const router = useRouter();
@@ -26,7 +26,7 @@ const ProfilePage = () => {
 
   return (
     <PageGuard roles={["client", "trainer"]}>
-      <div className=''>
+      <>
         <CoreCard>
           <ThemeSelector />
           <p>{userData?.data?.name}</p>
@@ -39,7 +39,7 @@ const ProfilePage = () => {
 
           <button onClick={() => signOut()}>Logout</button>
         </CoreCard>
-      </div>
+      </>
     </PageGuard>
   );
 };

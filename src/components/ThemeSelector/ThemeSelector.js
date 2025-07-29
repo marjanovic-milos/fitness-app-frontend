@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { ThemeContext } from "src/app/context/theme";
+import { ThemeContext } from "src/context/theme";
 import CoreSwitch from "../CoreSwitch/CoreSwitch";
 import { useTranslation } from "react-i18next";
 

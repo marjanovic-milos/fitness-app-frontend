@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-// import "react-big-calendar/lib/addons/dragAndDrop/styles";
+
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import classes from "./CoreCalendar.module.css";
@@ -18,7 +18,7 @@ const CoreCalendar = () => {
 
   const CustomEvent = ({ event }) => {
     return (
-      <div className="bg-purple-200 p-1 rounded text-sm">
+      <div className='bg-purple-200 p-1 rounded text-sm'>
         📝 <strong>{event.title}</strong>
       </div>
     );
@@ -38,8 +38,8 @@ const CoreCalendar = () => {
       <Calendar
         localizer={localizer}
         events={events}
-        startAccessor="start"
-        endAccessor="end"
+        startAccessor='start'
+        endAccessor='end'
         // style={{ height: 500 }}
         selectable={true}
         onSelectSlot={(slotInfo) => {

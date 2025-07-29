@@ -1,8 +1,9 @@
 "use client";
 import "./globals.css";
-import "./i18n";
-import CoreLayout from "./components/CoreLayout/CoreLayout";
-import { ThemeProvider } from "./context/theme";
+import "../i18n";
+import CoreLayout from "src/components/CoreLayout/CoreLayout";
+import { ThemeProvider } from "../context/theme";
+
 import { useState } from "react";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

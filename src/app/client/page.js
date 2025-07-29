@@ -1,12 +1,12 @@
 "use client";
-import { useState } from "react";
-import CoreCalendar from "../components/CoreCalendar/CoreCalendar";
-import CalendarWeekly from "../components/CoreCalendar/CalendarWeekly";
+
 import { useTranslation } from "react-i18next";
-import PageGuard from "../page-guards/pageGuard";
-import CoreCard from "../components/CoreCard/CoreCard";
-import CoreLoader from "../components/CoreLoader/CoreLoader";
-import CoreDashboard from "../components/CoreDashboard/CoreDashboard";
+import PageGuard from "../../page-guards/pageGuard";
+
+// import CoreCard from "../components/CoreCard/CoreCard";
+// import CoreLoader from "../components/CoreLoader/CoreLoader";
+
+import CoreDashboard from "src/components/CoreDashboard/CoreDashboard";
 import { Crown } from "lucide-react";
 
 import { useQuery } from "@tanstack/react-query";

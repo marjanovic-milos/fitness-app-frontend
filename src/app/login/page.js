@@ -2,12 +2,14 @@
 import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { signIn } from "../utils/auth";
+import { signIn } from "../../utils/auth";
 import { useForm } from "react-hook-form";
 import styles from "./loginClient.module.css";
-import CoreInput from "../components/CoreInput/CoreInput";
-import CoreButton from "../components/CoreButton/CoreButton";
+import CoreInput from "src/components/CoreInput/CoreInput";
+
+import CoreButton from "src/components/CoreButton/CoreButton";
 import { useRouter } from "next/navigation";
+
 const ClientLogin = () => {
   const {
     register,
@@ -22,7 +24,7 @@ const ClientLogin = () => {
     mutationFn: signIn,
     onSuccess: (data) => {
       queryClient.setQueryData(["user"], data.data.data.user);
-      router.push("/client/profile");
+      router.push("/profile");
     },
   });
 

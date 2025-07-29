@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import StaticMeter from "../StaticMeter/StaticMeter";
 import moment from "moment";
 
-import { getWeekRange } from "src/app/utils/calendar";
+import { getWeekRange } from "src/utils/calendar";
 const CalendarWeekly = () => {
   const today = moment().format("DD-MMM");
   const weekDates = useMemo(() => getWeekRange(3, 3, "DD-MMM"), []);

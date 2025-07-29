@@ -3,10 +3,13 @@ import React from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { authMe, signOut } from "../utils/auth";
 import CoreHeader from "../components/CoreHeader/CoreHeader";
-import CoreFooter from "../components/CoreFooter/CoreFooter";
 import MobileNavigation from "../components/MobileNavigation/MobileNavigation";
-const PageGuard = ({ children }) => {
+import { useRouter } from "next/navigation";
+const PageGuard = (props) => {
   const queryClient = useQueryClient();
+
+  const { children, roles } = props;
+  const router = useRouter();
 
   const { data: user } = useQuery({
     queryKey: ["user"],
@@ -27,13 +30,16 @@ const PageGuard = ({ children }) => {
 
   if (!user) return null;
 
+  if (!roles?.includes(user?.role)) {
+    router.push("/login");
+  }
+
   return (
-    <>
+    <div className='size-full xl:px-12 px-6 overflow-auto'>
       <CoreHeader />
       {children}
-      {/* <CoreFooter /> */}
       <MobileNavigation />
-    </>
+    </div>
   );
 };
 

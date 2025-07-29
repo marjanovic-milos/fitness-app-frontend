@@ -6,38 +6,29 @@ import { useTranslation } from "react-i18next";
 import PageGuard from "../page-guards/pageGuard";
 import CoreCard from "../components/CoreCard/CoreCard";
 import CoreLoader from "../components/CoreLoader/CoreLoader";
-import CoreBreadcrumbs from "../components/CoreBreadcrumbs/CoreBreadcrumbs";
+import CoreDashboard from "../components/CoreDashboard/CoreDashboard";
+import { Crown } from "lucide-react";
+
+import { useQuery } from "@tanstack/react-query";
+
 export default function Home() {
   const { t } = useTranslation();
 
-  return (
-    <PageGuard>
-      {/* <div className={"size-full xl:px-12 px-6 overflow-auto"}>
-        <div>
-          <h3> Welcome, client name</h3>
-        </div>
-        <div className="flex xl:flex-row flex-col gap-10 size-full">
-          <CalendarWeekly />
-          <div className="w-2xl size-full">
-            <CoreCard>
-              <div className="flex items-center justify-center size-full">
-                <h2 className="text-2xl text-gray-600 ">Test text</h2>
-              </div>
-            </CoreCard>
-          </div>
-        </div>
-      </div> */}
+  const userData = useQuery({
+    queryKey: ["user"],
+    enabled: false,
+    queryFn: () => null,
+  });
 
-      <div className={"size-full xl:px-12 px-6 overflow-auto"}>
-        <div className="flex xl:flex-row flex-col gap-10 size-full">
-          <CoreCalendar />
-          <div className="xl:w-2xl w-full size-full">
-            <CoreCard>
-              <h2 className="text-2xl text-gray-600 text-center">Test text</h2>
-            </CoreCard>
-          </div>
+  return (
+    <PageGuard roles={["trainer"]}>
+      <div className='flex justify-between items-center w-md'>
+        <h3 className='my-8 text-lg font-semibold'> Welcome, {userData?.data?.name}</h3>
+        <div class='h-10 px-6 rounded-full text-white font-semibold bg-linear-to-r from-cyan-500 to-blue-500 flex items-center gap-2'>
+          <Crown className='w-5 h-5' strokeWidth={1.5} /> You are premium
         </div>
       </div>
+      <CoreDashboard />
     </PageGuard>
   );
 }

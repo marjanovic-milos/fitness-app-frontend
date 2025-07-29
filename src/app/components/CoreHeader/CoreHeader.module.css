@@ -2,11 +2,11 @@
   @apply flex
   h-[5rem]
   text-xl
-    xl:justify-between justify-end gap-[2rem] w-full  py-5 xl:px-12 px-6;
+    xl:justify-between justify-end gap-[2rem] w-full  py-5;
 }
 
 .core-header {
   @apply flex  
   h-[5rem]
- xl:justify-between justify-end  gap-[2rem] w-full py-5 xl:px-12 px-6;
+ xl:justify-between justify-end  gap-[2rem] w-full py-5;
 }

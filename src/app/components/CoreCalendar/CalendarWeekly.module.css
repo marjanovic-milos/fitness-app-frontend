@@ -1,5 +1,5 @@
 .weekly-root {
-  @apply xl:grid grid-cols-[2fr_3fr] flex flex-col gap-4 items-center xl:p-5 p-0 h-[100%];
+  @apply xl:grid grid-cols-[2fr_3fr] flex flex-col gap-4 items-center xl:p-5 p-0 h-[60vh] text-gray-600;
 }
 
 .week-root {

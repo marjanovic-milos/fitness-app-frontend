@@ -21,11 +21,11 @@ export const TRAINER_URLS = [
     icon: User,
     label: "Users",
   },
-  {
-    url: "/trainer/billing",
-    icon: Banknote,
-    label: "Billing",
-  },
+  // {
+  //   url: "/trainer/billing",
+  //   icon: Banknote,
+  //   label: "Billing",
+  // },
 ];
 
 export const CLIENT_URLS = [
@@ -34,9 +34,9 @@ export const CLIENT_URLS = [
     icon: LayoutDashboard,
     label: "Dashboard",
   },
-  {
-    url: "/client/billing",
-    icon: Banknote,
-    label: "Billing",
-  },
+  // {
+  //   url: "/client/billing",
+  //   icon: Banknote,
+  //   label: "Billing",
+  // },
 ];

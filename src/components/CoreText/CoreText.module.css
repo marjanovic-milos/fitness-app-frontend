@@ -1,0 +1,6 @@
+.core-text {
+  @apply text-gray-800;
+}
+.core-text-dark {
+  @apply text-white;
+}

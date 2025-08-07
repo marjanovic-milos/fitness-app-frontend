@@ -1,0 +1,6 @@
+.core-heading {
+  @apply text-gray-800;
+}
+.core-heading-dark {
+  @apply text-white;
+}

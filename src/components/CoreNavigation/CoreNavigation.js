@@ -1,13 +1,12 @@
 "use client";
-import React, { useMemo } from "react";
+import React, { useMemo, useContext } from "react";
 import Link from "next/link";
-// import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { CLIENT_URLS, TRAINER_URLS } from "./resources";
+import { ThemeContext } from "src/context/theme";
 
 const CoreNavigation = () => {
-  // const { t } = useTranslation();
-
+  const { dark } = useContext(ThemeContext);
   const userData = useQuery({
     queryKey: ["user"],
     enabled: false,
@@ -18,6 +17,8 @@ const CoreNavigation = () => {
     () => (userData?.data?.role === "trainer" ? TRAINER_URLS : CLIENT_URLS),
     [userData?.data?.role]
   );
+
+  const menuItemStyle = `core-menu-item ${dark ? "core-menu-item-dark" : ""}`;
 
   return (
     <div className="core-menu">
@@ -31,7 +32,7 @@ const CoreNavigation = () => {
         {resorucesData?.map((item, key) => {
           const Icon = item.icon;
           return (
-            <Link href="/client" className="core-menu-item" key={key}>
+            <Link href="/client" className={menuItemStyle} key={key}>
               <Icon className="w-5 h-5" strokeWidth={1.5} />
               <p>{item.label}</p>
             </Link>

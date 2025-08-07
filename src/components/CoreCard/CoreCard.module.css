@@ -1,3 +1,6 @@
 .core-card {
-  @apply rounded-xl bg-white w-full h-full shadow-sm;
+  @apply rounded-xl bg-white size-full shadow-sm;
+}
+.core-card-dark {
+  @apply rounded-xl bg-gray-800 size-full shadow-sm;
 }

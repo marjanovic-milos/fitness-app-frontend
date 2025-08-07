@@ -5,7 +5,10 @@
   @apply flex gap-4;
 }
 .core-menu-item {
-  @apply flex items-center text-base gap-2  bg-white rounded-full p-4 hover:bg-gray-900 hover:text-white;
+  @apply flex items-center text-base gap-2  bg-white rounded-full p-4 hover:bg-gray-900 hover:text-white shadow-sm;
+}
+.core-menu-item-dark {
+  @apply flex items-center text-base gap-2  bg-gray-800 rounded-full p-4 hover:bg-gray-900;
 }
 @media screen and (max-width: 1024px) {
   .core-menu {

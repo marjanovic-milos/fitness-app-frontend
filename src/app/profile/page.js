@@ -7,6 +7,8 @@ import PageGuard from "src/page-guards/pageGuard";
 import { useQueryClient, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import CoreCard from "src/components/CoreCard/CoreCard";
+import { Crown } from "lucide-react";
+
 const ProfilePage = () => {
   const { i18n } = useTranslation();
   const router = useRouter();
@@ -30,8 +32,20 @@ const ProfilePage = () => {
         <CoreCard>
           <ThemeSelector />
           <p>{userData?.data?.name}</p>
+
+          <div className="flex justify-between items-center w-md">
+            <h3 className="my-8 text-lg font-semibold">
+              {" "}
+              Welcome, {userData?.data?.name}
+            </h3>
+
+            <div class="h-10 px-6 rounded-full text-white font-semibold bg-linear-to-r from-cyan-500 to-blue-500 flex items-center gap-2">
+              <Crown className="w-5 h-5" strokeWidth={1.5} /> You are premium
+            </div>
+          </div>
+
           <div>
-            <button className='mx-2' onClick={() => i18n.changeLanguage("sr")}>
+            <button className="mx-2" onClick={() => i18n.changeLanguage("sr")}>
               Serbian
             </button>
             <button onClick={() => i18n.changeLanguage("en")}>English</button>

@@ -7,15 +7,15 @@ import { ThemeContext } from "src/context/theme";
 
 const CoreNavigation = () => {
   const { dark } = useContext(ThemeContext);
-  const userData = useQuery({
+  const { data } = useQuery({
     queryKey: ["user"],
     enabled: false,
     queryFn: () => null,
   });
 
   const resorucesData = useMemo(
-    () => (userData?.data?.role === "trainer" ? TRAINER_URLS : CLIENT_URLS),
-    [userData?.data?.role]
+    () => (data?.role === "trainer" ? TRAINER_URLS : CLIENT_URLS),
+    [data?.role]
   );
 
   const menuItemStyle = `core-menu-item ${dark ? "core-menu-item-dark" : ""}`;

@@ -1,57 +1,39 @@
 import http from "..";
+import { asyncHandler } from "src/utils/async";
 
-export const signIn = async ({ data }) => {
+export const signIn = asyncHandler(async ({ data }) => {
   const { email, password } = data;
+  const request = await http.post(
+    "/auth/login",
+    {
+      email,
+      password,
+    },
+    {
+      skipAuth: true,
+    }
+  );
+  localStorage.setItem("token", request.data.token);
+  return request;
+});
 
-  try {
-    const request = await http.post(
-      "/auth/login",
-      {
-        email,
-        password,
-      },
-      {
-        skipAuth: true,
-      }
-    );
-    localStorage.setItem("token", request.data.token);
-    return request;
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
-};
+export const authMe = asyncHandler(async () => {
+  const res = await http.get(
+    "/auth/getMe",
 
-export const authMe = async () => {
-  try {
-    const res = await http.get(
-      "/auth/getMe",
+    {
+      skipAuth: false,
+    }
+  );
+  return res.data.data;
+});
 
-      {
-        skipAuth: false,
-      }
-    );
+export const signOut = asyncHandler(async (invalidateQuery) => {
+  invalidateQuery();
+  localStorage.removeItem("token");
+  window.location.href = "/login";
 
-    return res.data.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const signOut = async (invalidateQuery) => {
-  try {
-    invalidateQuery();
-    localStorage.removeItem("token");
-    window.location.href = "/login";
-
-    return await http.post(
-      "/auth/logout",
-
-      {
-        skipAuth: false,
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
-};
+  return await http.post("/auth/logout", {
+    skipAuth: false,
+  });
+});

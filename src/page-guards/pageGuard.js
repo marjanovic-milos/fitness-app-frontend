@@ -39,7 +39,7 @@ const PageGuard = (props) => {
   return (
     <div className="size-full xl:px-12 px-6 overflow-auto">
       <CoreHeader />
-      {children}
+      <div className="py-5">{children}</div>
       <MobileNavigation />
     </div>
   );

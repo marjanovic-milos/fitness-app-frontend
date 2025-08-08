@@ -1,57 +1,53 @@
 import http from "..";
+import { asyncHandler } from "src/utils/async";
 
-export const signIn = async ({ data }) => {
-  const { email, password } = data;
+export const getSavedMeals = asyncHandler(async () => {
+  const res = await http.get("/meals", {
+    skipAuth: false,
+  });
+  return res.data.data;
+});
 
-  try {
-    const request = await http.post(
-      "/auth/login",
-      {
-        email,
-        password,
-      },
-      {
-        skipAuth: true,
-      }
-    );
-    localStorage.setItem("token", request.data.token);
-    return request;
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
-};
+export const getOneMeal = asyncHandler(async (id) => {
+  const res = await http.get(`/meals/${id}`, {
+    skipAuth: false,
+  });
+  return res.data.data;
+});
 
-export const authMe = async () => {
-  try {
-    const res = await http.get(
-      "/auth/getMe",
+export const deleteMeal = asyncHandler(async (id) => {
+  const res = await http.delete(`/meals/${id}`, {
+    skipAuth: false,
+  });
+  return res.data.data;
+});
 
-      {
-        skipAuth: false,
-      }
-    );
+export const saveMeal = asyncHandler(async (data) => {
+  const { image, spoonacularId, title, sourceUrl } = data;
+  const request = await http.post(
+    "/meals/addMeal",
+    {
+      image,
+      spoonacularId,
+      title,
+      sourceUrl,
+    },
+    {
+      skipAuth: true,
+    }
+  );
+  return request;
+});
 
-    return res.data.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const signOut = async (invalidateQuery) => {
-  try {
-    invalidateQuery();
-    localStorage.removeItem("token");
-    window.location.href = "/login";
-
-    return await http.post(
-      "/auth/logout",
-
-      {
-        skipAuth: false,
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
-};
+export const updateMeal = asyncHandler(async (data) => {
+  const request = await http.put(
+    "/meals/addMeal",
+    {
+      data,
+    },
+    {
+      skipAuth: true,
+    }
+  );
+  return request;
+});

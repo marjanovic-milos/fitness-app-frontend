@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+
 import { ThemeContext } from "src/context/theme";
 
 const CoreText = (props) => {

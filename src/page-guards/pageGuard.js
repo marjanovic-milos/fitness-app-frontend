@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { authMe, signOut } from "../utils/auth";
+import { authMe, signOut } from "../http/api/auth";
 
 import CoreHeader from "src/components/CoreHeader/CoreHeader";
 import MobileNavigation from "src/components/MobileNavigation/MobileNavigation";
@@ -37,7 +37,7 @@ const PageGuard = (props) => {
   }
 
   return (
-    <div className='size-full xl:px-12 px-6 overflow-auto'>
+    <div className="size-full xl:px-12 px-6 overflow-auto">
       <CoreHeader />
       {children}
       <MobileNavigation />

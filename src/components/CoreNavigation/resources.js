@@ -17,7 +17,7 @@ export const TRAINER_URLS = [
     label: "Meal Plans",
   },
   {
-    url: "/trainer/users  ",
+    url: "/trainer/users",
     icon: User,
     label: "Users",
   },

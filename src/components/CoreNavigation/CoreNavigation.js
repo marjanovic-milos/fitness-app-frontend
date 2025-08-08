@@ -32,7 +32,7 @@ const CoreNavigation = () => {
         {resorucesData?.map((item, key) => {
           const Icon = item.icon;
           return (
-            <Link href="/client" className={menuItemStyle} key={key}>
+            <Link href={item.url} className={menuItemStyle} key={key}>
               <Icon className="w-5 h-5" strokeWidth={1.5} />
               <p>{item.label}</p>
             </Link>

@@ -1,4 +1,4 @@
-import http from "../http";
+import http from "..";
 
 export const signIn = async ({ data }) => {
   const { email, password } = data;

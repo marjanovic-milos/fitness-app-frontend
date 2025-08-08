@@ -10,7 +10,8 @@ import CoreCard from "src/components/CoreCard/CoreCard";
 import { Crown } from "lucide-react";
 import CoreText from "src/components/CoreText/CoreText";
 import CoreButton from "src/components/CoreButton/CoreButton";
-import CoreHeading from "src/components/CoreHeading/CoreHeading";
+import CoreDropdown from "src/components/CoreDropdown/CoreDropdown";
+
 const ProfilePage = () => {
   const { i18n } = useTranslation();
   const router = useRouter();
@@ -27,18 +28,23 @@ const ProfilePage = () => {
     queryClient.invalidateQueries({ queryKey: ["user"] });
     router.push("/login");
   };
-
+  console.log("userData", i18n.language);
   return (
     <PageGuard roles={["client", "trainer"]}>
-      <div className="w-2xl">
+      <div className="xl:w-2xl w-full">
         <CoreCard>
           <div className="p-10">
-            <ThemeSelector />
-
-            <div className="flex justify-between items-center w-md">
-              <CoreHeading type="h6" className="text-lg font-semibold">
-                Welcome, {userData?.data?.name}
-              </CoreHeading>
+            <div className="flex xl:flex-row flex-col justify-between xl:items-center items-start gap-4">
+              <div className="flex items-center gap-4">
+                <img
+                  src="https://randomuser.me/api/portraits/men/32.jpg"
+                  alt="User Profile"
+                  className="w-10 h-10 rounded-full  object-cover"
+                />
+                <CoreText className="text-lg font-semibold">
+                  Welcome, {userData?.data?.name}
+                </CoreText>
+              </div>
 
               <div class="h-10 px-6 rounded-full text-white font-semibold bg-linear-to-r from-cyan-500 to-blue-500 flex items-center gap-2">
                 <Crown className="w-5 h-5" strokeWidth={1.5} /> You are premium
@@ -46,16 +52,20 @@ const ProfilePage = () => {
             </div>
 
             <div>
-              <button
-                className="mx-2"
-                onClick={() => i18n.changeLanguage("sr")}
-              >
-                Serbian
-              </button>
-              <button onClick={() => i18n.changeLanguage("en")}>English</button>
+              <CoreDropdown
+                options={[
+                  { value: "en", label: "English" },
+                  { value: "sr", label: "Serbian" },
+                ]}
+                value={i18n.language}
+                onChange={(lang) => i18n.changeLanguage(lang)}
+                className="my-4"
+              />
             </div>
-
-            <CoreButton onClick={() => signOut()}>Logout</CoreButton>
+            <div className="flex justify-between items-center gap-4">
+              <ThemeSelector />
+              <CoreButton onClick={() => signOut()}>Logout</CoreButton>
+            </div>
           </div>
         </CoreCard>
       </div>

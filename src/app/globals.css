@@ -13,6 +13,7 @@
 @import "../components/CoreBreadcrumbs/CoreBreadcrumbs.module.css";
 @import "../components/CoreText/CoreText.module.css";
 @import "../components/CoreHeading/CoreHeading.module.css";
+@import "../components/CoreDropdown/CoreDropdown.module.css";
 
 @layer base {
   h1 {

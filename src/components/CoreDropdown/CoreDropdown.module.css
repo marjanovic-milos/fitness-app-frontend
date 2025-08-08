@@ -1,0 +1,16 @@
+.core-select-wrapper {
+  @apply relative inline-block w-full;
+}
+
+.core-select-element {
+  @apply block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm
+         focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none outline-none cursor-pointer;
+}
+
+.core-select-element:disabled {
+  @apply bg-gray-100 text-gray-400 cursor-not-allowed;
+}
+
+.core-select-option {
+  @apply text-gray-700;
+}

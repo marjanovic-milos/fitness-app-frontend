@@ -1,26 +1,39 @@
 import React from "react";
-import styles from "./CoreSwitch.module.css";
-const CoreSwitch = (props) => {
-  const { id, label, checked, onChange, name } = props;
+
+const CoreSwitch = ({
+  id,
+  checked,
+  onChange,
+  name,
+  leftIcon: LeftIcon,
+  rightIcon: RightIcon,
+}) => {
   return (
-    <label
-      htmlFor={id}
-      className="inline-flex items-center cursor-pointer outline-none"
-    >
+    <label htmlFor={id} className="inline-flex items-center cursor-pointer">
       <input
         id={id}
         name={name}
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="sr-only peer focus:ring-0"
+        className="sr-only peer"
       />
-      <div className="relative w-11 h-6 bg-gray-200 rounded-full peer dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
-      {label && (
-        <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-          {label}
-        </span>
-      )}
+
+      {/* Track */}
+      <div className="relative w-20 h-10 bg-white rounded-full shadow-inner transition-colors duration-300">
+        {/* Slider */}
+        <div
+          className={`absolute top-1 left-1 h-8 w-8 rounded-full flex items-center justify-center shadow-md transition-all duration-300
+            ${checked ? "translate-x-10 bg-black" : "translate-x-0 bg-white"}`}
+        >
+          {!checked && LeftIcon && (
+            <LeftIcon size={20} className="text-yellow-400" />
+          )}
+          {checked && RightIcon && (
+            <RightIcon size={20} className="text-white" />
+          )}
+        </div>
+      </div>
     </label>
   );
 };

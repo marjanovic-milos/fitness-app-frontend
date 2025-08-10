@@ -1,3 +1,12 @@
 .core-button {
-  @apply flex  justify-center cursor-pointer items-center text-white h-[3rem] bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center me-2 mb-2 m-0;
+  @apply flex justify-center items-center gap-2 text-base bg-gray-800 rounded-full text-white text-center me-2 mb-2 m-0 cursor-pointer h-[2.5rem] pl-2 pr-3;
+}
+
+.core-button-link {
+}
+
+.core-button-icon {
+}
+
+.core-button-primary {
 }

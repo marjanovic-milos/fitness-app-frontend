@@ -10,7 +10,7 @@
 @import "../components/MobileNavigation/MobileNavigation.module.css";
 @import "../components/CoreCalendar/CalendarWeekly.module.css";
 @import "../components/CoreCalendar/CoreCalendar.module.css";
-@import "../components/CoreBreadcrumbs/CoreBreadcrumbs.module.css";
+@import "../components/CoreSubnavigation/CoreSubnavigation.module.css";
 @import "../components/CoreText/CoreText.module.css";
 @import "../components/CoreHeading/CoreHeading.module.css";
 @import "../components/CoreDropdown/CoreDropdown.module.css";
@@ -28,6 +28,20 @@
     --color-primary: #1d4ed8;
     --color-secondary: #9333ea;
     --color-accent: #f59e0b;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  a,
+  p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
   }
 }
 

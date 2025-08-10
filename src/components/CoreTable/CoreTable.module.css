@@ -1,0 +1,28 @@
+.core-table {
+  @apply block p-8 rounded-lg shadow-2xl w-full;
+}
+.core-table-body {
+  @apply grid items-center text-center;
+}
+.core-table-header {
+  @apply grid gap-4 items-center p-2 rounded-lg;
+}
+.core-table-header-dark {
+  @apply grid gap-4 items-center p-2 rounded-lg bg-slate-900;
+}
+
+.core-table-header-item {
+  @apply flex justify-center font-semibold text-base text-stone-800 p-2;
+}
+
+.core-table-header-item-dark {
+  @apply flex justify-center font-semibold text-base p-2 text-white;
+}
+
+.core-table-row {
+  /* background-color: var(--color-primary); */
+  @apply grid gap-4 rounded-full overflow-hidden shadow-md w-full my-5 p-5;
+}
+.core-table-loader {
+  @apply w-[100vw] h-20 bg-gray-200 rounded-full animate-pulse;
+}

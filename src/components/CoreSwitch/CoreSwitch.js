@@ -19,9 +19,7 @@ const CoreSwitch = ({
         className="sr-only peer"
       />
 
-      {/* Track */}
       <div className="relative w-20 h-10 bg-white rounded-full shadow-inner transition-colors duration-300">
-        {/* Slider */}
         <div
           className={`absolute top-1 left-1 h-8 w-8 rounded-full flex items-center justify-center shadow-md transition-all duration-300
             ${checked ? "translate-x-10 bg-black" : "translate-x-0 bg-white"}`}

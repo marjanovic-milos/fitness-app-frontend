@@ -1,11 +1,15 @@
 import http from "..";
 import { asyncHandler } from "src/utils/async";
 
-export const getSavedMeals = asyncHandler(async () => {
-  const res = await http.get("/meals", {
-    skipAuth: false,
-  });
-  return res.data.data;
+export const getSavedMeals = asyncHandler(async ({ page, limit = 5 }) => {
+  const res = await http.get(
+    `/meals?page=${page}&limit=${limit}&fields=-ownerId,-created,-spoonacularId`,
+    {
+      skipAuth: false,
+    }
+  );
+
+  return res.data;
 });
 
 export const getOneMeal = asyncHandler(async (id) => {
@@ -19,7 +23,7 @@ export const deleteMeal = asyncHandler(async (id) => {
   const res = await http.delete(`/meals/${id}`, {
     skipAuth: false,
   });
-  return res.data.data;
+  return res.data;
 });
 
 export const saveMeal = asyncHandler(async (data) => {

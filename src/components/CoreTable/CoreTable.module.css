@@ -1,5 +1,5 @@
 .core-table {
-  @apply block p-8 pt-0 rounded-lg shadow-sm w-full;
+  @apply block  pt-0 rounded-lg shadow-sm w-full;
 }
 .core-table-body {
   @apply grid items-center text-center;
@@ -20,9 +20,8 @@
 }
 
 .core-table-row {
-  /* background-color: var(--color-primary); */
   @apply grid gap-4 overflow-hidden w-full border-t border-gray-300 p-2;
 }
 .core-table-loader {
-  @apply w-[100vw] h-20 bg-gray-200 rounded-full animate-pulse;
+  @apply w-[100vw] h-20 bg-gray-200 animate-pulse;
 }

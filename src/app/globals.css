@@ -15,6 +15,8 @@
 @import "../components/CoreHeading/CoreHeading.module.css";
 @import "../components/CoreDropdown/CoreDropdown.module.css";
 @import "../components/CoreTable/CoreTable.module.css";
+@import "../components/WildCard/wildcard.module.css";
+@import "../components/CorePagination/CorePagination.module.css";
 
 @layer base {
   h1 {

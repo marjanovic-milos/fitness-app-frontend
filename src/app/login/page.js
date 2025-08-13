@@ -40,12 +40,15 @@ const ClientLogin = () => {
             name="email"
             type="email"
             label="Email"
-            {...register("email")}
+            register={register}
+
+            // {...register("email")}
           />
           <CoreInput
             classes={{ root: "mt-2" }}
             name="password"
-            {...register("password")}
+            register={register}
+            // {...register("password")}
             type="password"
             label="Password"
           />

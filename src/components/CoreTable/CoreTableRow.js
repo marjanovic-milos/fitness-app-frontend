@@ -1,8 +1,14 @@
 import React from "react";
 
-const CoreTableRow = ({ children, className }) => {
+const CoreTableRow = ({ children, className, handleSubmit, onSubmit }) => {
   const styles = `core-table-row ${className}`;
-  return <div className={styles}>{children}</div>;
+  return (
+    <div>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles}>
+        {children}
+      </form>
+    </div>
+  );
 };
 
 export default CoreTableRow;

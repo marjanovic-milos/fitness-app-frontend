@@ -46,12 +46,12 @@ export const saveMeal = asyncHandler(async (data) => {
 export const updateMeal = asyncHandler(async (params) => {
   const { data, actionId } = params;
 
-  console.log(data, actionId);
+  // console.log(params);
 
   const request = await http.put(
     `/meals/${actionId}`,
     {
-      data,
+      ...data,
     },
     {
       skipAuth: false,

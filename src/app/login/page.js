@@ -31,7 +31,7 @@ const ClientLogin = () => {
   const onSubmit = (data) => {
     mutate({ data });
   };
-
+  console.log(errors, "errors");
   return (
     <div className={styles.root}>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -48,6 +48,7 @@ const ClientLogin = () => {
             classes={{ root: "mt-2" }}
             name="password"
             register={register}
+            required={"Password is required field"}
             // {...register("password")}
             type="password"
             label="Password"

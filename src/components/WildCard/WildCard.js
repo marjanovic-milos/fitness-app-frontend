@@ -23,16 +23,16 @@ const WildCard = (props) => {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: ({ data, id }) => deleteFn({ data, id }),
+    mutationFn: deleteFn,
     onSuccess: () => {
       queryClient.invalidateQueries([queryKey]);
     },
   });
 
   const updateMutation = useMutation({
-    mutationFn: (data) => updateFn(data),
+    mutationFn: updateFn,
     onSuccess: () => {
-      queryClient.invalidateQueries([queryKey]);
+      queryClient.invalidateQueries({ queryKey: [queryKey], exact: false });
     },
   });
 

@@ -28,7 +28,7 @@ const ProfilePage = () => {
     queryClient.invalidateQueries({ queryKey: ["user"] });
     router.push("/login");
   };
-  console.log("userData", i18n.language);
+
   return (
     <PageGuard roles={["client", "trainer"]}>
       <div className="xl:w-2xl w-full">
@@ -46,7 +46,7 @@ const ProfilePage = () => {
                 </CoreText>
               </div>
 
-              <div class="h-10 px-6 rounded-full text-white font-semibold bg-linear-to-r from-cyan-500 to-blue-500 flex items-center gap-2">
+              <div className="h-10 px-6 rounded-full text-white font-semibold bg-linear-to-r from-cyan-500 to-blue-500 flex items-center gap-2">
                 <Crown className="w-5 h-5" strokeWidth={1.5} /> You are premium
               </div>
             </div>

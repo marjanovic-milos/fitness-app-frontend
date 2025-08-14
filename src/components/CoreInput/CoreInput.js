@@ -3,12 +3,23 @@
 import React, { useContext } from "react";
 
 import { ThemeContext } from "src/context/theme";
+import { ErrorMessage } from "@hookform/error-message";
 
 const CoreInput = (props) => {
   const { dark } = useContext(ThemeContext);
 
-  const { id, classes, name, type, label, value, fieldType, register } = props;
-
+  const {
+    id,
+    classes,
+    name,
+    type,
+    label,
+    value,
+    fieldType,
+    register,
+    required,
+    errors,
+  } = props;
   const rootStyles = `${dark ? "core-root-input-dark" : "core-root-input"} ${
     classes?.root ? classes.root : ""
   }`;
@@ -31,8 +42,14 @@ const CoreInput = (props) => {
         label={label}
         className={rootInput}
         defaultValue={value}
-        {...register(name)}
+        {...register(name, required)}
       />
+
+      {errors[name] ? (
+        <p className="text-xs text-red-400 w-full flex justify-start m-1">
+          {errors[name].message}
+        </p>
+      ) : null}
     </div>
   );
 };

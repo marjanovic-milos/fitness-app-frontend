@@ -19,10 +19,10 @@ const CoreTable = (props) => {
     columns,
     className,
     loading = true,
-    sortingHandler,
     data,
     deleteMutation,
     updateMutation,
+    sortingHandler,
   } = props;
 
   const { dark } = useContext(ThemeContext);

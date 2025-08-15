@@ -1,9 +1,10 @@
 import http from "..";
 import { asyncHandler } from "src/utils/async";
+const ignorefileds = "fields=-ownerId,-created,-spoonacularId";
 
-export const getSavedMeals = asyncHandler(async ({ page, limit = 5 }) => {
+export const getSavedMeals = asyncHandler(async ({ page, limit = 5, sort }) => {
   const res = await http.get(
-    `/meals?page=${page}&limit=${limit}&fields=-ownerId,-created,-spoonacularId`,
+    `/meals?page=${page}&limit=${limit}&${ignorefileds}&sort=${sort}`,
     {
       skipAuth: false,
     }
@@ -45,8 +46,6 @@ export const saveMeal = asyncHandler(async (data) => {
 
 export const updateMeal = asyncHandler(async (params) => {
   const { data, actionId } = params;
-
-  // console.log(params);
 
   const request = await http.put(
     `/meals/${actionId}`,

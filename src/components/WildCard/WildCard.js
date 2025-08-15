@@ -10,6 +10,7 @@ const WildCard = (props) => {
   const { columns, queryFn, queryKey, deleteFn, updateFn } = props;
 
   const [page, setPage] = useState(1);
+  const [sort, setSort] = useState(null);
   const queryClient = useQueryClient();
   const limit = 5;
   const {
@@ -17,8 +18,8 @@ const WildCard = (props) => {
     isLoading: loading,
     isRefetching,
   } = useQuery({
-    queryKey: [queryKey, page, limit],
-    queryFn: () => queryFn({ page, limit }),
+    queryKey: [queryKey, page, limit, sort],
+    queryFn: () => queryFn({ page, limit, sort }),
     keepPreviousData: true,
   });
 
@@ -37,6 +38,7 @@ const WildCard = (props) => {
   });
 
   const handleChange = (page) => setPage(page);
+  const sortingHandler = (newSort) => setSort(newSort, ...sort);
 
   return (
     <CoreCard>
@@ -49,6 +51,7 @@ const WildCard = (props) => {
             data={data?.data}
             deleteMutation={deleteMutation}
             updateMutation={updateMutation}
+            sortingHandler={sortingHandler}
             className={{ header: `grid-cols-8` }}
           />
           <CorePagination

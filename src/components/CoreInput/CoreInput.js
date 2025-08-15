@@ -45,10 +45,8 @@ const CoreInput = (props) => {
         {...register(name, required)}
       />
 
-      {errors[name] ? (
-        <p className="text-xs text-red-400 w-full flex justify-start m-1">
-          {errors[name].message}
-        </p>
+      {errors?.[name] ? (
+        <p className="error-input-message">{errors[name].message}</p>
       ) : null}
     </div>
   );

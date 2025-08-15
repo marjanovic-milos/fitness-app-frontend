@@ -49,7 +49,7 @@ const WildCard = (props) => {
             data={data?.data}
             deleteMutation={deleteMutation}
             updateMutation={updateMutation}
-            className={{ header: `grid-cols-7` }}
+            className={{ header: `grid-cols-8` }}
           />
           <CorePagination
             handleChange={handleChange}

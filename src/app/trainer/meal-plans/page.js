@@ -12,6 +12,7 @@ const MealPlansPage = () => {
     "Carbs",
     "Fats",
     "Calories",
+    "Links",
     "Actions",
   ];
   return (

@@ -1,12 +1,19 @@
-import React, { useContext, useState, useMemo } from "react";
+import React, { useContext, useState } from "react";
 import { ThemeContext } from "src/context/theme";
 import CoreTableRow from "./CoreTableRow";
 import CoreText from "../CoreText/CoreText";
 import Link from "next/link";
-import { Link as LinkIcon, Trash2, Pencil } from "lucide-react";
+import {
+  Link as LinkIcon,
+  Trash2,
+  Pencil,
+  X as CloseIcon,
+  Check,
+} from "lucide-react";
 import Image from "next/image";
 import CoreInput from "../CoreInput/CoreInput";
 import { useForm } from "react-hook-form";
+
 const CoreTable = (props) => {
   const {
     columns,
@@ -23,6 +30,7 @@ const CoreTable = (props) => {
   const [actionId, setActionId] = useState(null);
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -31,6 +39,7 @@ const CoreTable = (props) => {
   const header = `${dark ? "core-table-header-dark" : "core-table-header"} ${
     className?.header
   }`;
+
   const headerItem = `${
     dark ? "core-table-header-item-dark" : "core-table-header-item"
   } ${className?.headerItem}`;
@@ -40,14 +49,18 @@ const CoreTable = (props) => {
       <div className="core-table-loader" />
     </div>
   ));
+
+  const resetForm = () => {
+    setActionId(null);
+    reset();
+  };
   const onSubmit = (data) => {
     updateMutation.mutate({ data, actionId });
-    setActionId(null);
+    resetForm();
   };
 
   const content = data?.map((item) => {
     const entries = Object.entries(item).filter(([key]) => key !== "_id");
-
     entries.sort(([keyA], [keyB]) => {
       if (keyA === "image") return -1;
       if (keyB === "image") return 1;
@@ -58,11 +71,7 @@ const CoreTable = (props) => {
       return 0;
     });
     return (
-      <CoreTableRow
-        handleSubmit={handleSubmit(onSubmit)}
-        key={item._id}
-        className="grid-cols-7"
-      >
+      <CoreTableRow key={item._id} className="grid-cols-8">
         {entries.map(([key, value]) => {
           if (key === "image") {
             return (
@@ -72,32 +81,18 @@ const CoreTable = (props) => {
                   alt="Example local image"
                   width={50}
                   height={50}
-                  className="w-10 h-10 rounded-full object-cover"
+                  className="core-table-image"
                   priority
                 />
               </div>
             );
           }
           if (key === "sourceUrl") {
-            return actionId ? (
-              <div className="flex items-center" key={key}>
-                <button type="submit">Confirm</button>;
-                <button onClick={() => setActionId(null)}>Cancel</button>
-              </div>
-            ) : (
-              <div
-                key={key}
-                className="flex justify-end items-center px-10 gap-3"
-              >
+            return (
+              <div key={key} className="core-button-row-wrapper">
                 <Link href={value}>
                   <LinkIcon className="w-4 h-4" strokeWidth={1.5} />
                 </Link>
-                <button onClick={() => setActionId(item._id)}>
-                  <Pencil className="w-4 h-4" strokeWidth={1.5} />
-                </button>
-                <button onClick={() => deleteMutation.mutate(item?._id)}>
-                  <Trash2 className="w-4 h-4" strokeWidth={1.5} />
-                </button>
               </div>
             );
           }
@@ -109,15 +104,11 @@ const CoreTable = (props) => {
               register={register}
               fieldType="flat"
               required={{
-                required: "This is required.",
-                pattern: {
-                  value: /d+/,
+                required: `Field ${key} is required.`,
+                pattern: key !== "title" && {
+                  value: /^\d+$/,
                   message: "This input is number only.",
                 },
-                // maxLength: {
-                //   value: 10,
-                //   message: "This input exceed maxLength.",
-                // },
               }}
               errors={errors}
             />
@@ -125,6 +116,41 @@ const CoreTable = (props) => {
             <CoreText key={key}>{value}</CoreText>
           );
         })}
+
+        {actionId ? (
+          actionId === item?._id ? (
+            <div className="core-button-row-wrapper" key={item._id}>
+              <button disabled={actionId !== item?._id} type="button">
+                <Check
+                  onClick={handleSubmit((data) => {
+                    onSubmit(data);
+                  })}
+                  className="w-4 h-4"
+                  strokeWidth={1.5}
+                />
+              </button>
+              <button
+                disabled={actionId !== item?._id}
+                type="button"
+                onClick={resetForm}
+              >
+                <CloseIcon className="w-4 h-4" strokeWidth={1.5} />
+              </button>
+            </div>
+          ) : null
+        ) : (
+          <div key={item._id} className="core-button-row-wrapper">
+            <button type="button" onClick={() => setActionId(item._id)}>
+              <Pencil className="w-4 h-4" strokeWidth={1.5} />
+            </button>
+            <button
+              type="button"
+              onClick={() => deleteMutation.mutate(item?._id)}
+            >
+              <Trash2 className="w-4 h-4" strokeWidth={1.5} />
+            </button>
+          </div>
+        )}
       </CoreTableRow>
     );
   });

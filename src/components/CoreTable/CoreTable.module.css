@@ -20,8 +20,15 @@
 }
 
 .core-table-row {
-  @apply grid gap-4 overflow-hidden w-full border-t-2 border-gray-100 p-2;
+  @apply grid gap-4 overflow-hidden w-full border-t-2 border-gray-100 p-6;
 }
 .core-table-loader {
   @apply w-full h-12 bg-gray-200 animate-pulse px-10;
+}
+
+.core-button-row-wrapper {
+  @apply flex justify-center items-center px-10 gap-3;
+}
+.core-table-image {
+  @apply w-10 h-10 rounded-full object-cover;
 }

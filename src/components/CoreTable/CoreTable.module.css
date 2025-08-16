@@ -12,7 +12,7 @@
 }
 
 .core-table-header-item {
-  @apply flex justify-center items-center font-semibold text-base text-gray-400 px-10 py-2 cursor-pointer;
+  @apply flex justify-around items-center font-semibold text-base text-gray-400 px-10 py-2 cursor-pointer;
 }
 
 .core-table-header-item-dark {
@@ -20,7 +20,7 @@
 }
 
 .core-table-row {
-  @apply grid gap-4 items-start w-full border-t-2 border-gray-100 xl:p-6 px-3 py-6;
+  @apply grid gap-4 items-start w-full border-t-1 border-gray-100 xl:p-6 px-3 py-6;
 }
 .core-table-loader {
   @apply w-full h-12 bg-gray-200 animate-pulse px-10;
@@ -30,7 +30,7 @@
   @apply flex lg:justify-center justify-start items-center lg:px-10 px-0 gap-3;
 }
 .core-table-image {
-  @apply w-10 h-10 rounded-full object-cover;
+  @apply w-15 h-15 rounded-full object-cover;
 }
 
 .core-table-confirm {
@@ -39,6 +39,10 @@
 
 .core-table-cancel {
   @apply w-6 h-6 text-red-600 bg-red-200 rounded-sm p-1 cursor-pointer;
+}
+
+.core-table-edit {
+  @apply w-4 h-4 text-teal-600 cursor-pointer;
 }
 
 .core-table-delete {

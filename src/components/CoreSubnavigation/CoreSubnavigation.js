@@ -8,7 +8,7 @@ const CoreSubnavigation = (props) => {
   const { heading, button } = props;
   return (
     <div className='core-subnavigation'>
-      <CoreHeading type='h1' className='font-semibold'>
+      <CoreHeading type='h2' className='font-semibold'>
         {heading}
       </CoreHeading>
       <CoreButton icon={Plus}>{button}</CoreButton>

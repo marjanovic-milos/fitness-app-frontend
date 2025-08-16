@@ -3,33 +3,18 @@ import { ThemeContext } from "src/context/theme";
 import CoreTableRow from "./CoreTableRow";
 import CoreText from "../CoreText/CoreText";
 import Link from "next/link";
-import {
-  Link as LinkIcon,
-  Trash2,
-  Pencil,
-  X as CloseIcon,
-  Check,
-  ChevronDown,
-  ChevronUp,
-} from "lucide-react";
+import { Link as LinkIcon, Trash2, Pencil, X as CloseIcon, Check, ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
 import CoreInput from "../CoreInput/CoreInput";
 import { useForm } from "react-hook-form";
 
 const CoreTable = (props) => {
-  const {
-    columns,
-    className,
-    loading = true,
-    data,
-    deleteMutation,
-    updateMutation,
-    sortingHandler,
-  } = props;
+  const { columns, className, loading = true, data, deleteMutation, updateMutation, sortingHandler } = props;
 
   const { dark } = useContext(ThemeContext);
 
   const [actionId, setActionId] = useState(null);
+
   const {
     register,
     reset,
@@ -38,17 +23,13 @@ const CoreTable = (props) => {
   } = useForm();
 
   const root = `core-table ${className?.root}`;
-  const header = `${dark ? "core-table-header-dark" : "core-table-header"} ${
-    className?.header
-  }`;
+  const header = `${dark ? "core-table-header-dark" : "core-table-header"} ${className?.header}`;
 
-  const headerItem = `${
-    dark ? "core-table-header-item-dark" : "core-table-header-item"
-  } ${className?.headerItem}`;
+  const headerItem = `${dark ? "core-table-header-item-dark" : "core-table-header-item"} ${className?.headerItem}`;
 
   const loader = Array.from({ length: 5 }, (_, i) => (
-    <div className="my-2 px-5" key={i}>
-      <div className="core-table-loader" />
+    <div className='my-2 px-5' key={i}>
+      <div className='core-table-loader' />
     </div>
   ));
 
@@ -73,27 +54,21 @@ const CoreTable = (props) => {
       return 0;
     });
     return (
-      <CoreTableRow key={item._id} className="lg:grid-cols-8  w-full">
+      <CoreTableRow key={item._id} className='lg:grid-cols-8  w-full'>
         {entries.map(([key, value]) => {
           if (key === "image") {
             return (
-              <div className="lg:core-center" key={key}>
-                <Image
-                  src={value}
-                  alt="Example local image"
-                  width={50}
-                  height={50}
-                  className="core-table-image"
-                  priority
-                />
+              <div className='core-center' key={key}>
+                <Image src={value} alt='Example local image' width={50} height={50} className='core-table-image' priority />
               </div>
             );
           }
           if (key === "sourceUrl") {
             return (
-              <div key={key} className="core-button-row-wrapper">
+              <div key={key} className='core-button-row-wrapper h-full'>
                 <Link href={value}>
-                  <LinkIcon className="w-4 h-4" strokeWidth={1.5} />
+                  <CoreText className='lg:hidden block underline'>Recepie link</CoreText>
+                  <LinkIcon className='lg:block hidden w-4 w-4' strokeWidth={1.5} />
                 </Link>
               </div>
             );
@@ -104,7 +79,7 @@ const CoreTable = (props) => {
               key={key}
               name={key}
               register={register}
-              fieldType="flat"
+              fieldType='flat'
               label={key.charAt(0).toUpperCase() + key.slice(1)}
               required={{
                 required: `Field ${key} is required.`,
@@ -116,46 +91,37 @@ const CoreTable = (props) => {
               errors={errors}
             />
           ) : (
-            <div className="flex lg:justify-center justify-start gap-1">
-              <CoreText className="lg:hidden block" key={key}>
-                {key !== "title" && `${key} :`}
-              </CoreText>{" "}
-              <CoreText key={key}>{value}</CoreText>
+            <div key={key} className='flex lg:justify-center justify-start items-center gap-1 h-full'>
+              <CoreText className='lg:hidden block'>{key !== "title" && `${key.charAt(0).toUpperCase() + key.slice(1)} :`}</CoreText>{" "}
+              <CoreText>{value}</CoreText>
             </div>
           );
         })}
 
         {actionId ? (
           actionId === item?._id ? (
-            <div className="core-button-row-wrapper" key={item._id}>
-              <button disabled={actionId !== item?._id} type="button">
+            <div className='core-button-row-wrapper h-full' key={item._id}>
+              <button disabled={actionId !== item?._id} type='button'>
                 <Check
                   onClick={handleSubmit((data) => {
                     onSubmit(data);
                   })}
-                  className="core-table-confirm"
+                  className='core-table-confirm'
                   strokeWidth={1.5}
                 />
               </button>
-              <button
-                disabled={actionId !== item?._id}
-                type="button"
-                onClick={resetForm}
-              >
-                <CloseIcon className="core-table-cancel" strokeWidth={1.5} />
+              <button disabled={actionId !== item?._id} type='button' onClick={resetForm}>
+                <CloseIcon className='core-table-cancel' strokeWidth={1.5} />
               </button>
             </div>
           ) : null
         ) : (
-          <div key={item._id} className="core-button-row-wrapper">
-            <button type="button" onClick={() => setActionId(item._id)}>
-              <Pencil className="w-4 h-4" strokeWidth={1.5} />
+          <div key={item._id} className='core-button-row-wrapper h-full'>
+            <button type='button' onClick={() => setActionId(item._id)}>
+              <Pencil className='core-table-edit' strokeWidth={1.5} />
             </button>
-            <button
-              type="button"
-              onClick={() => deleteMutation.mutate(item?._id)}
-            >
-              <Trash2 className="core-table-delete" strokeWidth={1.5} />
+            <button type='button' onClick={() => deleteMutation.mutate(item?._id)}>
+              <Trash2 className='core-table-delete' strokeWidth={1.5} />
             </button>
           </div>
         )}
@@ -168,26 +134,21 @@ const CoreTable = (props) => {
       <div className={header}>
         {columns?.map((column, index) => {
           const [sort, setSort] = useState(false);
+
           const skipFields = ["Actions", "Links", ""];
           const sorting = ({ column, sort }) => {
             setSort(!sort);
             sortingHandler({ column, sort });
           };
           return (
-            <div className="" key={index}>
+            <div key={index}>
               {!skipFields.includes(column) ? (
-                <div
-                  onClick={() => sorting({ column, sort })}
-                  className={headerItem}
-                >
+                <div onClick={() => sorting({ column, sort })} className={headerItem}>
                   {column}
                   {sort ? (
-                    <ChevronDown
-                      className="w-4 h-auto mx-2"
-                      strokeWidth={1.5}
-                    />
+                    <ChevronDown className='w-[30px] min-h-4 my-2' strokeWidth={1.5} />
                   ) : (
-                    <ChevronUp className="w-4 h-auto mx-2" strokeWidth={1.5} />
+                    <ChevronUp className='w-[30px] min-h-4 my-2' strokeWidth={1.5} />
                   )}
                 </div>
               ) : (
@@ -197,7 +158,7 @@ const CoreTable = (props) => {
           );
         })}
       </div>
-      <div className="core-table-body">{loading ? loader : content}</div>
+      <div className='core-table-body'>{loading ? loader : content}</div>
     </div>
   );
 };

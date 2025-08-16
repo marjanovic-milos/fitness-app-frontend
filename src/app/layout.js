@@ -2,7 +2,8 @@
 import "./globals.css";
 import "../i18n";
 import CoreLayout from "src/components/CoreLayout/CoreLayout";
-import { ThemeProvider } from "../context/theme";
+import { AlertProvider } from "src/context/alert";
+import { ThemeProvider } from "src/context/theme";
 
 import { useState } from "react";
 
@@ -14,9 +15,11 @@ export default function RootLayout({ children }) {
     <html lang='en'>
       <body className={`root-layout`}>
         <QueryClientProvider client={queryClient}>
-          <ThemeProvider>
-            <CoreLayout>{children}</CoreLayout>
-          </ThemeProvider>
+          <AlertProvider>
+            <ThemeProvider>
+              <CoreLayout>{children}</CoreLayout>
+            </ThemeProvider>
+          </AlertProvider>
         </QueryClientProvider>
       </body>
     </html>

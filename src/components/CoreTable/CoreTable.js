@@ -9,6 +9,8 @@ import {
   Pencil,
   X as CloseIcon,
   Check,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import Image from "next/image";
 import CoreInput from "../CoreInput/CoreInput";
@@ -158,13 +160,38 @@ const CoreTable = (props) => {
   return (
     <div className={root}>
       <div className={header}>
-        {columns?.map((column, index) => (
-          <div className="" key={index}>
-            <div onClick={() => sortingHandler()} className={headerItem}>
-              {column}
+        {columns?.map((column, index) => {
+          const [sort, setSort] = useState(false);
+
+          const skipFields = ["Actions", "Links", ""];
+
+          const sorting = ({ column, sort }) => {
+            setSort(!sort);
+            sortingHandler({ column, sort });
+          };
+          return (
+            <div className="" key={index}>
+              {!skipFields.includes(column) ? (
+                <div
+                  onClick={() => sorting({ column, sort })}
+                  className={headerItem}
+                >
+                  {column}
+                  {sort ? (
+                    <ChevronDown
+                      className="w-4 h-auto mx-2"
+                      strokeWidth={1.5}
+                    />
+                  ) : (
+                    <ChevronUp className="w-4 h-auto mx-2" strokeWidth={1.5} />
+                  )}
+                </div>
+              ) : (
+                <div className={headerItem}>{column}</div>
+              )}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
       <div className="core-table-body">{loading ? loader : content}</div>
     </div>

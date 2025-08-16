@@ -1,11 +1,11 @@
 .core-table {
-  @apply block  pt-0 rounded-lg shadow-sm w-full;
+  @apply block  pt-0 rounded-lg shadow-sm w-full   overflow-x-auto;
 }
 .core-table-body {
-  @apply grid items-center text-center overflow-hidden;
+  @apply grid items-center text-center lg:w-full w-2xl overflow-hidden;
 }
 .core-table-header {
-  @apply grid gap-4 items-center p-2 rounded-lg;
+  @apply grid gap-4 items-center  lg:w-full w-2xl p-2 rounded-lg;
 }
 .core-table-header-dark {
   @apply grid gap-4 items-center p-2 rounded-lg bg-slate-900;

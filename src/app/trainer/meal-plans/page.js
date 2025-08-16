@@ -9,9 +9,9 @@ const MealPlansPage = () => {
     "",
     "Title",
     "Protein",
-    "Carbs",
-    "Fats",
     "Calories",
+    "Fats",
+    "Carbs",
     "Links",
     "Actions",
   ];

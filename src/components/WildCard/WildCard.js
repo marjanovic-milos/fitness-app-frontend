@@ -10,7 +10,7 @@ const WildCard = (props) => {
   const { columns, queryFn, queryKey, deleteFn, updateFn } = props;
 
   const [page, setPage] = useState(1);
-  const [sort, setSort] = useState(null);
+  const [sort, setSort] = useState({});
   const queryClient = useQueryClient();
   const limit = 5;
   const {
@@ -19,7 +19,14 @@ const WildCard = (props) => {
     isRefetching,
   } = useQuery({
     queryKey: [queryKey, page, limit, sort],
-    queryFn: () => queryFn({ page, limit, sort }),
+    queryFn: () =>
+      queryFn({
+        page,
+        limit,
+        sort: Object.entries(sort)
+          .map(([key, value]) => `${value ? "" : "-"}${key.toLowerCase()}`)
+          .join(","),
+      }),
     keepPreviousData: true,
   });
 
@@ -38,7 +45,9 @@ const WildCard = (props) => {
   });
 
   const handleChange = (page) => setPage(page);
-  const sortingHandler = (newSort) => setSort(newSort, ...sort);
+
+  const sortingHandler = ({ column, sort: localSort }) =>
+    setSort({ ...sort, [column]: localSort });
 
   return (
     <CoreCard>

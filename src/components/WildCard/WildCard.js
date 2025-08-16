@@ -61,7 +61,9 @@ const WildCard = (props) => {
             deleteMutation={deleteMutation}
             updateMutation={updateMutation}
             sortingHandler={sortingHandler}
-            className={{ header: `grid-cols-8` }}
+            className={{
+              header: `lg:grid-cols-8 w-full`,
+            }}
           />
           <CorePagination
             handleChange={handleChange}

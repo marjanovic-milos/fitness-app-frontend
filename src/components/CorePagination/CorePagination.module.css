@@ -1,5 +1,5 @@
 .core-pagination {
-  @apply flex justify-end items-center gap-4;
+  @apply flex xl:justify-end justify-center items-center gap-4;
 }
 .core-pagination-buttons {
   @apply bg-gray-700 rounded-full w-8 h-8 text-sm flex justify-center items-center text-white cursor-pointer;

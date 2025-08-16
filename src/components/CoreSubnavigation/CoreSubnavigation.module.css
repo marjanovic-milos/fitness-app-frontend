@@ -1,5 +1,5 @@
 .core-subnavigation {
-  @apply flex justify-between items-center mb-4;
+  @apply flex lg:flex-row flex-col justify-between xl:items-center items-start gap-4 mb-4;
 }
 
 .core-subnavigation-item {

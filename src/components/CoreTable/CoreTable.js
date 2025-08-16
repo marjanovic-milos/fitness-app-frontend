@@ -73,11 +73,11 @@ const CoreTable = (props) => {
       return 0;
     });
     return (
-      <CoreTableRow key={item._id} className="grid-cols-8">
+      <CoreTableRow key={item._id} className="lg:grid-cols-8  w-full">
         {entries.map(([key, value]) => {
           if (key === "image") {
             return (
-              <div className="core-center" key={key}>
+              <div className="lg:core-center" key={key}>
                 <Image
                   src={value}
                   alt="Example local image"
@@ -105,6 +105,7 @@ const CoreTable = (props) => {
               name={key}
               register={register}
               fieldType="flat"
+              label={key.charAt(0).toUpperCase() + key.slice(1)}
               required={{
                 required: `Field ${key} is required.`,
                 pattern: key !== "title" && {
@@ -115,7 +116,12 @@ const CoreTable = (props) => {
               errors={errors}
             />
           ) : (
-            <CoreText key={key}>{value}</CoreText>
+            <div className="flex lg:justify-center justify-start gap-1">
+              <CoreText className="lg:hidden block" key={key}>
+                {key !== "title" && `${key} :`}
+              </CoreText>{" "}
+              <CoreText key={key}>{value}</CoreText>
+            </div>
           );
         })}
 
@@ -127,7 +133,7 @@ const CoreTable = (props) => {
                   onClick={handleSubmit((data) => {
                     onSubmit(data);
                   })}
-                  className="w-4 h-4"
+                  className="core-table-confirm"
                   strokeWidth={1.5}
                 />
               </button>
@@ -136,7 +142,7 @@ const CoreTable = (props) => {
                 type="button"
                 onClick={resetForm}
               >
-                <CloseIcon className="w-4 h-4" strokeWidth={1.5} />
+                <CloseIcon className="core-table-cancel" strokeWidth={1.5} />
               </button>
             </div>
           ) : null
@@ -149,7 +155,7 @@ const CoreTable = (props) => {
               type="button"
               onClick={() => deleteMutation.mutate(item?._id)}
             >
-              <Trash2 className="w-4 h-4" strokeWidth={1.5} />
+              <Trash2 className="core-table-delete" strokeWidth={1.5} />
             </button>
           </div>
         )}
@@ -162,9 +168,7 @@ const CoreTable = (props) => {
       <div className={header}>
         {columns?.map((column, index) => {
           const [sort, setSort] = useState(false);
-
           const skipFields = ["Actions", "Links", ""];
-
           const sorting = ({ column, sort }) => {
             setSort(!sort);
             sortingHandler({ column, sort });

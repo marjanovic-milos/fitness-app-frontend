@@ -10,7 +10,7 @@ const ThemeSelector = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex w-full items-center gap-4">
       <CoreText className="text-base">{t("core.themeSwitch")}</CoreText>
       <CoreSwitch
         id="darkModeToggle"

@@ -3,6 +3,11 @@
   "description": "This is a basic example.",
 
   "core": {
-    "themeSwitch": "change color theme"
+    "themeSwitch": "Change color theme",
+    "translationsSelect": "Change language"
+  },
+  "profile": {
+    "userSettings": "User Settings",
+    "userDetails": "User Details"
   }
 }

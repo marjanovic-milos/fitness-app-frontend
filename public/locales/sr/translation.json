@@ -2,6 +2,11 @@
   "welcome": "Dobrodošli",
   "description": "Ovo je osnovni primer.",
   "core": {
-    "themeSwitch": "Promeni boju"
+    "themeSwitch": "Promeni temu",
+    "translationsSelect": "Promeni jezik"
+  },
+  "profile": {
+    "userSettings": "Podesavanja Korisnika",
+    "userDetails": "Detalji Korisnika"
   }
 }

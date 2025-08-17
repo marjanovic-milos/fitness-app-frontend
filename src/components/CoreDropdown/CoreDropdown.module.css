@@ -12,5 +12,5 @@
 }
 
 .core-select-option {
-  @apply text-gray-700;
+  @apply text-gray-700 absolute bottom-0;
 }

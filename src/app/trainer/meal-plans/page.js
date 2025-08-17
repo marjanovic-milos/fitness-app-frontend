@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import PageGuard from "src/page-guards/pageGuard";
 import { getSavedMeals, deleteMeal, updateMeal } from "src/http/api/meals";
 import CoreTableComponent from "src/components/CoreTableComponent/CoreTableComponent";
@@ -15,6 +15,8 @@ const MealPlansPage = () => {
     "Links",
     "Actions",
   ];
+
+  // const [open, setOpen] = useState(false);
   return (
     <PageGuard roles={["trainer"]}>
       <CoreTableComponent
@@ -22,7 +24,10 @@ const MealPlansPage = () => {
         queryFn={getSavedMeals}
         deleteFn={deleteMeal}
         updateFn={updateMeal}
+        createFn={() => {}}
         queryKey={"meals"}
+        buttonText="Add New"
+        heading="Your Meal Plans"
       />
     </PageGuard>
   );

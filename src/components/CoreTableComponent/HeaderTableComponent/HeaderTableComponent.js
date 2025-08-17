@@ -5,13 +5,15 @@ import CoreHeading from "../../CoreHeading/CoreHeading";
 import CoreButton from "../../CoreButton/CoreButton";
 
 const CoreSubnavigation = (props) => {
-  const { heading, button } = props;
+  const { heading, button, setCreateForm } = props;
   return (
     <div className="core-subnavigation">
-      <CoreHeading type="h1" className="font-semibold">
+      <CoreHeading type="h2" className="font-semibold">
         {heading}
       </CoreHeading>
-      <CoreButton icon={Plus}>{button}</CoreButton>
+      <CoreButton onClick={setCreateForm} icon={Plus}>
+        {button}
+      </CoreButton>
     </div>
   );
 };

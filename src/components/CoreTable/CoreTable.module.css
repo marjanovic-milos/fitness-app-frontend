@@ -23,14 +23,14 @@
   @apply grid gap-4 items-start w-full border-t-1 border-gray-100 xl:p-6 px-3 py-6;
 }
 .core-table-loader {
-  @apply w-full h-12 bg-gray-200 animate-pulse px-10;
+  @apply w-full h-20 bg-gray-200 animate-pulse px-10;
 }
 
 .core-button-row-wrapper {
   @apply flex lg:justify-center justify-start items-center lg:px-10 px-0 gap-3;
 }
 .core-table-image {
-  @apply w-15 h-15 rounded-full object-cover;
+  @apply w-10 h-10 rounded-full object-cover;
 }
 
 .core-table-confirm {

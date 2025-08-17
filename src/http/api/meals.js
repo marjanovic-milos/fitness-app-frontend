@@ -58,3 +58,16 @@ export const updateMeal = asyncHandler(async (params) => {
   );
   return request;
 });
+
+export const searchSpoonacular = asyncHandler(async (data) => {
+  const request = await http.post(
+    "/meals/byNutrients",
+    {
+      ...data,
+    },
+    {
+      skipAuth: false,
+    }
+  );
+  return request;
+});

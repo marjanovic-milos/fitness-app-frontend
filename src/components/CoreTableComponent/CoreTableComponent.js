@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import CoreCard from "../CoreCard/CoreCard";
 import CoreTable from "../CoreTable/CoreTable";
-import CoreSubnavigation from "../CoreSubnavigation/CoreSubnavigation";
+import CoreSubnavigation from "./HeaderTableComponent/HeaderTableComponent";
 import { useAlert } from "src/context/alert";
 import CorePagination from "../CorePagination/CorePagination";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 
-const WildCard = (props) => {
+const CoreTableComponent = (props) => {
   const { columns, queryFn, queryKey, deleteFn, updateFn } = props;
 
   const [page, setPage] = useState(1);
@@ -49,13 +49,14 @@ const WildCard = (props) => {
 
   const handleChange = (page) => setPage(page);
 
-  const sortingHandler = ({ column, sort: localSort }) => setSort({ ...sort, [column]: localSort });
+  const sortingHandler = ({ column, sort: localSort }) =>
+    setSort({ ...sort, [column]: localSort });
 
   return (
     <CoreCard>
-      <div className='p-6'>
-        <CoreSubnavigation heading='Your Meal Plans' button='Create New' />
-        <div className='flex flex-col'>
+      <div className="p-6">
+        <CoreSubnavigation heading="Your Meal Plans" button="Create New" />
+        <div className="flex flex-col">
           <CoreTable
             loading={loading || isRefetching}
             columns={columns}
@@ -67,11 +68,16 @@ const WildCard = (props) => {
               header: `lg:grid-cols-8 w-full`,
             }}
           />
-          <CorePagination handleChange={handleChange} page={page} limit={limit} totalPages={data?.totalPages} />
+          <CorePagination
+            handleChange={handleChange}
+            page={page}
+            limit={limit}
+            totalPages={data?.totalPages}
+          />
         </div>
       </div>
     </CoreCard>
   );
 };
 
-export default WildCard;
+export default CoreTableComponent;

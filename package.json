@@ -25,6 +25,8 @@
     "react-dom": "19.1.0",
     "react-hook-form": "^7.60.0",
     "react-i18next": "^15.6.0",
+    "react-slick": "^0.31.0",
+    "slick-carousel": "^1.8.1",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {

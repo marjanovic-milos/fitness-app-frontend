@@ -8,15 +8,7 @@ import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 
 import Spoonacular from "../SpoonacularComponent/Spoonacular";
 const CoreTableComponent = (props) => {
-  const {
-    columns,
-    queryFn,
-    queryKey,
-    deleteFn,
-    updateFn,
-    heading,
-    buttonText,
-  } = props;
+  const { columns, queryFn, queryKey, deleteFn, updateFn, heading, buttonText } = props;
 
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState({});
@@ -61,25 +53,20 @@ const CoreTableComponent = (props) => {
   const handleChange = (page) => setPage(page);
   const handleForm = () => setCreateForm(!createForm);
 
-  const sortingHandler = ({ column, sort: localSort }) =>
-    setSort({ ...sort, [column]: localSort });
+  const sortingHandler = ({ column, sort: localSort }) => setSort({ ...sort, [column]: localSort });
 
   return (
     <div
       className={`lg:grid gap-4 flex flex-col-reverse
         transition-[grid-template-columns] duration-[1500ms]
         ease-[cubic-bezier(0.77,0,0.175,1)]
-        will-change-[grid-template-columns]`}
+        will-change-[grid-template-columns] `}
       style={{ gridTemplateColumns: createForm ? "2fr 1fr" : "1fr 0fr" }}
     >
       <CoreCard>
-        <div className="p-6">
-          <CoreSubnavigation
-            setCreateForm={handleForm}
-            heading={heading}
-            button={buttonText}
-          />
-          <div className="flex flex-col">
+        <div className='p-6'>
+          <CoreSubnavigation setCreateForm={handleForm} heading={heading} button={buttonText} />
+          <div className='flex flex-col'>
             <CoreTable
               loading={loading || isRefetching}
               columns={columns}
@@ -91,12 +78,7 @@ const CoreTableComponent = (props) => {
                 header: `lg:grid-cols-8 w-full`,
               }}
             />
-            <CorePagination
-              handleChange={handleChange}
-              page={page}
-              limit={limit}
-              totalPages={data?.totalPages}
-            />
+            <CorePagination handleChange={handleChange} page={page} limit={limit} totalPages={data?.totalPages} />
           </div>
         </div>
       </CoreCard>

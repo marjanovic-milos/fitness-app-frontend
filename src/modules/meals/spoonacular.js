@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import CoreCard from "../CoreCard/CoreCard";
-import CoreInput from "../CoreInput/CoreInput";
+import CoreCard from "../../components/CoreCard/CoreCard";
+import CoreInput from "../../components/CoreInput/CoreInput";
 import { useForm } from "react-hook-form";
-import CoreHeading from "../CoreHeading/CoreHeading";
 import { searchSpoonacular } from "src/http/api/meals";
 import { useMutation } from "@tanstack/react-query";
 import { useAlert } from "src/context/alert";
-import { CoreSlider } from "../CoreSlider/CoreSlider";
-import { CoreSwiperCard } from "../CoreSwiperCard/CoreSwiperCard";
+import { CoreSlider } from "../../components/CoreSlider/CoreSlider";
+import { CoreSwiperCard } from "../../components/CoreSwiperCard/CoreSwiperCard";
 
 const Spoonacular = () => {
   const {
@@ -138,98 +137,99 @@ const Spoonacular = () => {
     },
   ];
 
-  const component1 = (
-    <form className='w-md' onSubmit={handleSubmit(onSubmit)}>
-      <div className='flex gap-5 my-10'>
-        <CoreInput
-          name='minProtein'
-          register={register}
-          // fieldType='flat'
-          label='Min. Protein'
-          type='number'
-          required={{
-            required: "Field minProtein is required.",
-            pattern: {
-              value: /^\d+$/,
-              message: "This input is number only.",
-            },
-          }}
-          errors={errors}
-        />
-        <CoreInput
-          name='maxProtein'
-          register={register}
-          // fieldType='flat'
-          label='Max. Protein'
-          type='number'
-          required={{
-            required: "Field maxProtein is required.",
-            pattern: {
-              value: /^\d+$/,
-              message: "This input is number only.",
-            },
-          }}
-          errors={errors}
-        />
-      </div>
-
-      <div className='flex gap-5 my-10'>
-        <CoreInput
-          name='minProtein'
-          register={register}
-          // fieldType='flat'
-          label='Min. Protein'
-          type='number'
-          required={{
-            required: "Field minProtein is required.",
-            pattern: {
-              value: /^\d+$/,
-              message: "This input is number only.",
-            },
-          }}
-          errors={errors}
-        />
-        <CoreInput
-          name='maxProtein'
-          register={register}
-          // fieldType='flat'
-          label='Max. Protein'
-          type='number'
-          required={{
-            required: "Field maxProtein is required.",
-            pattern: {
-              value: /^\d+$/,
-              message: "This input is number only.",
-            },
-          }}
-          errors={errors}
-        />
-      </div>
-      <button type='submit' disabled={testMutation.isPending} className='px-4 py-2 bg-blue-500 text-white rounded-md disabled:opacity-50'>
-        {testMutation.isPending ? "Sending..." : "Send"}
-      </button>
-    </form>
-  );
-
   return (
-    <CoreCard>
-      <div className='p-6 overflow-hidden'>
-        <CoreSwiperCard heading={" Spoonacular Recepies"} component1={component1} component2={<>aaa</>} />
-
-        <div className='overflow-hidden my-10 w-lg h-fit py-5 m-auto'>
-          <CoreSlider>
-            {dummyData?.map((recepie) => (
-              <div className='relative ' key={recepie?.id}>
-                <img src={recepie?.image} alt='User Profile' className='object-cover w-full h-auto max-h-[250px] rounded-lg ' />
-                <div className='absolute p-5 flex items-end inset-0 bg-gradient-to-r from-blue-800/60 to-transparent text-white w-xs text-xl font-thin'>
-                  <p className='h-auto'>{recepie?.title}</p>
-                </div>
-              </div>
-            ))}
-          </CoreSlider>
+    <div className='overflow-hidden'>
+      <form onSubmit={handleSubmit()}>
+        <div className='flex gap-5 my-10'>
+          <CoreInput
+            name='minProtein'
+            register={register}
+            label='Min. Protein'
+            type='number'
+            required={{
+              required: "Field minProtein is required.",
+              pattern: {
+                value: /^\d+$/,
+                message: "This input is number only.",
+              },
+              min: {
+                value: 1,
+                message: "Value must be greater than 0.",
+              },
+            }}
+            errors={errors}
+          />
+          <CoreInput
+            name='maxProtein'
+            register={register}
+            label='Max. Protein'
+            type='number'
+            required={{
+              required: "Field maxProtein is required.",
+              pattern: {
+                value: /^\d+$/,
+                message: "This input is number only.",
+              },
+            }}
+            errors={errors}
+          />
         </div>
+
+        <div className='flex gap-5 my-10'>
+          <CoreInput
+            name='minCarbs'
+            register={register}
+            label='Min. Protein'
+            type='number'
+            required={{
+              required: "Field minCarbs is required.",
+              pattern: {
+                value: /^\d+$/,
+                message: "This input is number only.",
+              },
+              min: {
+                value: 1,
+                message: "Value must be greater than 0.",
+              },
+            }}
+            errors={errors}
+          />
+          <CoreInput
+            name='maxCarbs'
+            register={register}
+            label='Max. Carbs'
+            type='number'
+            required={{
+              required: "Field maxCarbs is required.",
+              pattern: {
+                value: /^\d+$/,
+                message: "This input is number only.",
+              },
+              min: {
+                value: 1,
+                message: "Value must be greater than 0.",
+              },
+            }}
+            errors={errors}
+          />
+        </div>
+        <button type='submit' disabled={testMutation.isPending} className='px-4 py-2 bg-blue-500 text-white rounded-md disabled:opacity-50'>
+          {testMutation.isPending ? "Sending..." : "Send"}
+        </button>
+      </form>
+      <div className='overflow-hidden my-10 w-lg h-fit py-5 m-auto'>
+        <CoreSlider>
+          {dummyData?.map((recepie) => (
+            <div className='relative ' key={recepie?.id}>
+              <img src={recepie?.image} alt='User Profile' className='object-cover w-full h-auto max-h-[250px] rounded-lg ' />
+              <div className='absolute p-5 flex items-end inset-0 bg-gradient-to-r from-blue-800/60 to-transparent text-white w-xs text-xl font-thin'>
+                <p className='h-auto'>{recepie?.title}</p>
+              </div>
+            </div>
+          ))}
+        </CoreSlider>
       </div>
-    </CoreCard>
+    </div>
   );
 };
 

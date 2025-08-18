@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import CoreCard from "../CoreCard/CoreCard";
 import CoreTable from "../CoreTable/CoreTable";
-import CoreSubnavigation from "./HeaderTableComponent/HeaderTableComponent";
+import HeaderTableComponent from "./HeaderTableComponent/HeaderTableComponent";
 import { useAlert } from "src/context/alert";
 import CorePagination from "../CorePagination/CorePagination";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 
-import Spoonacular from "../SpoonacularComponent/Spoonacular";
 const CoreTableComponent = (props) => {
-  const { columns, queryFn, queryKey, deleteFn, updateFn, heading, buttonText } = props;
+  const { columns, queryFn, queryKey, deleteFn, updateFn, heading, buttonText, icon, createForm: CreateForm } = props;
 
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState({});
-  const [createForm, setCreateForm] = useState(false);
+  const [createFormState, setCreateForm] = useState(false);
   const { showAlert } = useAlert();
   const queryClient = useQueryClient();
 
@@ -51,21 +50,15 @@ const CoreTableComponent = (props) => {
   });
 
   const handleChange = (page) => setPage(page);
-  const handleForm = () => setCreateForm(!createForm);
+  const handleForm = () => setCreateForm(!createFormState);
 
   const sortingHandler = ({ column, sort: localSort }) => setSort({ ...sort, [column]: localSort });
 
   return (
-    <div
-      className={`lg:grid gap-4 flex flex-col-reverse
-        transition-[grid-template-columns] duration-[1500ms]
-        ease-[cubic-bezier(0.77,0,0.175,1)]
-        will-change-[grid-template-columns] `}
-      style={{ gridTemplateColumns: createForm ? "2fr 1fr" : "1fr 0fr" }}
-    >
+    <div className={`lg:grid  ${createFormState ? "grid-cols-[3fr_1fr]" : "grid-cols-1fr"}  gap-4 flex flex-col-reverse`}>
       <CoreCard>
         <div className='p-6'>
-          <CoreSubnavigation setCreateForm={handleForm} heading={heading} button={buttonText} />
+          <HeaderTableComponent setCreateForm={handleForm} heading={heading} button={buttonText} icon={icon} />
           <div className='flex flex-col'>
             <CoreTable
               loading={loading || isRefetching}
@@ -82,7 +75,7 @@ const CoreTableComponent = (props) => {
           </div>
         </div>
       </CoreCard>
-      {createForm && <Spoonacular />}
+      {createFormState && <CreateForm />}
     </div>
   );
 };

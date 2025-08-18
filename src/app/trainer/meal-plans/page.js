@@ -1,22 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import PageGuard from "src/page-guards/pageGuard";
+import { CookingPot, Salad } from "lucide-react";
 import { getSavedMeals, deleteMeal, updateMeal } from "src/http/api/meals";
 import CoreTableComponent from "src/components/CoreTableComponent/CoreTableComponent";
-
+import { createMeal } from "src/modules/meals/createMeal";
 const MealPlansPage = () => {
-  const columns = [
-    "",
-    "Title",
-    "Protein",
-    "Calories",
-    "Fats",
-    "Carbs",
-    "Links",
-    "Actions",
-  ];
+  const columns = ["", "Title", "Protein", "Calories", "Fats", "Carbs", "Links", "Actions"];
 
-  // const [open, setOpen] = useState(false);
   return (
     <PageGuard roles={["trainer"]}>
       <CoreTableComponent
@@ -25,9 +16,11 @@ const MealPlansPage = () => {
         deleteFn={deleteMeal}
         updateFn={updateMeal}
         createFn={() => {}}
+        createForm={createMeal}
         queryKey={"meals"}
-        buttonText="Add New"
-        heading="Your Meal Plans"
+        buttonText='Add New'
+        heading='Your Meal Plans'
+        icon={Salad}
       />
     </PageGuard>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import CoreInput from "src/components/CoreInput/CoreInput";
 import { useForm } from "react-hook-form";
+import CoreText from "src/components/CoreText/CoreText";
 const CreateYours = () => {
   const {
     handleSubmit,

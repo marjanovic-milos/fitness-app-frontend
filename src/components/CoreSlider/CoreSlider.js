@@ -7,9 +7,12 @@ export const CoreSlider = ({ children, settings }) => {
     : {
         dots: true,
         infinite: true,
-        speed: 500,
+        speed: 2000,
         slidesToShow: 1,
         slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        cssEase: "linear",
       };
 
   return <Slider {...settingSlider}>{children}</Slider>;

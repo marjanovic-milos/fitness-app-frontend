@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import PageGuard from "src/page-guards/pageGuard";
-import { CookingPot, Salad } from "lucide-react";
+import { Salad } from "lucide-react";
 import { getSavedMeals, deleteMeal, updateMeal } from "src/http/api/meals";
 import CoreTableComponent from "src/components/CoreTableComponent/CoreTableComponent";
 import { createMeal } from "src/modules/meals/createMeal";

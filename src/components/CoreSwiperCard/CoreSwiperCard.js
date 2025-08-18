@@ -17,7 +17,7 @@ export const CoreSwiperCard = ({ heading1, heading2, component1, component2, ico
   };
 
   return (
-    <div className='w-md'>
+    <div className='xl:w-md w-full'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-4'>
           <div className='bg-gray-100 rounded-full p-1'>

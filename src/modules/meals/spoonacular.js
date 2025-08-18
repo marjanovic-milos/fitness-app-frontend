@@ -138,7 +138,7 @@ const Spoonacular = () => {
   ];
 
   return (
-    <div className='overflow-hidden'>
+    <div className='overflow-hidden w-full'>
       <form onSubmit={handleSubmit()}>
         <div className='flex gap-5 my-10'>
           <CoreInput

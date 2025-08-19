@@ -1,0 +1,18 @@
+.core-root-slider .slick-dots li button::before {
+  color: red !important;
+  font-size: 0.8rem;
+  border: 1px solid green;
+  border-radius: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.core-root-slider .slick-dots {
+  padding-bottom: 0.4rem;
+}
+
+.core-root-slider .slick-dots li button {
+  position: relative;
+}

@@ -6,7 +6,7 @@ import { searchSpoonacular } from "src/http/api/meals";
 import { useMutation } from "@tanstack/react-query";
 import { useAlert } from "src/context/alert";
 import { CoreSlider } from "../../components/CoreSlider/CoreSlider";
-import { CoreSwiperCard } from "../../components/CoreSwiperCard/CoreSwiperCard";
+import CoreButton from "src/components/CoreButton/CoreButton";
 
 const Spoonacular = () => {
   const {
@@ -213,9 +213,9 @@ const Spoonacular = () => {
             errors={errors}
           />
         </div>
-        <button type='submit' disabled={testMutation.isPending} className='px-4 py-2 bg-blue-500 text-white rounded-md disabled:opacity-50'>
+        <CoreButton type='submit' classes='w-[10rem]' variant='outline' disabled={testMutation.isPending}>
           {testMutation.isPending ? "Sending..." : "Send"}
-        </button>
+        </CoreButton>
       </form>
       <div className='overflow-hidden my-10 w-lg h-fit py-5 m-auto'>
         <CoreSlider>

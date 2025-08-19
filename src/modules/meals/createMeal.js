@@ -10,7 +10,7 @@ export const createMeal = () => {
       <div className='p-6 overflow-hidden'>
         <CoreSwiperCard
           heading1={"Spoonacular Recepies"}
-          heading2={"Enter yours"}
+          heading2={"Create yours"}
           component1={Spoonacular}
           component2={CreateYours}
           icon1={ChefHat}

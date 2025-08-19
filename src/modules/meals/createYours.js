@@ -2,6 +2,7 @@ import React from "react";
 import CoreInput from "src/components/CoreInput/CoreInput";
 import { useForm } from "react-hook-form";
 import CoreText from "src/components/CoreText/CoreText";
+import CoreButton from "src/components/CoreButton/CoreButton";
 const CreateYours = () => {
   const {
     handleSubmit,
@@ -108,6 +109,12 @@ const CreateYours = () => {
           errors={errors}
         />
       </div>
+      <CoreButton
+        classes='w-full'
+        // isLoading={true}
+      >
+        Save
+      </CoreButton>
     </form>
   );
 };

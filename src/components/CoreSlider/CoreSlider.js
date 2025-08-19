@@ -15,5 +15,9 @@ export const CoreSlider = ({ children, settings }) => {
         cssEase: "linear",
       };
 
-  return <Slider {...settingSlider}>{children}</Slider>;
+  return (
+    <Slider className='core-root-slider' {...settingSlider}>
+      {children}
+    </Slider>
+  );
 };

@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "src/context/theme";
+import CoreLoader from "../CoreLoader/CoreLoader";
 
 const CoreButton = (props) => {
-  const { className, type, icon } = props;
+  const { classes, variant, icon, isLoading, children } = props;
   const { dark } = useContext(ThemeContext);
 
-  const rootInput = `${dark ? "core-button-dark" : "core-button"} ${
-    type === "outline" ? (dark ? "core-button-outline-dark" : "core-button-outline") : ""
-  } ${className?.root}`;
+  const rootInput = `${classes} ${dark ? "core-button-dark" : "core-button"} ${
+    variant === "outline" ? (dark ? "core-button-outline-dark" : "core-button-outline") : "core-button"
+  } `;
 
   const Icon = icon;
 
@@ -18,7 +19,9 @@ const CoreButton = (props) => {
           <Icon className='w-4 h-4' strokeWidth={1.5} />
         </div>
       )}
-      {props.children}
+      {children}
+
+      {isLoading && <CoreLoader btnLoader />}
     </button>
   );
 };

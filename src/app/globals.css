@@ -17,6 +17,7 @@
 @import "../components/CorePagination/CorePagination.module.css";
 @import "../components/CoreTableComponent/coreTableComponent.module.css";
 @import "../components/CoreTableComponent/HeaderTableComponent/headerTableComponent.module.css";
+@import "../components/CoreSlider/coreSlider.module.css";
 
 @layer base {
   h1 {

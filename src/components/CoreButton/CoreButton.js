@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "src/context/theme";
 
 const CoreButton = (props) => {
   const { className, type, icon } = props;
-  const rootInput = `core-button ${className?.root ? className.root : ""}`;
+  const { dark } = useContext(ThemeContext);
+
+  const rootInput = `${dark ? "core-button-dark" : "core-button"} ${
+    type === "outline" ? (dark ? "core-button-outline-dark" : "core-button-outline") : ""
+  } ${className?.root}`;
 
   const Icon = icon;
 

@@ -1,50 +1,50 @@
-"use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const CoreModal = ({
-  isOpen,
-  onClose,
-  onConfirm,
-  onCancel,
-  title,
-  children,
-}) => {
-  if (!isOpen) return null;
+const CoreModal = ({ isOpen, onClose, children }) => {
+  const [show, setShow] = useState(false); // keeps modal mounted
+  const [animate, setAnimate] = useState(false); // controls animation
+
+  // Handle open/close
+  useEffect(() => {
+    if (isOpen) {
+      setShow(true); // mount modal
+      setTimeout(() => setAnimate(true), 10); // trigger opening animation
+    } else {
+      setAnimate(false); // start closing animation
+      const timer = setTimeout(() => setShow(false), 300); // unmount after animation
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
+
+  // Prevent background scroll
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+  }, [isOpen]);
+
+  if (!show) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-      <div className="bg-white rounded-2xl shadow-lg max-w-md w-full p-6">
+    <>
+      {/* Backdrop */}
+      <div onClick={onClose} className={`fixed inset-0 bg-black z-40 transition-opacity duration-300 ${animate ? "opacity-50" : "opacity-0"}`} />
+
+      {/* Modal Content */}
+      <div
+        className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-[95%] sm:w-[90%] h-screen max-h-[95%] bg-white rounded-t-3xl shadow-xl p-8 z-50
+          transform transition-all duration-300 ${animate ? "translate-y-[5%] opacity-100" : "translate-y-full opacity-0"}`}
+      >
         {/* Header */}
-        {title && (
-          <h2 className="text-xl font-semibold mb-4 text-gray-800">{title}</h2>
-        )}
-
-        {/* Body */}
-        <div className="mb-6">{children}</div>
-
-        {/* Footer */}
-        <div className="flex justify-end gap-3">
-          <button
-            onClick={() => {
-              onCancel();
-              onClose();
-            }}
-            className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-800"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={() => {
-              onConfirm();
-              onClose();
-            }}
-            className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white"
-          >
-            Confirm
+        <div className='flex justify-between items-center mb-6'>
+          <h2 className='text-xl font-semibold'>Modal Title</h2>
+          <button onClick={onClose} className='text-gray-500 hover:text-gray-800 text-2xl'>
+            ✕
           </button>
         </div>
+
+        {/* Body */}
+        <div className='overflow-y-auto h-full'>{children}</div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -8,6 +8,7 @@ import { useAlert } from "src/context/alert";
 import { CoreSlider } from "../../components/CoreSlider/CoreSlider";
 import CoreButton from "src/components/CoreButton/CoreButton";
 import { Maximize2 } from "lucide-react";
+import CoreText from "src/components/CoreText/CoreText";
 const Spoonacular = () => {
   const {
     register,
@@ -220,16 +221,19 @@ const Spoonacular = () => {
       <div className='overflow-hidden my-10 w-full h-fit py-5 m-auto'>
         <CoreSlider>
           {dummyData?.map((recepie) => (
-            <div className='relative w-full' key={recepie?.id}>
-              <img src={recepie?.image} alt='' className='object-cover w-full h-auto max-h-[250px] rounded-lg' />
-              <div className='absolute p-5 flex items-end inset-0 bg-gradient-to-r from-blue-800/60 to-transparent text-white text-xl font-thin w-full'>
-                {/* <p className='h-auto'>{recepie?.title}</p> */}
-                <span className='absolute top-5 left-10 text-sm rounded-sm bg-blue-400 p-2 cursor-pointer'>{recepie?.calories} Calories</span>
-                <span className='absolute top-5 right-10 bg-gray-200 p-10 rounded-full'>
-                  <Maximize2 className='h-5 w-5' strokeWidth={1.5} />
-                </span>
+            <>
+              <div className='relative w-full' key={recepie?.id}>
+                <img src={recepie?.image} alt='' className='object-cover w-full h-auto max-h-[250px] rounded-lg' />
+                <div className='absolute p-5 flex items-end inset-0 bg-gradient-to-r from-blue-800/60 to-transparent text-white text-xl font-thin w-full'>
+                  {/* <p className='h-auto'>{recepie?.title}</p> */}
+                  <span className='absolute top-5 left-10 text-sm rounded-sm bg-blue-400 p-2 '>{recepie?.calories} Calories</span>
+                  <span className='absolute top-5 right-10 bg-gray-200 p-2 text-gray-800 rounded-full cursor-pointer'>
+                    <Maximize2 className='h-5 w-5' strokeWidth={1.5} />
+                  </span>
+                </div>
               </div>
-            </div>
+              <CoreText className='text-start'>{recepie?.title}</CoreText>
+            </>
           ))}
         </CoreSlider>
       </div>

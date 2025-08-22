@@ -4,7 +4,7 @@ import PageGuard from "src/page-guards/pageGuard";
 import { Salad } from "lucide-react";
 import { getSavedMeals, deleteMeal, updateMeal } from "src/http/api/meals";
 import CoreTableComponent from "src/components/CoreTableComponent/CoreTableComponent";
-import { createMeal } from "src/modules/meals/createMeal";
+import { CreateMeal } from "src/modules/meals/createMeal";
 const MealPlansPage = () => {
   const columns = ["", "Title", "Protein", "Calories", "Fats", "Carbs", "Links", "Actions"];
 
@@ -16,7 +16,7 @@ const MealPlansPage = () => {
         deleteFn={deleteMeal}
         updateFn={updateMeal}
         createFn={() => {}}
-        createForm={createMeal}
+        createForm={CreateMeal}
         queryKey={"meals"}
         buttonText='Add New'
         heading='Your Meal Plans'

@@ -13,7 +13,7 @@
 @import "../components/CoreCalendar/CoreCalendar.module.css";
 @import "../components/CoreText/CoreText.module.css";
 @import "../components/CoreHeading/CoreHeading.module.css";
-@import "../components/CoreDropdown/CoreDropdown.module.css";
+
 @import "../components/CoreTable/CoreTable.module.css";
 @import "../components/CorePagination/CorePagination.module.css";
 @import "../components/CoreTableComponent/coreTableComponent.module.css";

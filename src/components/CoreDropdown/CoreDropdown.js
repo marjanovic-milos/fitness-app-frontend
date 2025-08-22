@@ -1,39 +1,56 @@
-import React, { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import React, { useState, useContext } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
-const Select = ({ options = [], value, onChange, disabled = false, className = "" }) => {
+import { ThemeContext } from "src/context/theme";
+
+const CoreDropdown = ({ options, value, onChange }) => {
   const [open, setOpen] = useState(false);
 
-  const styles = `core-select-wrapper relative ${className}`;
+  const { dark } = useContext(ThemeContext);
+
+  const baseButton = "flex items-center justify-between gap-2 rounded-full px-4 py-2 text-sm font-medium focus:outline-none transition";
+  const lightButton = "bg-gray-100 text-gray-500 border-gray-300 hover:bg-gray-50";
+  const darkButton = "bg-gray-900 text-white border-gray-600 hover:bg-gray-600";
+
+  const baseList = "absolute left-0 mt-2 w-40 rounded-xl shadow-lg z-50 overflow-hidden";
+  const lightList = "bg-white border-gray-200 text-gray-700";
+  const darkList = "bg-gray-900 border-gray-600 text-white";
+
+  const baseItem = "cursor-pointer px-4 py-2 text-sm transition hover:opacity-80";
+  const lightItem = "hover:bg-gray-100";
+  const darkItem = "hover:bg-gray-600";
+
+  const btnValue = options.find((option) => option.value === value);
 
   return (
-    <div className={styles}>
-      <select
-        className='core-select-element appearance-none pr-10'
-        value={value}
-        onChange={(e) => {
-          onChange(e.target.value);
-          setOpen(false);
-        }}
-        disabled={disabled}
-        onFocus={() => setOpen(true)}
-        onBlur={() => setOpen(false)}
-      >
-        {options.map((opt) => (
-          <option key={opt.value} value={opt.value} className='core-select-option'>
-            {opt.label}
-          </option>
-        ))}
-      </select>
+    <div className='relative inline-block'>
+      <button onClick={() => setOpen(!open)} className={`${baseButton} ${dark ? darkButton : lightButton}`}>
+        {btnValue?.label ?? "Select"}
+        {open ? (
+          <ChevronUp size={16} className={dark ? "text-white" : "text-gray-600"} />
+        ) : (
+          <ChevronDown size={16} className={dark ? "text-white" : "text-gray-600"} />
+        )}
+      </button>
 
-      {/* Chevron Icon */}
-      <ChevronDown
-        className={`absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500 transition-transform duration-200 pointer-events-none ${
-          open ? "rotate-180" : ""
-        }`}
-      />
+      {open && (
+        <div className={`${baseList} ${dark ? darkList : lightList}`}>
+          {options.map((option, idx) => (
+            <div
+              key={idx}
+              onClick={() => {
+                onChange(option.value);
+                setOpen(false);
+              }}
+              className={`${baseItem} ${dark ? darkItem : lightItem}`}
+            >
+              {option?.label}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
-export default Select;
+export default CoreDropdown;

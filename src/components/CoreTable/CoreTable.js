@@ -129,35 +129,35 @@ const CoreTable = (props) => {
     );
   });
 
+  const headers = columns?.map((column, index) => {
+    const [sort, setSort] = useState(false);
+
+    const skipFields = ["Actions", "Links", ""];
+    const sorting = ({ column, sort }) => {
+      setSort(!sort);
+      sortingHandler({ column, sort });
+    };
+    return (
+      <div key={index}>
+        {!skipFields.includes(column) ? (
+          <div onClick={() => sorting({ column, sort })} className={headerItem}>
+            {column}
+            {sort ? (
+              <ChevronDown className='min-w-[20px] min-h-full' strokeWidth={1.5} />
+            ) : (
+              <ChevronUp className='min-w-[20px] min-h-full' strokeWidth={1.5} />
+            )}
+          </div>
+        ) : (
+          <div className={headerItem}>{column}</div>
+        )}
+      </div>
+    );
+  });
+
   return (
     <div className={root}>
-      <div className={header}>
-        {columns?.map((column, index) => {
-          const [sort, setSort] = useState(false);
-
-          const skipFields = ["Actions", "Links", ""];
-          const sorting = ({ column, sort }) => {
-            setSort(!sort);
-            sortingHandler({ column, sort });
-          };
-          return (
-            <div key={index}>
-              {!skipFields.includes(column) ? (
-                <div onClick={() => sorting({ column, sort })} className={headerItem}>
-                  {column}
-                  {sort ? (
-                    <ChevronDown className='min-w-[20px] min-h-full' strokeWidth={1.5} />
-                  ) : (
-                    <ChevronUp className='min-w-[20px] min-h-full' strokeWidth={1.5} />
-                  )}
-                </div>
-              ) : (
-                <div className={headerItem}>{column}</div>
-              )}
-            </div>
-          );
-        })}
-      </div>
+      <div className={header}>{headers}</div>
       <div className='core-table-body'>{loading ? loader : content}</div>
     </div>
   );

@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { signIn } from "../../http/api/auth";
 import { useForm } from "react-hook-form";
-import styles from "./loginClient.module.css";
+import styles from "./register.module.css";
 import CoreInput from "src/components/CoreInput/CoreInput";
 import Image from "next/image";
 import CoreButton from "src/components/CoreButton/CoreButton";
@@ -13,7 +13,7 @@ import avatar from "../.././../public/sportive.png";
 import CoreText from "src/components/CoreText/CoreText";
 import CoreHeading from "src/components/CoreHeading/CoreHeading";
 import Link from "next/link";
-const ClientLogin = () => {
+const Register = () => {
   const {
     register,
     handleSubmit,
@@ -38,10 +38,16 @@ const ClientLogin = () => {
   return (
     <div className={styles.root}>
       <div className={styles.leftSide}>
+        {/* <CoreHeading variant='h1' className='h-auto py-10 font-bold'>
+          One stop shop, for all your managing!
+        </CoreHeading> */}
+        <Image src={avatar} alt='My Photo' className={styles.image} width={400} height={300} />
+      </div>
+      <div className={styles.rightSide}>
         <div className={styles.formWrap}>
           <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             <CoreHeading variant='h3' className='font-bold'>
-              Sign In
+              Sign Up
             </CoreHeading>
             <CoreInput name='email' type='email' label='Email' register={register} {...register("email")} />
             <CoreInput
@@ -56,20 +62,17 @@ const ClientLogin = () => {
             <CoreButton classes={"w-full"}>Login</CoreButton>
             <div className='flex justify-center '>
               <CoreText>
-                First time here?
-                <Link href='/register' className='flex justify-center underline mx-2'>
-                  Register first
+                Already have an account?
+                <Link href='/login' className='flex justify-center underline mx-2'>
+                  Sign in
                 </Link>
               </CoreText>
             </div>
           </form>
         </div>
       </div>
-      <div className={styles.rightSide}>
-        <Image src={avatar} alt='My Photo' className={styles.image} width={400} height={300} />
-      </div>
     </div>
   );
 };
 
-export default ClientLogin;
+export default Register;

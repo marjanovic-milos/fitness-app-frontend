@@ -5,7 +5,7 @@ export const CoreSlider = ({ children, settings }) => {
   const settingSlider = settings
     ? settings
     : {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 2000,
         slidesToShow: 1,

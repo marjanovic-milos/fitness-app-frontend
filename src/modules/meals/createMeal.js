@@ -30,15 +30,6 @@ export const CreateMeal = () => {
         </div>
 
         <div className='xl:w-md w-full'>{selected === "spoonacular" ? <Spoonacular /> : <CreateYours />}</div>
-
-        {/* <CoreSwiperCard
-          heading1={"Spoonacular Recepies"}
-          heading2={"Create yours"}
-          component1={Spoonacular}
-          component2={CreateYours}
-          icon1={ChefHat}
-          icon2={Beef}
-        /> */}
       </div>
     </CoreCard>
   );

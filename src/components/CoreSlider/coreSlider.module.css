@@ -16,3 +16,11 @@
 .core-root-slider .slick-dots li button {
   position: relative;
 }
+
+.core-root-slider .slick-slide {
+  padding: 0 10px;
+}
+
+.core-root-slider .slick-list {
+  margin: 0 -10px;
+}

@@ -1,12 +1,25 @@
 {
   "welcome": "Dobrodošli",
   "description": "Ovo je osnovni primer.",
+
   "core": {
-    "themeSwitch": "Promeni temu",
+    "themeSwitch": "Promeni temu boja",
     "translationsSelect": "Promeni jezik"
   },
   "profile": {
-    "userSettings": "Podesavanja Korisnika",
-    "userDetails": "Detalji Korisnika"
+    "userSettings": "Korisnička podešavanja",
+    "userDetails": "Podaci o korisniku"
+  },
+  "meals": {
+    "cancelBtn": "Otkaži",
+    "searchBtn": "Pretraži",
+    "saveBtn": "Sacuvaj",
+    "minProtein": "Min. proteina",
+    "maxProtein": "Maks. proteina",
+    "minCarbs": "Min. ugljenih hidrata",
+    "maxCarbs": "Maks. ugljenih hidrata",
+    "requiredField": "Obavezno polje!",
+    "greaterThenZero": "Vrednost mora biti veća od 0.",
+    "numberOnly": "Ovo polje prihvata samo brojeve."
   }
 }

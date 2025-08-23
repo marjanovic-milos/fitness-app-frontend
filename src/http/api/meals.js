@@ -28,14 +28,10 @@ export const deleteMeal = asyncHandler(async (id) => {
 });
 
 export const saveMeal = asyncHandler(async (data) => {
-  const { image, spoonacularId, title, sourceUrl } = data;
   const request = await http.post(
     "/meals/addMeal",
     {
-      image,
-      spoonacularId,
-      title,
-      sourceUrl,
+      ...data,
     },
     {
       skipAuth: false,

@@ -9,5 +9,17 @@
   "profile": {
     "userSettings": "User Settings",
     "userDetails": "User Details"
+  },
+  "meals": {
+    "cancelBtn": "Cancel",
+    "searchBtn": "Search",
+    "saveBtn": "Save",
+    "minProtein": "Min. Protein",
+    "maxProtein": "Max. Protein",
+    "minCarbs": "Min. Carbs",
+    "maxCarbs": "Max. Carbs",
+    "requiredField": "Required field!",
+    "greaterThenZero": "Value must be greater than 0.",
+    "nubmerOnly": "This input is number only."
   }
 }

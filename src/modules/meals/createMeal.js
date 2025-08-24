@@ -50,52 +50,37 @@ export const CreateMeal = ({ handleCreateForm }) => {
 
   return (
     <CoreCard>
-      <div className="p-6 overflow-hidden">
-        <div className="flex justify-between items-center w-full">
+      <div className='p-6 overflow-hidden'>
+        <div className='flex justify-between items-center w-full'>
           {selected === "spoonacular" ? (
-            <CoreHeading type="h2" className="font-semibold" icon={ChefHat}>
+            <CoreHeading type='h2' className='font-semibold' icon={ChefHat}>
               Spoonacular Recepies
             </CoreHeading>
           ) : (
-            <CoreHeading type="h2" className="font-semibold" icon={Beef}>
+            <CoreHeading type='h2' className='font-semibold' icon={Beef}>
               Create Yours
             </CoreHeading>
           )}
-          <CoreDropdown
-            options={options}
-            value={selected}
-            onChange={(val) => setSelected(val)}
-          />
+          <CoreDropdown options={options} value={selected} onChange={(val) => setSelected(val)} />
         </div>
 
         {selected === "spoonacular" ? (
-          <div className="flex gap-2 my-8 w-full ml-1">
-            <Info className="w-5 h-5" strokeWidth={1.5} />
-            <CoreText className="!text-gray-500 !text-sm">
-              Search for the recepies, using Spoonacular API ( *values are
-              presented in grams).
-            </CoreText>
+          <div className='flex gap-2 my-8 w-full ml-1'>
+            <Info className='w-5 h-5' strokeWidth={1.5} />
+            <CoreText className='!text-gray-500 !text-sm'>Search for the recepies, using Spoonacular API ( *values are presented in grams).</CoreText>
           </div>
         ) : (
-          <div className="flex gap-2 my-8 w-full ml-1">
-            <Info className="w-5 h-5" strokeWidth={1.5} />
-            <CoreText className="!text-gray-500 !text-sm">
-              Create your own, note that all fields are requried.
-            </CoreText>
+          <div className='flex gap-2 mt-8 w-full ml-1'>
+            <Info className='w-5 h-5' strokeWidth={1.5} />
+            <CoreText className='!text-gray-500 !text-sm'>Create your own, note that all fields are requried.</CoreText>
           </div>
         )}
 
-        <div className="xl:w-md w-full">
+        <div className='xl:w-md w-full'>
           {selected === "spoonacular" ? (
             <Spoonacular cancelForm={handleCreateForm} />
           ) : (
-            <CreateYourForm
-              handleSubmit={handleSubmit}
-              register={register}
-              errors={errors}
-              onSubmit={onSubmit}
-              cancelForm={handleCreateForm}
-            />
+            <CreateYourForm handleSubmit={handleSubmit} register={register} errors={errors} onSubmit={onSubmit} cancelForm={handleCreateForm} />
           )}
         </div>
       </div>

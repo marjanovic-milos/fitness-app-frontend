@@ -9,8 +9,13 @@ import { Maximize2 } from "lucide-react";
 import CoreText from "src/components/CoreText/CoreText";
 import { SpoonacularForm } from "./mealForms";
 import { useForm } from "react-hook-form";
+import CoreModal from "src/components/CoreModal/CoreModal";
+import MealView from "./mealView";
+
 const Spoonacular = ({ cancelForm }) => {
   const [recepies, setRecepies] = useState();
+  const [selectedRecepie, setRecepie] = useState(false);
+
   const { showAlert } = useAlert();
 
   const {
@@ -140,40 +145,35 @@ const Spoonacular = ({ cancelForm }) => {
       carbs: "4g",
     },
   ];
-  // console.log(recepies, "recepies");
-  return (
-    <div className="w-auto">
-      <SpoonacularForm
-        handleSubmit={handleSubmit}
-        register={register}
-        errors={errors}
-        onSubmit={onSubmit}
-        cancelForm={cancelForm}
-      />
 
-      <div className="overflow-hidden mt-10 w-full h-fit pt-5">
+  return (
+    <div className='w-auto'>
+      <SpoonacularForm handleSubmit={handleSubmit} register={register} errors={errors} onSubmit={onSubmit} cancelForm={cancelForm} />
+
+      <CoreModal isOpen={!!selectedRecepie} onClose={() => setRecepie(null)}>
+        <MealView recepie={selectedRecepie} />
+      </CoreModal>
+      <div className='overflow-hidden mt-10 w-full h-fit py-10'>
         <CoreSlider>
           {dummyData?.map((recepie) => (
             <div key={recepie.id}>
-              <div className="relative w-full" key={recepie?.id}>
-                <span className="absolute inset-0 bg-black/60" />
-                <img
-                  src={recepie?.image}
-                  alt=""
-                  className="object-cover w-full h-auto max-h-[250px]"
-                />
-                <div className="h-auto w-full">
-                  <span className="absolute top-5 left-10 text-xs rounded-sm bg-gray-800 text-white  font-semibold px-2 py-1">
-                    {recepie?.calories} Calories
-                  </span>
-                  <span className="absolute top-5 right-10 bg-gray-200 p-2 text-gray-800 rounded-full cursor-pointer">
-                    <Maximize2 className="h-5 w-5" strokeWidth={1.5} />
-                  </span>
+              <div className='relative w-full h-full' key={recepie?.id}>
+                <span className='absolute inset-0 bg-black/60' />
+                <img src={recepie?.image} alt={recepie?.title} className='object-cover w-full h-auto max-h-[250px]' />
+                <div className='absolute top-5 left-5 flex gap-2'>
+                  <span className='text-xs rounded-sm bg-gray-800 text-white  font-semibold px-2 py-1'>Protein: {recepie?.protein}</span>
+
+                  <span className='text-xs rounded-sm bg-green-700 text-white  font-semibold px-2 py-1'>Carbs: {recepie?.carbs} </span>
                 </div>
+                <span
+                  onClick={() => setRecepie(recepie)}
+                  className='absolute top-5 right-5 bg-gray-200 p-2 text-gray-800 rounded-full cursor-pointer'
+                >
+                  <Maximize2 className='h-4 w-4' strokeWidth={1.5} />
+                </span>
+
+                <p className='absolute h-auto bottom-5 left-5 flex justify-start font-semibold text-white text-sm'>{recepie?.title}</p>
               </div>
-              <CoreText className="flex justify-start font-semibold text-sm my-2">
-                {recepie?.title}
-              </CoreText>
             </div>
           ))}
         </CoreSlider>

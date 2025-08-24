@@ -5,7 +5,7 @@ export const CoreSlider = ({ children, settings }) => {
   const settingSlider = settings
     ? settings
     : {
-        dots: false,
+        dots: true,
         infinite: true,
         speed: 2000,
         slidesToShow: 1,
@@ -16,7 +16,7 @@ export const CoreSlider = ({ children, settings }) => {
       };
 
   return (
-    <Slider className="core-root-slider" {...settingSlider}>
+    <Slider className='core-root-slider' {...settingSlider}>
       {children}
     </Slider>
   );

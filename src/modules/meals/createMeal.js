@@ -78,7 +78,7 @@ export const CreateMeal = ({ handleCreateForm }) => {
 
         <div className='xl:w-md w-full'>
           {selected === "spoonacular" ? (
-            <Spoonacular cancelForm={handleCreateForm} />
+            <Spoonacular cancelForm={handleCreateForm} onSave={saveMeal} />
           ) : (
             <CreateYourForm handleSubmit={handleSubmit} register={register} errors={errors} onSubmit={onSubmit} cancelForm={handleCreateForm} />
           )}

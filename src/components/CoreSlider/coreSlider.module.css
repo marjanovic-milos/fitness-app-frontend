@@ -1,7 +1,7 @@
 .core-root-slider .slick-dots li button::before {
   font-size: 0.8rem;
   padding-top: 1rem;
-  color: red;
+  color: #333;
 }
 
 .core-root-slider .slick-dots {

@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import CoreModal from "src/components/CoreModal/CoreModal";
 import MealView from "./mealView";
 
-const Spoonacular = ({ cancelForm }) => {
+const Spoonacular = ({ cancelForm, onSave }) => {
   const [recepies, setRecepies] = useState();
   const [selectedRecepie, setRecepie] = useState(false);
 
@@ -151,7 +151,7 @@ const Spoonacular = ({ cancelForm }) => {
       <SpoonacularForm handleSubmit={handleSubmit} register={register} errors={errors} onSubmit={onSubmit} cancelForm={cancelForm} />
 
       <CoreModal isOpen={!!selectedRecepie} onClose={() => setRecepie(null)}>
-        <MealView recepie={selectedRecepie} />
+        <MealView recepie={selectedRecepie} onSave={onSave} />
       </CoreModal>
       <div className='overflow-hidden mt-10 w-full h-fit py-10'>
         <CoreSlider>

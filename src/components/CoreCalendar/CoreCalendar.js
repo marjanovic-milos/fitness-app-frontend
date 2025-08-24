@@ -1,59 +1,92 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import dynamic from "next/dynamic";
+import { momentLocalizer } from "react-big-calendar";
 
-import { Calendar, momentLocalizer } from "react-big-calendar";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+
 import moment from "moment";
-import classes from "./CoreCalendar.module.css";
+
+// const Calendar = dynamic(
+//   () => import("react-big-calendar").then((mod) => mod.Calendar),
+//   { ssr: false }
+// );
+
+// import classes from "./CoreCalendar.module.css";
 
 const CoreCalendar = () => {
-  const localizer = momentLocalizer(moment);
-  const events = [
+  // const localizer = momentLocalizer(moment);
+  // const events = [
+  //   {
+  //     title: "Meeting",
+  //     start: new Date(2025, 7, 24, 10, 0), // Aug 24, 2025, 10:00
+  //     end: new Date(2025, 7, 24, 11, 0),
+  //   },
+  // ];
+
+  const [events, setEvents] = useState([
     {
-      title: "My Event",
-      start: new Date(2025, 6, 20, 10, 0),
-      end: new Date(2025, 6, 20, 12, 0),
+      id: "1",
+      title: "Meeting",
+      start: new Date().toISOString(),
+      end: new Date(Date.now() + 60 * 60 * 1000).toISOString(),
     },
-  ];
-
-  const CustomEvent = ({ event }) => {
-    return (
-      <div className='bg-purple-200 p-1 rounded text-sm'>
-        📝 <strong>{event.title}</strong>
-      </div>
-    );
-  };
-
-  // const CustomToolbar = (toolbar) => {
-  //   return (
-  //     <div className="flex justify-between items-center mb-4">
-  //       <button onClick={() => toolbar.onNavigate("PREV")}>← Prev</button>
-  //       <div>{toolbar.label}</div>
-  //       <button onClick={() => toolbar.onNavigate("NEXT")}>Next →</button>
-  //     </div>
-  //   );
-  // };
+  ]);
   return (
-    <div className={"min-w-[50rem] h-auto"}>
-      <Calendar
+    <div className={"h-auto"}>
+      <FullCalendar
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        initialView="timeGridWeek"
+        headerToolbar={{
+          left: "prev,next today",
+          center: "title",
+          right: "dayGridMonth,timeGridWeek,timeGridDay",
+        }}
+        selectable
+        editable // enables drag/drop + resize
+        events={events}
+        select={(info) => {
+          const newEvent = {
+            id: String(events.length + 1),
+            title: "New Event",
+            start: info.startStr,
+            end: info.endStr,
+          };
+          setEvents([...events, newEvent]);
+        }}
+        eventDrop={(info) => {
+          console.log(
+            "Dropped:",
+            info.event.title,
+            info.event.start,
+            info.event.end
+          );
+        }}
+        eventResize={(info) => {
+          console.log(
+            "Resized:",
+            info.event.title,
+            info.event.start,
+            info.event.end
+          );
+        }}
+      />
+      {/* <Calendar
         localizer={localizer}
         events={events}
-        startAccessor='start'
-        endAccessor='end'
-        // style={{ height: 500 }}
+        startAccessor="start"
+        endAccessor="end"
+        style={{ height: 500 }}
         selectable={true}
         onSelectSlot={(slotInfo) => {
           console.log("Selected slot", slotInfo);
         }}
         views={["month"]}
-        components={{
-          event: CustomEvent,
-          // toolbar: CustomToolbar,
-        }}
-        //   onSelectEvent={(event) => {
-        //     console.log("Selected event", event);
-        //   }}
-      />
+      /> */}
     </div>
   );
 };

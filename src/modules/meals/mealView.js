@@ -5,9 +5,9 @@ import { Zap, Ham, BookMarked, LeafyGreen, Salad, Vegan, Wheat, XCircle, Milk } 
 import CoreText from "src/components/CoreText/CoreText";
 import Image from "next/image";
 import CoreButton from "src/components/CoreButton/CoreButton";
-
+import logo from "../../../public/spoonacular.svg";
 const MealView = (props) => {
-  const { recepie, onSave } = props;
+  const { recepie, onSave, onClose } = props;
 
   const { data, isLoading } = useQuery({
     queryKey: ["recepie", recepie?.id],
@@ -40,6 +40,20 @@ const MealView = (props) => {
     spoonacularSourceUrl: "https://spoonacular.com/best-potato-cheese-soup-in-a-bread-bowl-634927",
   };
 
+  const handleSave = () => {
+    onSave({
+      spoonacularId: dummy?.id,
+      title: dummy?.title,
+      image: dummy?.image,
+      fat: Number(recepie?.fat.replace(/g$/, "")),
+      carbs: Number(recepie?.carbs.replace(/g$/, "")),
+      calories: recepie?.calories,
+      protein: Number(recepie?.protein.replace(/g$/, "")),
+      sourceUrl: dummy.sourceUrl,
+    });
+    onClose();
+  };
+
   const NutritionComponent = ({ className, title, data, icon }) => {
     const Icon = icon;
     return (
@@ -60,8 +74,12 @@ const MealView = (props) => {
   const DietComponent = ({ value, icon, title }) => {
     const Icon = icon;
     return (
-      <span className={`flex items-center gap-2 ${value ? "bg-green-500" : "bg-red-700"} w-fit h-8 rounded-lg px-2`}>
-        {value ? <Icon className='h-4 w-4 text-white ' strokeWidth={1.5} /> : <XCircle className='h-4 w-4 text-white ' strokeWidth={1.5} />}
+      <span className={`flex items-center gap-2 bg-transperent border ${value ? "border-green-500" : "border-red-700"} w-fit h-8 rounded-full px-2`}>
+        {value ? (
+          <Icon className={`h-4 w-4 ${value ? "text-green-500" : "!text-red-700"} `} strokeWidth={1.5} />
+        ) : (
+          <XCircle className={` h-4 w-4 ${value ? "text-green-500" : "text-red-700"}  `} strokeWidth={1.5} />
+        )}
         <p className={`text-xs text-white font-semibold `}>{`${value ? "" : "Not"} ${title}`}</p>
       </span>
     );
@@ -71,14 +89,10 @@ const MealView = (props) => {
     <div className='relative'>
       <span className='absolute inset-0 bg-black/30 rounded-xl' />
       <Image src={dummy?.image} alt='Example local image' width={500} height={500} className='w-full object-fit rounded-xl' priority />
-      <div className='absolute h-[50%]  w-full flex xl:flex-row flex-col justify-between gap-4 pb-20  px-10 top-10 left-0'>
-        <h1 className='text-white font-thin mb-10'> {dummy.title}</h1>
-        <div className='flex items-center gap-2'>
-          <DietComponent value={dummy.vegan} icon={Vegan} title='Vegan' />
-          <DietComponent value={dummy.vegetarian} icon={Salad} title='Vegetarian' />
-          <DietComponent value={dummy.glutenFree} icon={Wheat} title='Gluten Free' />
-          <DietComponent value={dummy.dairyFree} icon={Milk} title='Dairy Free' />
-        </div>
+
+      <Image src={logo} alt='Example local image' width={100} height={100} className='absolute top-5 left-5' priority />
+      <div className='absolute h-[50%]  w-full flex xl:flex-row flex-col justify-between gap-4 pb-20 px-10 xl:top-10 top-0 left-0'>
+        <h1 className='text-white font-thin mb-10 h-auto'> {dummy.title}</h1>
       </div>
 
       <div className='absolute bottom-0  left-0 flex items-start gap-5 h-[70%]  overflow-y-auto bg-white rounded-xl w-full p-5 z-99'>
@@ -90,24 +104,16 @@ const MealView = (props) => {
         </div>
         <div className='flex flex-col gap-5 w-[50%] h-[50%]'>
           <div className='w-full'>
+            <div className='flex items-center gap-2'>
+              <DietComponent value={dummy.vegan} icon={Vegan} title='Vegan' />
+              <DietComponent value={dummy.vegetarian} icon={Salad} title='Vegetarian' />
+              <DietComponent value={dummy.glutenFree} icon={Wheat} title='Gluten Free' />
+              <DietComponent value={dummy.dairyFree} icon={Milk} title='Dairy Free' />
+            </div>
             <CoreText className='text-sm font-semibold line-clamp-8'>{dummy.instructions}</CoreText>
           </div>
           <div className='flex items-center'>
-            <CoreButton
-              onClick={() =>
-                onSave({
-                  spoonacularId: dummy?.id,
-                  title: dummy?.title,
-                  image: dummy?.image,
-                  fat: recepie?.fat,
-                  carbs: recepie?.carbs,
-                  calories: recepie?.calories,
-                  protein: recepie?.protein,
-                })
-              }
-              classes='w-25 !justify-between !bg-gray-900'
-              icon={BookMarked}
-            >
+            <CoreButton onClick={handleSave} classes='w-25 !justify-between !bg-gray-900' icon={BookMarked}>
               Save
             </CoreButton>
           </div>

@@ -130,18 +130,21 @@ const CoreTable = (props) => {
   });
 
   const headers = columns?.map((column, index) => {
-    const [sort, setSort] = useState(false);
+    const [sort, setSort] = useState(index === 0);
 
     const skipFields = ["Actions", "Links", ""];
+
     const sorting = ({ column, sort }) => {
       setSort(!sort);
       sortingHandler({ column, sort });
     };
+
     return (
       <div key={index}>
         {!skipFields.includes(column) ? (
           <div onClick={() => sorting({ column, sort })} className={headerItem}>
             {column}
+
             {sort ? (
               <ChevronDown className='min-w-[20px] min-h-full' strokeWidth={1.5} />
             ) : (

@@ -26,7 +26,7 @@ const Spoonacular = ({ cancelForm, onSave }) => {
   } = useForm();
 
   const spoonacularMutation = useMutation({
-    mutationKey: ["search-spoonacular"],
+    mutationKey: ["recepie"],
     mutationFn: searchSpoonacular,
     onSuccess: (data) => {
       setRecepies(data.data.data);
@@ -151,7 +151,7 @@ const Spoonacular = ({ cancelForm, onSave }) => {
       <SpoonacularForm handleSubmit={handleSubmit} register={register} errors={errors} onSubmit={onSubmit} cancelForm={cancelForm} />
 
       <CoreModal isOpen={!!selectedRecepie} onClose={() => setRecepie(null)}>
-        <MealView recepie={selectedRecepie} onSave={onSave} />
+        <MealView recepie={selectedRecepie} onSave={onSave} onClose={} />
       </CoreModal>
       <div className='overflow-hidden mt-10 w-full h-fit py-10'>
         <CoreSlider>
@@ -159,10 +159,10 @@ const Spoonacular = ({ cancelForm, onSave }) => {
             <div key={recepie.id}>
               <div className='relative w-full h-full' key={recepie?.id}>
                 <span className='absolute inset-0 bg-black/60' />
+
                 <img src={recepie?.image} alt={recepie?.title} className='object-cover w-full h-auto max-h-[250px]' />
                 <div className='absolute top-5 left-5 flex gap-2'>
                   <span className='text-xs rounded-sm bg-gray-800 text-white  font-semibold px-2 py-1'>Protein: {recepie?.protein}</span>
-
                   <span className='text-xs rounded-sm bg-green-700 text-white  font-semibold px-2 py-1'>Carbs: {recepie?.carbs} </span>
                 </div>
                 <span

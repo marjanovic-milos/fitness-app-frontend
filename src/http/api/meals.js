@@ -3,7 +3,7 @@ import { asyncHandler } from "src/utils/async";
 const ignorefileds = "fields=-ownerId,-created,-spoonacularId";
 
 export const getSavedMeals = asyncHandler(async ({ page, limit = 5, sort }) => {
-  const res = await http.get(`/meals?page=${page}&limit=${limit}&sort=${sort}&${ignorefileds}`, {
+  const res = await http.get(`/meals?page=${page}&limit=${limit}&sort=${sort ? sort : "-title"}&${ignorefileds}`, {
     skipAuth: false,
   });
 

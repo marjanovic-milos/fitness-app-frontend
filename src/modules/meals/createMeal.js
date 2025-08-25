@@ -23,6 +23,7 @@ export const CreateMeal = ({ handleCreateForm }) => {
     formState: { errors },
     reset,
   } = useForm();
+
   const options = [
     { value: "spoonacular", label: "Spoonacular" },
     { value: "custom", label: "Custom" },
@@ -78,7 +79,7 @@ export const CreateMeal = ({ handleCreateForm }) => {
 
         <div className='xl:w-md w-full'>
           {selected === "spoonacular" ? (
-            <Spoonacular cancelForm={handleCreateForm} onSave={saveMeal} />
+            <Spoonacular cancelForm={handleCreateForm} onSave={onSubmit} />
           ) : (
             <CreateYourForm handleSubmit={handleSubmit} register={register} errors={errors} onSubmit={onSubmit} cancelForm={handleCreateForm} />
           )}

@@ -151,7 +151,7 @@ const Spoonacular = ({ cancelForm, onSave }) => {
       <SpoonacularForm handleSubmit={handleSubmit} register={register} errors={errors} onSubmit={onSubmit} cancelForm={cancelForm} />
 
       <CoreModal isOpen={!!selectedRecepie} onClose={() => setRecepie(null)}>
-        <MealView recepie={selectedRecepie} onSave={onSave} onClose={} />
+        <MealView recepie={selectedRecepie} onSave={onSave} onClose={() => {}} />
       </CoreModal>
       <div className='overflow-hidden mt-10 w-full h-fit py-10'>
         <CoreSlider>

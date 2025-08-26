@@ -1,11 +1,14 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { spoonacularRecepie } from "src/http/api/meals";
-import { Zap, Ham, BookMarked, LeafyGreen, Salad, Vegan, Wheat, XCircle, Milk } from "lucide-react";
+import { Zap, Ham, BookMarked, Plus, LeafyGreen, Salad, Vegan, Wheat, XCircle, Milk } from "lucide-react";
 import CoreText from "src/components/CoreText/CoreText";
 import Image from "next/image";
 import CoreButton from "src/components/CoreButton/CoreButton";
 import logo from "../../../public/spoonacular.svg";
+
+import Link from "next/link";
+
 const MealView = (props) => {
   const { recepie, onSave, onClose } = props;
 
@@ -80,7 +83,7 @@ const MealView = (props) => {
         ) : (
           <XCircle className={` h-4 w-4 ${value ? "text-green-500" : "text-red-700"}  `} strokeWidth={1.5} />
         )}
-        <p className={`text-xs text-white font-semibold `}>{`${value ? "" : "Not"} ${title}`}</p>
+        <p className={`text-xs  ${value ? "text-green-500" : "text-red-700"}  font-semibold `}>{`${value ? "" : "Not"} ${title}`}</p>
       </span>
     );
   };
@@ -110,12 +113,16 @@ const MealView = (props) => {
               <DietComponent value={dummy.glutenFree} icon={Wheat} title='Gluten Free' />
               <DietComponent value={dummy.dairyFree} icon={Milk} title='Dairy Free' />
             </div>
-            <CoreText className='text-sm font-semibold line-clamp-8'>{dummy.instructions}</CoreText>
+            <div className={"truncate-text text-lg font-thin my-5"}>{dummy.instructions}</div>
           </div>
-          <div className='flex items-center'>
-            <CoreButton onClick={handleSave} classes='w-25 !justify-between !bg-gray-900' icon={BookMarked}>
+          <div className='flex items-start gap-10 w-full'>
+            <CoreButton onClick={handleSave} classes='w-25 !justify-start !bg-gray-900 !m-0' icon={Plus}>
               Save
             </CoreButton>
+
+            <Link href={dummy.sourceUrl} className='font-semibold underline'>
+              Visit Website
+            </Link>
           </div>
         </div>
       </div>

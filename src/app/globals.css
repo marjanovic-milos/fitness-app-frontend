@@ -88,18 +88,15 @@
   border: none !important;
 }
 
-.core-overflow-text {
-  @apply overflow-hidden text-ellipsis whitespace-nowrap;
-}
 .core-center {
   @apply flex justify-center items-center;
 }
 
 @layer utilities {
-  .line-clamp-8 {
-    overflow: hidden;
+  .truncate-text {
     display: -webkit-box;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 8;
+    overflow: hidden;
   }
 }

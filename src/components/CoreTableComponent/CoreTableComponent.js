@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import CoreCard from "../CoreCard/CoreCard";
 import CoreTable from "../CoreTable/CoreTable";
 import HeaderTableComponent from "./HeaderTableComponent/HeaderTableComponent";
-import { useAlert } from "src/context/alert";
 import CorePagination from "../CorePagination/CorePagination";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
-
+import toast from "react-hot-toast";
 const CoreTableComponent = (props) => {
   const { columns, queryFn, queryKey, deleteFn, updateFn, heading, buttonText, icon, createForm: CreateForm } = props;
 
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState({});
   const [createFormState, setCreateForm] = useState(false);
-  const { showAlert } = useAlert();
+
   const queryClient = useQueryClient();
 
   const limit = 5;
@@ -37,7 +36,7 @@ const CoreTableComponent = (props) => {
     mutationFn: deleteFn,
     onSuccess: () => {
       queryClient.invalidateQueries([queryKey]);
-      showAlert("Succesfully deleted!");
+      toast.success("Successfully deleted!");
     },
   });
 
@@ -45,7 +44,7 @@ const CoreTableComponent = (props) => {
     mutationFn: updateFn,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [queryKey], exact: false });
-      showAlert("Succesfully updated!");
+      toast.success("Successfully updated!");
     },
   });
 

@@ -1,18 +1,18 @@
 "use client";
-
 import { ErrorBoundary } from "react-error-boundary";
-import { handleError } from "@/utils/handleError";
-
+import { handleError } from "src/utils/handleError";
 function ErrorFallback({ error, resetErrorBoundary }) {
   handleError(error, "ReactBoundary");
 
   return (
-    <div role='alert' className='p-4 border rounded bg-red-100 text-red-700'>
-      <h2>Something went wrong 😬</h2>
-      <pre className='text-sm'>{error.message}</pre>
-      <button onClick={resetErrorBoundary} className='mt-2 px-3 py-1 bg-red-600 text-white rounded'>
-        Try again
-      </button>
+    <div role='alert' className='flex justify-center items-center p-4 border rounded h-screen bg-red-100 text-red-700'>
+      <div className='flex flex-col gap-5'>
+        <h2>Something went wrong</h2>
+        <p className=''>{error.message}</p>
+        <button onClick={resetErrorBoundary} className='w-md mt-2 m-auto px-3 py-1 bg-red-600 text-white rounded'>
+          Try again
+        </button>
+      </div>
     </div>
   );
 }

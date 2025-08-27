@@ -11,12 +11,13 @@ import { SpoonacularForm } from "./mealForms";
 import { useForm } from "react-hook-form";
 import CoreModal from "src/components/CoreModal/CoreModal";
 import MealView from "./mealView";
-
+import { useTranslation } from "react-i18next";
 const Spoonacular = ({ cancelForm, onSave }) => {
   const [recepies, setRecepies] = useState();
   const [selectedRecepie, setRecepie] = useState(false);
 
   const { showAlert } = useAlert();
+  const { t } = useTranslation();
 
   const {
     register,
@@ -147,32 +148,52 @@ const Spoonacular = ({ cancelForm, onSave }) => {
   ];
 
   return (
-    <div className='w-auto'>
-      <SpoonacularForm handleSubmit={handleSubmit} register={register} errors={errors} onSubmit={onSubmit} cancelForm={cancelForm} />
+    <div className="w-auto">
+      <SpoonacularForm
+        handleSubmit={handleSubmit}
+        register={register}
+        errors={errors}
+        onSubmit={onSubmit}
+        cancelForm={cancelForm}
+      />
 
       <CoreModal isOpen={!!selectedRecepie} onClose={() => setRecepie(null)}>
-        <MealView recepie={selectedRecepie} onSave={onSave} onClose={() => {}} />
+        <MealView
+          recepie={selectedRecepie}
+          onSave={onSave}
+          onClose={() => {}}
+        />
       </CoreModal>
-      <div className='overflow-hidden mt-10 w-full h-fit py-10'>
+      <div className="overflow-hidden mt-10 w-full h-fit py-10">
         <CoreSlider>
           {dummyData?.map((recepie) => (
             <div key={recepie.id}>
-              <div className='relative w-full h-full' key={recepie?.id}>
-                <span className='absolute inset-0 bg-black/60' />
+              <div className="relative w-full h-full" key={recepie?.id}>
+                <span className="absolute inset-0 bg-black/60" />
 
-                <img src={recepie?.image} alt={recepie?.title} className='object-cover w-full h-auto max-h-[250px]' />
-                <div className='absolute top-5 left-5 flex gap-2'>
-                  <span className='text-xs rounded-sm bg-gray-800 text-white  font-semibold px-2 py-1'>Protein: {recepie?.protein}</span>
-                  <span className='text-xs rounded-sm bg-green-700 text-white  font-semibold px-2 py-1'>Carbs: {recepie?.carbs} </span>
+                <img
+                  src={recepie?.image}
+                  alt={recepie?.title}
+                  className="object-cover w-full h-auto max-h-[250px]"
+                />
+                <div className="absolute top-5 left-5 flex gap-2">
+                  <span className="text-xs rounded-sm bg-teal-800 text-white  font-semibold px-2 py-1">
+                    {t("meals.protein")}: {recepie?.protein}
+                  </span>
+                  <span className="text-xs rounded-sm bg-green-700 text-white  font-semibold px-2 py-1">
+                    {t("meals.carbs")}: {recepie?.carbs}{" "}
+                  </span>
                 </div>
                 <span
                   onClick={() => setRecepie(recepie)}
-                  className='absolute top-5 right-5 bg-gray-200 p-2 text-gray-800 rounded-full cursor-pointer'
+                  className="absolute top-5 right-5 bg-gray-200 p-2 text-gray-800 rounded-full cursor-pointer"
                 >
-                  <Maximize2 className='h-4 w-4' strokeWidth={1.5} />
+                  <Maximize2 className="h-4 w-4" strokeWidth={1.5} />
                 </span>
 
-                <p className='absolute h-auto bottom-5 left-5 flex justify-start font-semibold text-white text-sm'>{recepie?.title}</p>
+                <p className="absolute h-auto bottom-5 left-5 flex justify-start font-semibold text-white text-sm">
+                  {recepie?.title}
+                </p>
               </div>
             </div>
           ))}

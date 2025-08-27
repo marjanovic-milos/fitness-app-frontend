@@ -3,23 +3,48 @@
   "description": "Ovo je osnovni primer.",
 
   "core": {
-    "themeSwitch": "Promeni temu boja",
+    "themeSwitch": "Promeni temu",
     "translationsSelect": "Promeni jezik"
   },
   "profile": {
     "userSettings": "Korisnička podešavanja",
-    "userDetails": "Podaci o korisniku"
+    "userDetails": "Korisnički detalji"
   },
   "meals": {
     "cancelBtn": "Otkaži",
     "searchBtn": "Pretraži",
-    "saveBtn": "Sacuvaj",
-    "minProtein": "Min. proteina",
-    "maxProtein": "Maks. proteina",
-    "minCarbs": "Min. ugljenih hidrata",
-    "maxCarbs": "Maks. ugljenih hidrata",
+    "saveBtn": "Sačuvaj",
+    "addNew": "Dodaj novo",
+    "tableHeading": "Tvoji planovi ishrane",
+    "actions": "Akcije",
+    "links": "Linkovi",
+    "minProtein": "Min. Proteini",
+    "maxProtein": "Maks. Proteini",
+    "minCarbs": "Min. Ugljeni hidrati",
+    "maxCarbs": "Maks. Ugljeni hidrati",
     "requiredField": "Obavezno polje!",
     "greaterThenZero": "Vrednost mora biti veća od 0.",
-    "numberOnly": "Ovo polje prihvata samo brojeve."
+    "nubmerOnly": "Dozvoljeni su samo brojevi.",
+    "spoonacularTitle": "Spoonacular Recepti",
+    "spoonacularDescrition": "Pretraži recepte koristeći Spoonacular API (*vrednosti su prikazane u gramima).",
+    "customTitle": "Kreiraj svoje",
+    "customDescrition": "Kreiraj sopstvene, napomena: sva polja su obavezna.",
+    "spoonacularBtn": "Spoonacular",
+    "customBtn": "Prilagođeno",
+    "title": "Naslov",
+    "sourceUrl": "Link ka izvoru",
+    "notVeget": "Nije vegetarijansko",
+    "notVegan": "Nije vegansko",
+    "notGlutenFree": "Nije bez glutena",
+    "notDiaryFree": "Nije bez laktoze",
+    "veget": "Vegetarijansko",
+    "vegan": "Vegansko",
+    "glutenFree": "Bez glutena",
+    "diaryFree": "Bez laktoze",
+    "carbs": "Ugljeni hidrati",
+    "protein": "Proteini",
+    "fat": "Masti",
+    "calories": "Kalorije",
+    "visitWebste": "Poseti sajt"
   }
 }

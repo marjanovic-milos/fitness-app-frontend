@@ -5,8 +5,26 @@ import { Salad } from "lucide-react";
 import { getSavedMeals, deleteMeal, updateMeal } from "src/http/api/meals";
 import CoreTableComponent from "src/components/CoreTableComponent/CoreTableComponent";
 import { CreateMeal } from "src/modules/meals/createMeal";
+import { useTranslation } from "react-i18next";
 const MealPlansPage = () => {
-  const columns = ["", "Title", "Protein", "Calories", "Fats", "Carbs", "Links", "Actions"];
+  const { t } = useTranslation();
+
+  const columns = [
+    "",
+    t("meals.title"),
+
+    t("meals.protein"),
+
+    t("meals.calories"),
+
+    t("meals.fat"),
+
+    t("meals.carbs"),
+
+    t("meals.links"),
+
+    t("meals.actions"),
+  ];
 
   return (
     <PageGuard roles={["trainer"]}>
@@ -18,8 +36,8 @@ const MealPlansPage = () => {
         createFn={() => {}}
         createForm={CreateMeal}
         queryKey={"meals"}
-        buttonText='Add New'
-        heading='Your Meal Plans'
+        buttonText={t("meals.addNew")}
+        heading={t("meals.tableHeading")}
         icon={Salad}
       />
     </PageGuard>

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { spoonacularRecepie } from "src/http/api/meals";
+import { ThemeContext } from "src/context/theme";
 import {
   Zap,
   Ham,
@@ -17,11 +18,13 @@ import CoreText from "src/components/CoreText/CoreText";
 import Image from "next/image";
 import CoreButton from "src/components/CoreButton/CoreButton";
 import logo from "../../../public/spoonacular.svg";
-
+import { useTranslation } from "react-i18next";
 import Link from "next/link";
 
 const MealView = (props) => {
   const { recepie, onSave, onClose } = props;
+  const { dark } = useContext(ThemeContext);
+  const { t } = useTranslation();
 
   const { data, isLoading } = useQuery({
     queryKey: ["recepie", recepie?.id],
@@ -119,7 +122,9 @@ const MealView = (props) => {
           className={`text-xs  ${
             value ? "text-green-500" : "text-red-700"
           }  font-semibold `}
-        >{`${value ? "" : "Not"} ${title}`}</p>
+        >
+          {title}
+        </p>
       </span>
     );
   };
@@ -139,30 +144,34 @@ const MealView = (props) => {
             />
             <h1 className="text-white h-auto text-2xl"> {dummy.title}</h1>
           </div>
-          <div className="flex lg:flex-row flex-col-reverse gap-5 h-full overflow-y-auto bg-white rounded-xl w-full p-5 z-99">
+          <div
+            className={`flex lg:flex-row flex-col-reverse gap-5 h-full overflow-y-auto rounded-xl w-full p-5 z-99 ${
+              dark ? "bg-gray-800" : "bg-white"
+            }`}
+          >
             <div className="lg:w-[50%] w-full h-full">
               <div className="grid lg:grid-cols-4 grid-cols-2 gap-4 pb-10 h-full">
                 <NutritionComponent
                   className="bg-blue-400"
-                  title="Calories"
+                  title={t("meals.calories")}
                   data={recepie?.calories}
                   icon={Zap}
                 />
                 <NutritionComponent
                   className="bg-teal-400"
-                  title="Fat"
+                  title={t("meals.fat")}
                   data={recepie?.fat}
                   icon={Wheat}
                 />
                 <NutritionComponent
                   className="bg-green-400"
-                  title="Protein"
+                  title={t("meals.protein")}
                   data={recepie?.protein}
                   icon={Ham}
                 />
                 <NutritionComponent
                   className="bg-yellow-600"
-                  title="Carbs"
+                  title={t("meals.carbs")}
                   data={recepie?.carbs}
                   icon={LeafyGreen}
                 />
@@ -170,21 +179,37 @@ const MealView = (props) => {
             </div>
             <div className="flex flex-col gap-5 lg:w-[50%] w-full h-full">
               <div className="flex items-center flex-wrap gap-2">
-                <DietComponent value={dummy.vegan} icon={Vegan} title="Vegan" />
+                <DietComponent
+                  value={dummy.vegan}
+                  icon={Vegan}
+                  title={`${
+                    dummy.vegan ? t("meals.vegan") : t("meals.notVegan")
+                  }`}
+                />
                 <DietComponent
                   value={dummy.vegetarian}
                   icon={Salad}
-                  title="Vegetarian"
+                  title={`${
+                    dummy.vegetarian ? t("meals.veget") : t("meals.notVeget")
+                  }`}
                 />
                 <DietComponent
                   value={dummy.glutenFree}
                   icon={Wheat}
-                  title="Gluten Free"
+                  title={`${
+                    dummy.glutenFree
+                      ? t("meals.glutenFree")
+                      : t("meals.notGlutenFree")
+                  }`}
                 />
                 <DietComponent
                   value={dummy.dairyFree}
                   icon={Milk}
-                  title="Dairy Free"
+                  title={`${
+                    dummy.dairyFree
+                      ? t("meals.diaryFree")
+                      : t("meals.notDiaryFree")
+                  }`}
                 />
               </div>
               <div className="w-full">
@@ -195,17 +220,17 @@ const MealView = (props) => {
               <div className="flex items-start gap-10 w-full">
                 <CoreButton
                   onClick={handleSave}
-                  classes="w-25 !justify-start !bg-gray-900 !m-0"
+                  classes="!justify-start !bg-gray-900 !m-0"
                   icon={Plus}
                 >
-                  Save
+                  {t("meals.saveBtn")}
                 </CoreButton>
 
                 <Link
                   href={dummy.sourceUrl}
                   className="font-semibold underline"
                 >
-                  Visit Website
+                  {t("meals.visitWebste")}
                 </Link>
               </div>
             </div>

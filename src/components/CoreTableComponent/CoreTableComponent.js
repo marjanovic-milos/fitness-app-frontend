@@ -55,7 +55,7 @@ const CoreTableComponent = (props) => {
   const sortingHandler = ({ column, sort: localSort }) => setSort({ ...sort, [column]: localSort });
 
   return (
-    <div className={`xl:grid  ${createFormState ? "grid-cols-[3fr_1fr]" : "grid-cols-1fr"}  gap-4 flex flex-col-reverse h-full`}>
+    <div className={`xl:grid  ${createFormState ? "grid-cols-[4fr_1fr]" : "grid-cols-1fr"}  gap-4 flex flex-col-reverse h-full`}>
       <CoreCard>
         <div className='p-6'>
           <HeaderTableComponent setCreateForm={handleForm} heading={heading} button={buttonText} icon={icon} />

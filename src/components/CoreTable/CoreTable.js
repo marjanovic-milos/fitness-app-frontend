@@ -91,7 +91,7 @@ const CoreTable = (props) => {
               errors={errors}
             />
           ) : (
-            <div key={key} className='flex lg:justify-center justify-start items-center gap-1 h-full'>
+            <div key={key} className='flex lg:justify-center text-sm justify-start items-center gap-1 h-full'>
               <CoreText className='lg:hidden block'>{key !== "title" && `${key.charAt(0).toUpperCase() + key.slice(1)} :`}</CoreText>{" "}
               <CoreText>{value}</CoreText>
             </div>

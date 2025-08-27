@@ -13,6 +13,7 @@ export const signIn = asyncHandler(async ({ data }) => {
       skipAuth: true,
     }
   );
+
   localStorage.setItem("token", request.data.token);
   return request;
 });

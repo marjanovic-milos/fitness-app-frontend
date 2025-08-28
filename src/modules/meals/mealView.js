@@ -22,7 +22,7 @@ import { useTranslation } from "react-i18next";
 import Link from "next/link";
 
 const MealView = (props) => {
-  const { recepie, onSave, onClose } = props;
+  const { recepie, createFn, onClose } = props;
   const { dark } = useContext(ThemeContext);
   const { t } = useTranslation();
 
@@ -60,7 +60,7 @@ const MealView = (props) => {
   };
 
   const handleSave = () => {
-    onSave({
+    createFn.mutate({
       spoonacularId: dummy?.id,
       title: dummy?.title,
       image: dummy?.image,

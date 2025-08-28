@@ -1,7 +1,7 @@
 import CoreInput from "src/components/CoreInput/CoreInput";
 import CoreButton from "src/components/CoreButton/CoreButton";
 import { useTranslation } from "react-i18next";
-import { Search, Plus } from "lucide-react";
+
 export const SpoonacularForm = ({
   onSubmit,
   register,
@@ -107,7 +107,7 @@ export const SpoonacularForm = ({
 };
 
 export const CreateYourForm = ({
-  onSubmit,
+  createFn,
   register,
   handleSubmit,
   errors,
@@ -115,7 +115,7 @@ export const CreateYourForm = ({
 }) => {
   const { t } = useTranslation();
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit((data) => createFn.mutate(data))}>
       <div className="flex flex-col gap-y-10 gap-x-5 pt-10">
         <CoreInput
           name="title"

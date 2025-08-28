@@ -59,5 +59,13 @@
     "tableHeading": "Your clients",
     "actions": "Actions",
     "links": "Links"
+  },
+  "excercises": {
+    "tableHeading": "Your Excercises",
+    "name": "Name",
+    "video": "Video",
+    "notes": "Notes",
+    "videoLink": "Video Link",
+    "actions": "Actions"
   }
 }

@@ -1,45 +1,38 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import PageGuard from "src/page-guards/pageGuard";
-import { getExcercises } from "src/http/api/excercises";
-import { useQuery } from "@tanstack/react-query";
-import CoreText from "src/components/CoreText/CoreText";
-import CoreHeading from "src/components/CoreHeading/CoreHeading";
-import CoreCard from "src/components/CoreCard/CoreCard";
-import CoreButton from "src/components/CoreButton/CoreButton";
-import CoreModal from "src/components/CoreModal/CoreModal";
-const ExcercisePage = () => {
-  const { data } = useQuery({
-    queryKey: ["excercises"],
-    queryFn: getExcercises,
-  });
 
-  const [test, setTest] = useState(false);
+import { getExcercises } from "src/http/api/excercises";
+import CoreTableComponent from "src/components/CoreTableComponent/CoreTableComponent";
+import { useTranslation } from "react-i18next";
+import { Dumbbell } from "lucide-react";
+const ExcercisesPage = () => {
+  const { t } = useTranslation();
+
+  const columns = [
+    "",
+    t("excercises.name"),
+    t("excercises.video"),
+    t("excercises.notes"),
+    t("excercises.actions"),
+  ];
+
   return (
     <PageGuard roles={["trainer"]}>
-      <CoreModal isOpen={test} onClose={() => setTest(!test)}></CoreModal>
-      <CoreCard>
-        <div className='p-5'>
-          <CoreHeading type='h1' className='font-semibold'>
-            Saved excercises
-          </CoreHeading>
-          <CoreButton type='' onClick={() => setTest(!test)}>
-            Outlined
-          </CoreButton>
-          <div className='flex flex-col gap-4'>
-            {data?.map((excercise) => (
-              <div key={excercise._id} className='flex items-center rounded-full overflow-hidden shadow-md xl:w-md w-full'>
-                <div className='flex flex-col p-5'>
-                  <CoreText className=''>{excercise.name}</CoreText>
-                  <CoreText className=''>{excercise.notes}</CoreText>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </CoreCard>
+      <CoreTableComponent
+        columns={columns}
+        queryFn={getExcercises}
+        deleteFn={() => {}}
+        updateFn={() => {}}
+        createFn={() => {}}
+        createForm={null}
+        queryKey={"excercises"}
+        buttonText={null}
+        heading={t("excercises.tableHeading")}
+        icon={Dumbbell}
+      />
     </PageGuard>
   );
 };
 
-export default ExcercisePage;
+export default ExcercisesPage;

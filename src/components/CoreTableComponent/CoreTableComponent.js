@@ -16,7 +16,7 @@ const CoreTableComponent = (props) => {
     heading,
     buttonText,
     icon,
-    createForm: CreateForm,
+    createForm: RightSide,
   } = props;
 
   const [page, setPage] = useState(1);
@@ -102,7 +102,7 @@ const CoreTableComponent = (props) => {
               updateMutation={updateMutation}
               sortingHandler={sortingHandler}
               className={{
-                header: `lg:grid-cols-${columns.length} w-full`,
+                header: `lg:grid-cols-[repeat(auto-fit,minmax(50px,1fr))] w-full`,
               }}
             />
             <CorePagination
@@ -115,7 +115,7 @@ const CoreTableComponent = (props) => {
         </div>
       </CoreCard>
       {createFormState && (
-        <CreateForm handleCreateForm={handleForm} createFn={createMutation} />
+        <RightSide handleCreateForm={handleForm} createFn={createMutation} />
       )}
     </div>
   );

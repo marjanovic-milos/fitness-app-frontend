@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { ThemeContext } from "src/context/theme";
+import React, { useState } from "react";
+
 import CoreTableRow from "./CoreTableRow";
 import CoreText from "../CoreText/CoreText";
 import Link from "next/link";
@@ -9,13 +9,13 @@ import {
   Pencil,
   X as CloseIcon,
   Check,
-  ChevronDown,
-  ChevronUp,
 } from "lucide-react";
 import Image from "next/image";
 import CoreInput from "../CoreInput/CoreInput";
 import { useForm } from "react-hook-form";
+import TableHeaders from "./TableHeaders";
 
+import { useTranslation } from "react-i18next";
 const CoreTable = (props) => {
   const {
     columns,
@@ -27,7 +27,7 @@ const CoreTable = (props) => {
     sortingHandler,
   } = props;
 
-  const { dark } = useContext(ThemeContext);
+  const { t } = useTranslation();
 
   const [actionId, setActionId] = useState(null);
 
@@ -39,20 +39,12 @@ const CoreTable = (props) => {
   } = useForm();
 
   const root = `core-table ${className?.root}`;
-  const header = `${dark ? "core-table-header-dark" : "core-table-header"} ${
-    className?.header
-  }`;
-
-  const headerItem = `${
-    dark ? "core-table-header-item-dark" : "core-table-header-item"
-  } ${className?.headerItem}`;
 
   const loader = Array.from({ length: 5 }, (_, i) => (
     <div className="my-2 px-5" key={i}>
       <div className="core-table-loader" />
     </div>
   ));
-  const classRow = `lg:grid-cols-${columns.length} w-full`;
 
   const resetForm = () => {
     setActionId(null);
@@ -75,7 +67,10 @@ const CoreTable = (props) => {
       return 0;
     });
     return (
-      <CoreTableRow key={item._id} className={classRow}>
+      <CoreTableRow
+        key={item._id}
+        className={`lg:grid-cols-[repeat(auto-fit,minmax(50px,1fr))] w-full`}
+      >
         {entries.map(([key, value]) => {
           if (key === "image") {
             return (
@@ -95,9 +90,6 @@ const CoreTable = (props) => {
             return (
               <div key={key} className="core-button-row-wrapper h-full">
                 <Link href={value}>
-                  <CoreText className="lg:hidden block underline">
-                    Recepie link
-                  </CoreText>
                   <LinkIcon
                     className="lg:block hidden w-4 w-4"
                     strokeWidth={1.5}
@@ -115,10 +107,10 @@ const CoreTable = (props) => {
               fieldType="flat"
               label={key.charAt(0).toUpperCase() + key.slice(1)}
               required={{
-                required: `Field ${key} is required.`,
+                required: t("validation.fieldRequired", { key }),
                 pattern: key !== "title" && {
                   value: /^\d+$/,
-                  message: "This input is number only.",
+                  message: t("validation.nubmerOnly"),
                 },
               }}
               errors={errors}
@@ -175,44 +167,13 @@ const CoreTable = (props) => {
     );
   });
 
-  const headers = columns?.map((column, index) => {
-    const [sort, setSort] = useState(index === 0);
-
-    const skipFields = ["Actions", "Links", ""];
-
-    const sorting = ({ column, sort }) => {
-      setSort(!sort);
-      sortingHandler({ column, sort });
-    };
-
-    return (
-      <div key={index}>
-        {!skipFields.includes(column) ? (
-          <div onClick={() => sorting({ column, sort })} className={headerItem}>
-            {column}
-
-            {sort ? (
-              <ChevronDown
-                className="min-w-[20px] min-h-full"
-                strokeWidth={1.5}
-              />
-            ) : (
-              <ChevronUp
-                className="min-w-[20px] min-h-full"
-                strokeWidth={1.5}
-              />
-            )}
-          </div>
-        ) : (
-          <div className={headerItem}>{column}</div>
-        )}
-      </div>
-    );
-  });
-
   return (
     <div className={root}>
-      <div className={header}>{headers}</div>
+      <TableHeaders
+        columns={columns}
+        sortingHandler={sortingHandler}
+        className={className}
+      />
       <div className="core-table-body">{loading ? loader : content}</div>
     </div>
   );

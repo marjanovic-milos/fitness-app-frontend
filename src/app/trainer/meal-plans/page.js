@@ -2,7 +2,12 @@
 import React from "react";
 import PageGuard from "src/page-guards/pageGuard";
 import { Salad } from "lucide-react";
-import { getSavedMeals, deleteMeal, updateMeal } from "src/http/api/meals";
+import {
+  getSavedMeals,
+  deleteMeal,
+  updateMeal,
+  saveMeal,
+} from "src/http/api/meals";
 import CoreTableComponent from "src/components/CoreTableComponent/CoreTableComponent";
 import { CreateMeal } from "src/modules/meals/createMeal";
 import { useTranslation } from "react-i18next";
@@ -33,7 +38,7 @@ const MealPlansPage = () => {
         queryFn={getSavedMeals}
         deleteFn={deleteMeal}
         updateFn={updateMeal}
-        createFn={() => {}}
+        createFn={saveMeal}
         createForm={CreateMeal}
         queryKey={"meals"}
         buttonText={t("meals.addNew")}

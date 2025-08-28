@@ -10,6 +10,10 @@
     "userSettings": "User Settings",
     "userDetails": "User Details"
   },
+  "validation": {
+    "nubmerOnly": "This input is number only.",
+    "fieldRequired": "Field {{key}} is required."
+  },
   "meals": {
     "cancelBtn": "Cancel",
     "searchBtn": "Search",

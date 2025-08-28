@@ -149,7 +149,7 @@ const Spoonacular = ({ cancelForm, createFn }) => {
       carbs: "4g",
     },
   ];
-  console.log(selectedRecepie);
+
   return (
     <div className="w-auto">
       <SpoonacularForm

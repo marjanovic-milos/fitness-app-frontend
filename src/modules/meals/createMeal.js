@@ -6,19 +6,14 @@ import CoreCard from "src/components/CoreCard/CoreCard";
 import CoreDropdown from "src/components/CoreDropdown/CoreDropdown";
 import CoreHeading from "src/components/CoreHeading/CoreHeading";
 import { CreateYourForm } from "./mealForms";
-// import { useMutation } from "@tanstack/react-query";
-
-// import { saveMeal } from "src/http/api/meals";
-// import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import CoreText from "src/components/CoreText/CoreText";
 import { Info } from "lucide-react";
 import { useTranslation } from "react-i18next";
-// import toast from "react-hot-toast";
 
 export const CreateMeal = ({ handleCreateForm, createFn }) => {
   const [selected, setSelected] = useState("spoonacular");
-  // const queryClient = useQueryClient();
+
   const { t } = useTranslation();
 
   const {

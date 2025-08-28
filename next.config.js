@@ -5,6 +5,10 @@ module.exports = {
         protocol: "https",
         hostname: "img.spoonacular.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.pixabay.com",
+      },
     ],
   },
 };

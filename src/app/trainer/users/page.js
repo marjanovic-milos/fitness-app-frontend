@@ -1,40 +1,29 @@
 "use client";
 import React from "react";
 import PageGuard from "src/page-guards/pageGuard";
+import { Users } from "lucide-react";
 import { getUsers } from "src/http/api/users";
-import { useQuery } from "@tanstack/react-query";
-import CoreCard from "src/components/CoreCard/CoreCard";
-import CoreHeading from "src/components/CoreHeading/CoreHeading";
-import CoreText from "src/components/CoreText/CoreText";
-
+import CoreTableComponent from "src/components/CoreTableComponent/CoreTableComponent";
+import { useTranslation } from "react-i18next";
 const UsersPage = () => {
-  const { data } = useQuery({
-    queryKey: ["users"],
-    queryFn: getUsers,
-  });
+  const { t } = useTranslation();
+
+  const columns = ["", t("users.name"), t("users.email"), t("users.actions")];
 
   return (
     <PageGuard roles={["trainer"]}>
-      <CoreCard>
-        <div className="p-5">
-          <CoreHeading type="h1" className="font-semibold">
-            Users
-          </CoreHeading>
-          <div className="flex flex-col gap-4">
-            {data?.map((user) => (
-              <div
-                key={user._id}
-                className="flex items-center rounded-full overflow-hidden shadow-md xl:w-md w-full"
-              >
-                <div className="flex flex-col p-5">
-                  <CoreText className="">{user.name}</CoreText>
-                  <CoreText className="">{user.email}</CoreText>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </CoreCard>
+      <CoreTableComponent
+        columns={columns}
+        queryFn={getUsers}
+        deleteFn={() => {}}
+        updateFn={() => {}}
+        createFn={() => {}}
+        createForm={null}
+        queryKey={"users"}
+        buttonText={null}
+        heading={t("users.tableHeading")}
+        icon={Users}
+      />
     </PageGuard>
   );
 };

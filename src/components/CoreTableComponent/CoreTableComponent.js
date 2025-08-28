@@ -43,6 +43,7 @@ const CoreTableComponent = (props) => {
       }),
     keepPreviousData: true,
   });
+  console.log("data", data);
 
   const deleteMutation = useMutation({
     mutationFn: deleteFn,
@@ -97,7 +98,7 @@ const CoreTableComponent = (props) => {
             <CoreTable
               loading={loading || isRefetching}
               columns={columns}
-              data={data?.data}
+              data={data?.data || data}
               deleteMutation={deleteMutation}
               updateMutation={updateMutation}
               sortingHandler={sortingHandler}

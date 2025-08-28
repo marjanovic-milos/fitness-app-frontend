@@ -5,18 +5,19 @@ import CoreButton from "../../CoreButton/CoreButton";
 
 const HeaderTableComponent = (props) => {
   const { heading, button, setCreateForm, icon } = props;
-  // const Icon = icon;
 
   return (
-    <div className='core-subnavigation'>
-      <div className='flex items-center gap-2'>
-        <CoreHeading type='h2' className='font-semibold' icon={icon}>
+    <div className="core-subnavigation">
+      <div className="flex items-center gap-2">
+        <CoreHeading type="h2" className="font-semibold" icon={icon}>
           {heading}
         </CoreHeading>
       </div>
-      <CoreButton onClick={setCreateForm} icon={Plus}>
-        {button}
-      </CoreButton>
+      {button && (
+        <CoreButton onClick={setCreateForm} icon={Plus}>
+          {button}
+        </CoreButton>
+      )}
     </div>
   );
 };

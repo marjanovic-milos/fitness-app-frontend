@@ -51,5 +51,13 @@
     "fat": "Fat",
     "calories": "Calories",
     "visitWebste": "Visit Website"
+  },
+
+  "users": {
+    "name": "Name",
+    "email": "Email",
+    "tableHeading": "Your clients",
+    "actions": "Actions",
+    "links": "Links"
   }
 }

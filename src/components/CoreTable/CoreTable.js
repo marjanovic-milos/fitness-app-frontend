@@ -71,7 +71,7 @@ const CoreTable = (props) => {
         key={item._id}
         className={`lg:grid-cols-[repeat(auto-fit,minmax(50px,1fr))] w-full`}
       >
-        {entries.map(([key, value]) => {
+        {entries?.map(([key, value]) => {
           if (key === "image") {
             return (
               <div className="core-center" key={key}>
@@ -167,6 +167,9 @@ const CoreTable = (props) => {
     );
   });
 
+  if (!data?.length && !loading) {
+    return <p>There are no data available!</p>;
+  }
   return (
     <div className={root}>
       <TableHeaders

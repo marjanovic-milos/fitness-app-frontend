@@ -1,39 +1,54 @@
 import React, { useState } from "react";
 import CalendarWeekly from "../CoreCalendar/CalendarWeekly";
 import CoreCard from "../CoreCard/CoreCard";
-import { Calendar, ChevronDown, LayoutDashboard } from "lucide-react";
+import CoreDropdown from "../CoreDropdown/CoreDropdown";
+import { Calendar, LayoutDashboard } from "lucide-react";
+import CoreHeading from "../CoreHeading/CoreHeading";
+import CoreCalendar from "../CoreCalendar/CoreCalendar";
 const CoreDashboard = () => {
-  const [view, setView] = useState(true);
+  const [selected, setSelected] = useState("weekly");
+
+  const options = [
+    { value: "calendar", label: "Calendar" },
+    { value: "weekly", label: "Weekly" },
+  ];
+
   return (
     <>
-      <div className="flex xl:flex-row flex-col gap-6 size-full">
+      <div className="flex flex-col gap-6 w-[50vw]">
         <CoreCard>
-          <div className="flex justify-between w-full pt-5 px-5">
-            {/* {view ? (
-              <div className="flex w-full items-center gap-2">
-                <Calendar className="w-5 h-5" strokeWidth={1.5} />
-                <p className="text-lg font-semibold">{"Month View"}</p>
-              </div>
-            ) : (
-              <div className="flex w-full items-center gap-2">
-                <LayoutDashboard className="w-5 h-5" strokeWidth={1.5} />
-                <p className="text-lg font-semibold">{"Week View"}</p>
-              </div>
-            )} */}
+          <div className="p-6">
+            <div className="flex justify-between">
+              {selected === "weekly" ? (
+                <CoreHeading
+                  type="h2"
+                  className="font-semibold"
+                  icon={LayoutDashboard}
+                >
+                  Weekly
+                </CoreHeading>
+              ) : (
+                <CoreHeading
+                  type="h2"
+                  className="font-semibold"
+                  icon={Calendar}
+                >
+                  Calendar
+                </CoreHeading>
+              )}
+              <CoreDropdown
+                options={options}
+                value={selected}
+                onChange={(val) => setSelected(val)}
+              />
+            </div>
 
-            {/* <div
-              className="flex items-center justify-between bg-slate-50 font-semibold rounded-full px-3 py-1 cursor-pointer"
-              onClick={() => setView(!view)}
-            >
-              {view ? "Week" : "Month"}
-              <ChevronDown className="w-5 h-5" strokeWidth={1.5} />
-            </div> */}
+            {selected === "weekly" ? <CalendarWeekly /> : <CoreCalendar />}
           </div>
-          <CalendarWeekly />
         </CoreCard>
-        <div className="w-2xl">
+        {/* <div className="w-2xl">
           <CoreCard></CoreCard>
-        </div>
+        </div> */}
       </div>
     </>
   );

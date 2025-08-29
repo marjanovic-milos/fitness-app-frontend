@@ -40,39 +40,29 @@ const CoreCalendar = () => {
     <div className={"h-auto"}>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="timeGridWeek"
+        initialView='timeGridWeek'
         headerToolbar={{
-          left: "prev,next today",
+          left: "prev,next",
           center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay",
+          right: "dayGridMonth,timeGridDay",
         }}
         selectable
         editable // enables drag/drop + resize
         events={events}
         select={(info) => {
-          const newEvent = {
-            id: String(events.length + 1),
-            title: "New Event",
-            start: info.startStr,
-            end: info.endStr,
-          };
-          setEvents([...events, newEvent]);
+          // const newEvent = {
+          //   id: String(events.length + 1),
+          //   title: "New Event",
+          //   start: info.startStr,
+          //   end: info.endStr,
+          // };
+          // setEvents([...events, newEvent]);
         }}
         eventDrop={(info) => {
-          console.log(
-            "Dropped:",
-            info.event.title,
-            info.event.start,
-            info.event.end
-          );
+          console.log("Dropped:", info.event.title, info.event.start, info.event.end);
         }}
         eventResize={(info) => {
-          console.log(
-            "Resized:",
-            info.event.title,
-            info.event.start,
-            info.event.end
-          );
+          console.log("Resized:", info.event.title, info.event.start, info.event.end);
         }}
       />
       {/* <Calendar

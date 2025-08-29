@@ -63,12 +63,12 @@
   @apply bg-red-200;
 }
 
-.rbc-day-bg {
+/* .rbc-day-bg {
   border: none !important;
   margin: 1rem;
-}
+} */
 
-.rbc-date-cell {
+/* .rbc-date-cell {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,8 +86,27 @@
 .rbc-month-row {
   max-height: 80px;
   border: none !important;
+} */
+
+.fc .fc-scrollgrid-liquid {
+  border: none !important;
 }
 
+.fc table {
+  border: none !important;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border: none !important;
+}
+
+.fc .fc-daygrid-day {
+  /* @apply bg-red-200; */
+}
+.fc .fc-daygrid-day-frame {
+  @apply bg-teal-600 min-h-[50%] w-[50%] flex items-center justify-center rounded-full text-center m-auto;
+}
 .core-center {
   @apply flex justify-center items-center;
 }

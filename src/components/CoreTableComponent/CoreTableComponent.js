@@ -43,7 +43,6 @@ const CoreTableComponent = (props) => {
       }),
     keepPreviousData: true,
   });
-  console.log("data", data);
 
   const deleteMutation = useMutation({
     mutationFn: deleteFn,

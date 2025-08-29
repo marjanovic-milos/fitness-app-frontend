@@ -51,7 +51,7 @@ const CoreTable = (props) => {
     reset();
   };
   const onSubmit = (data) => {
-    updateMutation.mutate({ data, actionId });
+    updateMutation.mutate({ data, id: actionId });
     resetForm();
   };
 
@@ -66,6 +66,12 @@ const CoreTable = (props) => {
 
       return 0;
     });
+
+    const conditionNumbersOnly = (key) =>
+      key === "carbs" ||
+      key === "fat" ||
+      key === "calories" ||
+      key === "protein";
     return (
       <CoreTableRow
         key={item._id}
@@ -108,7 +114,7 @@ const CoreTable = (props) => {
               label={key.charAt(0).toUpperCase() + key.slice(1)}
               required={{
                 required: t("validation.fieldRequired", { key }),
-                pattern: key !== "title" && {
+                pattern: conditionNumbersOnly(key) && {
                   value: /^\d+$/,
                   message: t("validation.nubmerOnly"),
                 },
@@ -121,7 +127,7 @@ const CoreTable = (props) => {
               className="flex lg:justify-center text-sm justify-start items-center gap-1 h-full"
             >
               <CoreText className="lg:hidden block">
-                {key !== "title" &&
+                {conditionNumbersOnly(key) &&
                   `${key.charAt(0).toUpperCase() + key.slice(1)} :`}
               </CoreText>{" "}
               <CoreText>{value}</CoreText>

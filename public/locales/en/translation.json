@@ -65,7 +65,14 @@
     "name": "Name",
     "video": "Video",
     "notes": "Notes",
-    "videoLink": "Video Link",
-    "actions": "Actions"
+    "youtubeLink": "Youtube Link",
+    "youtubeOnly": "Only Youtube links are allowed.",
+    "actions": "Actions",
+    "addNewExcercise": "Add New",
+    "createExcercise": "Create Excercise",
+    "requiredField": "Required field!",
+    "descrition": "Create your own excercise, note that all fields are requried.",
+    "saveBtn": "Save",
+    "cancelBtn": "Cancel"
   }
 }

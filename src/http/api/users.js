@@ -11,5 +11,5 @@ export const getUsers = asyncHandler(async ({ page, limit = 5, sort }) => {
       skipAuth: false,
     }
   );
-  return res.data.data;
+  return res.data;
 });

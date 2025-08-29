@@ -8,7 +8,11 @@
   },
   "profile": {
     "userSettings": "Korisnička podešavanja",
-    "userDetails": "Korisnički detalji"
+    "userDetails": "Podaci o korisniku"
+  },
+  "validation": {
+    "nubmerOnly": "Ovo polje dozvoljava samo brojeve.",
+    "fieldRequired": "Polje {{key}} je obavezno."
   },
   "meals": {
     "cancelBtn": "Otkaži",
@@ -18,21 +22,22 @@
     "tableHeading": "Tvoji planovi ishrane",
     "actions": "Akcije",
     "links": "Linkovi",
-    "minProtein": "Min. Proteini",
-    "maxProtein": "Maks. Proteini",
-    "minCarbs": "Min. Ugljeni hidrati",
-    "maxCarbs": "Maks. Ugljeni hidrati",
+    "minProtein": "Min. proteina",
+    "maxProtein": "Maks. proteina",
+    "minCarbs": "Min. ugljenih hidrata",
+    "maxCarbs": "Maks. ugljenih hidrata",
     "requiredField": "Obavezno polje!",
     "greaterThenZero": "Vrednost mora biti veća od 0.",
-    "nubmerOnly": "Dozvoljeni su samo brojevi.",
-    "spoonacularTitle": "Spoonacular Recepti",
+    "nubmerOnly": "Ovo polje dozvoljava samo brojeve.",
+    "spoonacularTitle": "Spoonacular recepti",
+
     "spoonacularDescrition": "Pretraži recepte koristeći Spoonacular API (*vrednosti su prikazane u gramima).",
-    "customTitle": "Kreiraj svoje",
-    "customDescrition": "Kreiraj sopstvene, napomena: sva polja su obavezna.",
+    "customTitle": "Kreiraj svoj",
+    "customDescrition": "Kreiraj sopstveni recept, imaj na umu da su sva polja obavezna.",
     "spoonacularBtn": "Spoonacular",
     "customBtn": "Prilagođeno",
-    "title": "Naslov",
-    "sourceUrl": "Link ka izvoru",
+    "title": "Naziv",
+    "sourceUrl": "Izvorni URL",
     "notVeget": "Nije vegetarijansko",
     "notVegan": "Nije vegansko",
     "notGlutenFree": "Nije bez glutena",
@@ -46,5 +51,28 @@
     "fat": "Masti",
     "calories": "Kalorije",
     "visitWebste": "Poseti sajt"
+  },
+
+  "users": {
+    "name": "Ime",
+    "email": "Email",
+    "tableHeading": "Tvoji klijenti",
+    "actions": "Akcije",
+    "links": "Linkovi"
+  },
+  "excercises": {
+    "tableHeading": "Tvoje vežbe",
+    "name": "Naziv",
+    "video": "Video",
+    "notes": "Beleške",
+    "youtubeLink": "Youtube link",
+    "youtubeOnly": "Dozvoljeni su samo Youtube linkovi.",
+    "actions": "Akcije",
+    "addNewExcercise": "Dodaj novu",
+    "createExcercise": "Kreiraj vežbu",
+    "requiredField": "Obavezno polje!",
+    "descrition": "Kreiraj sopstvenu vežbu, imaj na umu da su sva polja obavezna.",
+    "saveBtn": "Sačuvaj",
+    "cancelBtn": "Otkaži"
   }
 }

@@ -37,17 +37,17 @@ const CoreCalendar = () => {
     },
   ]);
   return (
-    <div className={"h-auto"}>
+    <div className={"core-table h-auto"}>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView='timeGridWeek'
+        initialView="dayGridMonth"
         headerToolbar={{
           left: "prev,next",
           center: "title",
-          right: "dayGridMonth,timeGridDay",
+          right: "",
         }}
         selectable
-        editable // enables drag/drop + resize
+        // editable
         events={events}
         select={(info) => {
           // const newEvent = {
@@ -59,24 +59,17 @@ const CoreCalendar = () => {
           // setEvents([...events, newEvent]);
         }}
         eventDrop={(info) => {
-          console.log("Dropped:", info.event.title, info.event.start, info.event.end);
+          console.log(
+            "Dropped:",
+            info.event.title,
+            info.event.start,
+            info.event.end
+          );
         }}
-        eventResize={(info) => {
-          console.log("Resized:", info.event.title, info.event.start, info.event.end);
-        }}
+        // eventResize={(info) => {
+        //   console.log("Resized:", info.event.title, info.event.start, info.event.end);
+        // }}
       />
-      {/* <Calendar
-        localizer={localizer}
-        events={events}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: 500 }}
-        selectable={true}
-        onSelectSlot={(slotInfo) => {
-          console.log("Selected slot", slotInfo);
-        }}
-        views={["month"]}
-      /> */}
     </div>
   );
 };

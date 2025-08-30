@@ -15,7 +15,7 @@ const CoreDashboard = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-6 w-[50vw]">
+      <div className="flex gap-6 ">
         <CoreCard>
           <div className="p-6">
             <div className="flex justify-between">
@@ -46,6 +46,7 @@ const CoreDashboard = () => {
             {selected === "weekly" ? <CalendarWeekly /> : <CoreCalendar />}
           </div>
         </CoreCard>
+        <div className="w-[50vw] h-auto bg-red-200">qq </div>
         {/* <div className="w-2xl">
           <CoreCard></CoreCard>
         </div> */}

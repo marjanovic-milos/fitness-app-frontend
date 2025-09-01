@@ -1,9 +1,9 @@
 .core-button {
-  @apply flex justify-center items-center gap-2 text-base bg-gray-800 rounded-full text-white text-center me-2 mb-2 m-0 cursor-pointer h-[2.5rem] pl-2 pr-3;
+  @apply flex justify-center items-center gap-2 text-base bg-gray-800 rounded-full text-white text-center me-2 mb-2 m-0 cursor-pointer h-[2.5rem] px-2;
 }
 
 .core-button-dark {
-  @apply flex justify-center items-center gap-2 text-base bg-gray-900 rounded-full text-white text-center me-2 mb-2 m-0 cursor-pointer h-[2.5rem] pl-2 pr-3;
+  @apply flex justify-center items-center gap-2 text-base bg-gray-900 rounded-full text-white text-center me-2 mb-2 m-0 cursor-pointer h-[2.5rem] px-2;
 }
 
 .core-button-link {

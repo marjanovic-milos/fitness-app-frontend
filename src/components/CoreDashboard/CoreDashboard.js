@@ -6,8 +6,13 @@ import { Calendar, LayoutDashboard } from "lucide-react";
 import CoreHeading from "../CoreHeading/CoreHeading";
 import CoreCalendar from "../CoreCalendar/CoreCalendar";
 import CoreAccordion from "../CoreAccordion/CoreAccordion";
+import CoreModal from "../CoreModal/CoreModal";
+import CoreButton from "../CoreButton/CoreButton";
+import { Plus } from "lucide-react";
+
 const CoreDashboard = () => {
-  const [selected, setSelected] = useState("weekly");
+  const [selected, setSelected] = useState("calendar");
+  const [isOpen, setOpen] = useState(false);
 
   const options = [
     { value: "calendar", label: "Calendar" },
@@ -16,32 +21,57 @@ const CoreDashboard = () => {
 
   return (
     <>
-      <div className='flex gap-6 '>
+      <div className="flex gap-6 ">
         <CoreCard>
-          <div className='p-6'>
-            <div className='flex justify-between'>
+          <div className="p-6">
+            <div className="flex justify-between">
               {selected === "weekly" ? (
-                <CoreHeading type='h2' className='font-semibold' icon={LayoutDashboard}>
+                <CoreHeading
+                  type="h2"
+                  className="font-semibold"
+                  icon={LayoutDashboard}
+                >
                   Weekly
                 </CoreHeading>
               ) : (
-                <CoreHeading type='h2' className='font-semibold' icon={Calendar}>
+                <CoreHeading
+                  type="h2"
+                  className="font-semibold"
+                  icon={Calendar}
+                >
                   Calendar
                 </CoreHeading>
               )}
-              <CoreDropdown options={options} value={selected} onChange={(val) => setSelected(val)} />
+              <div className="flex gap-4">
+                <CoreDropdown
+                  options={options}
+                  value={selected}
+                  onChange={(val) => setSelected(val)}
+                />
+              </div>
             </div>
+            <div className="flex flex-col my-10">
+              <CoreButton
+                classes="w-fit"
+                onClick={() => setOpen(true)}
+                icon={Plus}
+              >
+                Add New
+              </CoreButton>
+              <CoreCalendar />
 
-            {selected === "weekly" ? <CalendarWeekly /> : <CoreCalendar />}
+              <CoreModal
+                heading="Create New Event"
+                isOpen={isOpen}
+                onClose={() => setOpen(false)}
+              ></CoreModal>
+            </div>
           </div>
         </CoreCard>
-        <div className='w-[50vw] h-auto bg-red-200'>
-          <CoreAccordion title='Something new '>
+        {/* <div className="w-[50vw] h-auto bg-red-200">
+          <CoreAccordion title="Something new">
             <p>aaaaa</p>
           </CoreAccordion>
-        </div>
-        {/* <div className="w-2xl">
-          <CoreCard></CoreCard>
         </div> */}
       </div>
     </>

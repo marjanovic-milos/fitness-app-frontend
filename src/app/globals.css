@@ -63,7 +63,7 @@
   @apply bg-red-200;
 }
 
-.core-table .fc .fc-table,
+/* .core-table .fc .fc-table,
 .core-table .fc-theme-standard td,
 .core-table .fc-theme-standard th {
   border: none !important;
@@ -72,9 +72,6 @@
 .core-table .fc-table {
   max-height: 500px;
   max-width: 500px;
-  background-color: red;
-  /* 
-  max-width: 500px; */
 }
 .core-table .fc-theme-standard td {
   max-height: 50px;
@@ -101,7 +98,7 @@
 .core-table .fc .fc-event-time,
 .core-table .fc .fc-event-title {
   display: none !important;
-}
+} */
 
 .core-center {
   @apply flex justify-center items-center;

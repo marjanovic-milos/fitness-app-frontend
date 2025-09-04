@@ -9,6 +9,8 @@ import CoreAccordion from "../CoreAccordion/CoreAccordion";
 import CoreModal from "../CoreModal/CoreModal";
 import CoreButton from "../CoreButton/CoreButton";
 import { Plus } from "lucide-react";
+import CoreSearch from "../CoreSearch/CoreSearch";
+import { useForm } from "react-hook-form";
 
 const CoreDashboard = () => {
   const [selected, setSelected] = useState("calendar");
@@ -50,16 +52,18 @@ const CoreDashboard = () => {
                 />
               </div>
             </div>
-            <div className="flex flex-col my-10">
-              <CoreButton
-                classes="w-fit"
-                onClick={() => setOpen(true)}
-                icon={Plus}
-              >
-                Add New
-              </CoreButton>
+            <div className="flex flex-col mt-10">
+              <div className="w-[250px] my-10">
+                <CoreButton
+                  classes="w-fit"
+                  onClick={() => setOpen(true)}
+                  icon={Plus}
+                >
+                  Add New
+                </CoreButton>
+                <CoreSearch classes="w-full" delay={2000} />
+              </div>
               <CoreCalendar />
-
               <CoreModal
                 heading="Create New Event"
                 isOpen={isOpen}

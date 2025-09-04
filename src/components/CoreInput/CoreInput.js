@@ -2,8 +2,9 @@
 
 import React, { useContext } from "react";
 import { ThemeContext } from "src/context/theme";
-import { Search } from "lucide-react"; // import search icon
+import { X as Close, Search } from "lucide-react"; // import search icon
 import CoreLoader from "../CoreLoader/CoreLoader";
+
 const CoreInput = (props) => {
   const { dark } = useContext(ThemeContext);
 
@@ -20,6 +21,7 @@ const CoreInput = (props) => {
     errors,
     search,
     loading,
+    action,
   } = props;
 
   const rootStyles = `${dark ? "core-root-input-dark" : "core-root-input"} ${
@@ -59,6 +61,12 @@ const CoreInput = (props) => {
             <div className="absolute right-5 top-1/2 -translate-y-1/2">
               <CoreLoader btnLoader />
             </div>
+          ) : action ? (
+            <Close
+              onClick={() => action()}
+              className="cursor-pointer absolute right-5 top-1/2 -translate-y-1/2 text-gray-400"
+              strokeWidth={1.5}
+            />
           ) : (
             <Search
               className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400"

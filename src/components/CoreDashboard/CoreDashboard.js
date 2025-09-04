@@ -10,8 +10,8 @@ import CoreModal from "../CoreModal/CoreModal";
 import CoreButton from "../CoreButton/CoreButton";
 import { Plus } from "lucide-react";
 import CoreSearch from "../CoreSearch/CoreSearch";
-import { useForm } from "react-hook-form";
 
+import CoreMultiSelect from "../CoreMultiselect/CoreMultiSelect";
 const CoreDashboard = () => {
   const [selected, setSelected] = useState("calendar");
   const [isOpen, setOpen] = useState(false);
@@ -53,7 +53,7 @@ const CoreDashboard = () => {
               </div>
             </div>
             <div className="flex flex-col mt-10">
-              <div className="w-[250px] my-10">
+              <div className=" my-10">
                 <CoreButton
                   classes="w-fit"
                   onClick={() => setOpen(true)}
@@ -61,7 +61,9 @@ const CoreDashboard = () => {
                 >
                   Add New
                 </CoreButton>
-                <CoreSearch multi classes="w-full" delay={2000} />
+                {/* <CoreSearch multi classes="w-full" delay={2000} /> */}
+
+                <CoreMultiSelect />
               </div>
               <CoreCalendar />
               <CoreModal

@@ -5,14 +5,15 @@ import { useForm } from "react-hook-form";
 
 const CoreSearch = ({
   delay,
-  searchFn,
   classes,
+  searchFn,
   data,
   loading,
   multi,
   handleMultiSelection,
 }) => {
   const [text, setText] = useState("");
+  const [close, setClose] = useState(false);
 
   const { register } = useForm();
 
@@ -20,18 +21,17 @@ const CoreSearch = ({
     await searchFn(val);
   });
 
-  const options = [
-    { value: "1", label: "Option 1" },
-    { value: "2", label: "Option 2" },
-  ];
   const handleSelection = (data) => {
-    multi ? handleMultiSelection(data) : setText(data);
+    multi ? handleMultiSelection(data) : setText(data?.label);
   };
   const showList = useMemo(
-    () => multi || (!text && !!options?.length),
-    [multi, text, data]
+    () => !text && !!data?.length && !close,
+    [text, data, close]
   );
 
+  const handleClose = () => {
+    setClose(true);
+  };
   return (
     <div className="p-4 w-full relative">
       <CoreInput
@@ -43,11 +43,12 @@ const CoreSearch = ({
         name="search"
         loading={loading}
         search
+        action={handleClose}
       />
       {showList && (
         <div className="core-search-list">
-          {options?.map((option) => (
-            <p onClick={() => handleSelection(option?.label)}>{option.label}</p>
+          {data?.map((option) => (
+            <p onClick={() => handleSelection(option)}>{option.label}</p>
           ))}
         </div>
       )}

@@ -61,7 +61,7 @@ const CoreDashboard = () => {
                 >
                   Add New
                 </CoreButton>
-                <CoreSearch classes="w-full" delay={2000} />
+                <CoreSearch multi classes="w-full" delay={2000} />
               </div>
               <CoreCalendar />
               <CoreModal

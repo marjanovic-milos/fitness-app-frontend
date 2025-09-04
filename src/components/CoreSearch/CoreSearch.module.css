@@ -1,0 +1,7 @@
+.core-search-list {
+  @apply absolute bg-gray-500 bottom-[-2rem] left-0 rounded-xl w-full overflow-y-scroll z-100;
+}
+
+.core-search-list::-webkit-scrollbar {
+  display: none;
+}

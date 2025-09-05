@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import "react-big-calendar/lib/css/react-big-calendar.css";
+// import "react-big-calendar/lib/css/react-big-calendar.css";
 import dynamic from "next/dynamic";
 import { momentLocalizer } from "react-big-calendar";
 
@@ -40,7 +40,7 @@ const CoreCalendar = () => {
     <div className={"core-table h-auto"}>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
+        initialView='dayGridMonth'
         headerToolbar={{
           left: "prev,next",
           center: "title",
@@ -59,12 +59,7 @@ const CoreCalendar = () => {
           // setEvents([...events, newEvent]);
         }}
         eventDrop={(info) => {
-          console.log(
-            "Dropped:",
-            info.event.title,
-            info.event.start,
-            info.event.end
-          );
+          console.log("Dropped:", info.event.title, info.event.start, info.event.end);
         }}
         // eventResize={(info) => {
         //   console.log("Resized:", info.event.title, info.event.start, info.event.end);

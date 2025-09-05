@@ -1,10 +1,18 @@
 .core-search-root {
-  @apply w-full relative;
+  @apply w-fit relative;
 }
 .core-search-list {
-  @apply absolute bg-gray-500 bottom-[-3rem] left-0 rounded-xl w-full overflow-y-scroll z-100;
+  @apply absolute bg-gray-700 bottom-[-10rem] left-0 rounded-xl w-full overflow-y-scroll z-100;
 }
 
 .core-search-list::-webkit-scrollbar {
   display: none;
+}
+
+.core-search-list-element {
+  @apply cursor-pointer w-full px-10 h-10 flex justify-start;
+}
+
+.core-search-list-element:hover {
+  @apply bg-gray-900;
 }

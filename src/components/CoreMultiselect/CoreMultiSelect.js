@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import CoreSearch from "../CoreSearch/CoreSearch";
 import { X as Close } from "lucide-react";
 const CoreMultiSelect = ({ searchFn, data, loading }) => {
-  const options = [
-    { id: "1", label: "Option 1" },
-    { id: "2", label: "Option 2" },
-  ];
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleMultiSelection = (option) => {
@@ -19,14 +15,14 @@ const CoreMultiSelect = ({ searchFn, data, loading }) => {
   };
 
   return (
-    <div className="">
+    <div>
       <CoreSearch
         multi={true}
         classes="w-full"
         delay={2000}
         handleMultiSelection={handleMultiSelection}
         searchFn={searchFn}
-        data={options}
+        data={data}
         loading={loading}
       />
       <div className="flex w-full gap-4 justify-end mt-2 px-4">

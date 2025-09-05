@@ -14,6 +14,13 @@ export const getExcercises = asyncHandler(async ({ page, limit = 5, sort }) => {
   return res.data;
 });
 
+export const findExcercise = asyncHandler(async ({ name }) => {
+  const res = await http.get(`/excercises?name=${name}&${ignorefileds}`, {
+    skipAuth: false,
+  });
+  return res.data?.data?.map((item) => ({ id: item._id, label: item.name }));
+});
+
 export const saveExcercise = asyncHandler(async (data) => {
   const request = await http.post(
     "/excercises/addExcercise",

@@ -16,27 +16,27 @@ const CoreSearch = (props) => {
 
   const [text, setText] = useState("");
   const [close, setClose] = useState(false);
+  const debounced = useDebounce(text, delay);
 
   const { register } = useForm();
 
-  useDebounce(text, delay, async (val) => {
-    await searchFn(val);
-  });
+  useMemo(() => {
+    if (debounced) searchFn({ name: debounced });
+  }, [debounced, searchFn, text, delay]);
 
   const handleSelection = (data) => {
     if (multi) {
       handleMultiSelection(data);
       setClose(true);
-      setText("");
     } else {
       setText(data?.label);
     }
   };
   const showList = useMemo(
-    () => !text && !!data?.length && !close,
+    () => text && data?.length && !close,
     [text, data, close]
   );
-
+  console.log(showList, "showList");
   return (
     <div className="core-search-root">
       <CoreInput

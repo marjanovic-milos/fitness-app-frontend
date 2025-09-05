@@ -3,15 +3,17 @@ import CoreInput from "../CoreInput/CoreInput";
 import { useDebounce } from "src/app/hooks/useDebounced";
 import { useForm } from "react-hook-form";
 
-const CoreSearch = ({
-  delay,
-  classes,
-  searchFn,
-  data,
-  loading,
-  multi,
-  handleMultiSelection,
-}) => {
+const CoreSearch = (props) => {
+  const {
+    delay,
+    classes,
+    searchFn,
+    data,
+    loading,
+    multi,
+    handleMultiSelection,
+  } = props;
+
   const [text, setText] = useState("");
   const [close, setClose] = useState(false);
 
@@ -22,28 +24,34 @@ const CoreSearch = ({
   });
 
   const handleSelection = (data) => {
-    multi ? handleMultiSelection(data) : setText(data?.label);
+    if (multi) {
+      handleMultiSelection(data);
+      setClose(true);
+      setText("");
+    } else {
+      setText(data?.label);
+    }
   };
   const showList = useMemo(
     () => !text && !!data?.length && !close,
     [text, data, close]
   );
 
-  const handleClose = () => {
-    setClose(true);
-  };
   return (
-    <div className="p-4 w-full relative">
+    <div className="core-search-root">
       <CoreInput
-        label="Search"
+        name="search"
         value={text}
         register={register}
         classes={classes}
+        placeholder="Search..."
         onChange={(e) => setText(e.target.value)}
-        name="search"
+        action={() => setClose(true)}
+        onFocus={() => setClose(false)}
         loading={loading}
-        search
-        action={handleClose}
+        close={!close}
+        search={true}
+        {...props}
       />
       {showList && (
         <div className="core-search-list">

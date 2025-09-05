@@ -22,6 +22,7 @@ const CoreInput = (props) => {
     search,
     loading,
     action,
+    close,
   } = props;
 
   const rootStyles = `${dark ? "core-root-input-dark" : "core-root-input"} ${
@@ -61,7 +62,7 @@ const CoreInput = (props) => {
             <div className="absolute right-5 top-1/2 -translate-y-1/2">
               <CoreLoader btnLoader />
             </div>
-          ) : action ? (
+          ) : action && close ? (
             <Close
               onClick={() => action()}
               className="cursor-pointer absolute right-5 top-1/2 -translate-y-1/2 text-gray-400"

@@ -5,12 +5,12 @@ import CoreDropdown from "../CoreDropdown/CoreDropdown";
 import { Calendar, LayoutDashboard } from "lucide-react";
 import CoreHeading from "../CoreHeading/CoreHeading";
 import CoreCalendar from "../CoreCalendar/CoreCalendar";
-import CoreAccordion from "../CoreAccordion/CoreAccordion";
+
 import CoreModal from "../CoreModal/CoreModal";
 import CoreButton from "../CoreButton/CoreButton";
 import { Plus } from "lucide-react";
-import CoreSearch from "../CoreSearch/CoreSearch";
 
+import CreateEvent from "src/modules/events/CreateEvent";
 import CoreMultiSelect from "../CoreMultiselect/CoreMultiSelect";
 const CoreDashboard = () => {
   const [selected, setSelected] = useState("calendar");
@@ -61,16 +61,16 @@ const CoreDashboard = () => {
                 >
                   Add New
                 </CoreButton>
-                {/* <CoreSearch multi classes="w-full" delay={2000} /> */}
-
-                <CoreMultiSelect />
+                {/* <CoreMultiSelect /> */}
               </div>
               <CoreCalendar />
               <CoreModal
                 heading="Create New Event"
                 isOpen={isOpen}
                 onClose={() => setOpen(false)}
-              ></CoreModal>
+              >
+                <CreateEvent />
+              </CoreModal>
             </div>
           </div>
         </CoreCard>

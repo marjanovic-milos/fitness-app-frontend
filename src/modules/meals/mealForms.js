@@ -72,7 +72,6 @@ export const SpoonacularForm = ({
           register={register}
           label={t("meals.maxCarbs")}
           type="number"
-          className="w-fit"
           required={{
             required: t("meals.requiredField"),
             pattern: {

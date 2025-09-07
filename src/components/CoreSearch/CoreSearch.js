@@ -1,7 +1,6 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import CoreInput from "../CoreInput/CoreInput";
 import { useDebounce } from "src/app/hooks/useDebounced";
-import { useForm } from "react-hook-form";
 
 const CoreSearch = (props) => {
   const {
@@ -11,9 +10,11 @@ const CoreSearch = (props) => {
     searchFn,
     data,
     loading,
-    multi,
+    multi = false,
     handleMultiSelection,
     placeholder,
+    register,
+    setValue,
   } = props;
 
   const [text, setText] = useState("");
@@ -29,7 +30,9 @@ const CoreSearch = (props) => {
       handleMultiSelection(data);
       setClose(true);
     } else {
+      setValue(name, data.id);
       setText(data?.label);
+      setClose(true);
     }
   };
   const showList = useMemo(
@@ -39,8 +42,9 @@ const CoreSearch = (props) => {
 
   return (
     <div className="core-search-root">
+      <input type="hidden" {...register(name)} />
       <CoreInput
-        name={name}
+        name={"search"}
         value={text}
         classes={classes}
         placeholder={placeholder || "Search..."}
@@ -50,7 +54,7 @@ const CoreSearch = (props) => {
         loading={loading}
         close={!close}
         search={true}
-        {...props}
+        register={() => {}}
       />
       {showList && (
         <div className="core-search-list">

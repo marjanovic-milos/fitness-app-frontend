@@ -2,7 +2,7 @@
 
 import React, { useContext } from "react";
 import { ThemeContext } from "src/context/theme";
-import { X as Close, Search } from "lucide-react"; // import search icon
+import { X as Close, Search } from "lucide-react";
 import CoreLoader from "../CoreLoader/CoreLoader";
 
 const CoreInput = (props) => {
@@ -62,7 +62,7 @@ const CoreInput = (props) => {
             <div className="absolute right-5 top-1/2 -translate-y-1/2">
               <CoreLoader btnLoader />
             </div>
-          ) : action && close ? (
+          ) : action && !close ? (
             <Close
               onClick={() => action()}
               className="cursor-pointer absolute right-5 top-1/2 -translate-y-1/2 text-gray-400"

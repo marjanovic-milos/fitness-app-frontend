@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import CoreAccordion from "src/components/CoreAccordion/CoreAccordion";
 import CoreMultiSelect from "src/components/CoreMultiselect/CoreMultiSelect";
 import CoreInput from "src/components/CoreInput/CoreInput";
-import CoreSearch from "src/components/CoreSearch/CoreSearch";
+
 import { findExcercise } from "src/http/api/excercises";
 import { useMutation } from "@tanstack/react-query";
 import { findMeal } from "src/http/api/meals";
 import CoreText from "src/components/CoreText/CoreText";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import CoreButton from "src/components/CoreButton/CoreButton";
 import CoreDropdown from "src/components/CoreDropdown/CoreDropdown";
+
+import CoreCheckbox from "src/components/CoreCheckbox/CoreCheckbox";
 import Users from "./Users";
 const CreateEvent = () => {
   const [type, setType] = useState("group");
@@ -18,9 +20,9 @@ const CreateEvent = () => {
     register,
     handleSubmit,
     formState: { errors },
-    control,
     setValue,
-    defaultValues,
+    control,
+    watch,
   } = useForm({
     defaultValues: {
       excercisePlans: [],
@@ -50,16 +52,18 @@ const CreateEvent = () => {
   ];
   const trainingOption = trainingOptions.filter(
     (option) => option.value === type
-  );
+  )?.[0];
+
+  const selected = watch("preferences");
 
   const submit = (data) => {
-    console.log(data);
+    console.log(data, selected);
   };
 
   return (
     <div className="mx-10  h-full">
       <div className="flex items-center justify-between w-full">
-        <CoreText>Training type {trainingOption?.[0]?.label}</CoreText>
+        <CoreText>Training type {trainingOption?.label}</CoreText>
         <CoreDropdown
           options={trainingOptions}
           value={type}
@@ -68,8 +72,11 @@ const CreateEvent = () => {
       </div>
 
       <form onSubmit={handleSubmit(submit)}>
-        {/* <Users trainingOption={trainingOption?.[0]} register={register} /> */}
-
+        <Users
+          trainingOption={trainingOption}
+          setValue={setValue}
+          register={register}
+        />
         <div className="flex flex-col items-start gap-2 my-10">
           <CoreText> Find your excercises:</CoreText>
 
@@ -81,26 +88,61 @@ const CreateEvent = () => {
             searchFn={searchExcercises}
             setValue={setValue}
           />
-
-          {/* <Controller
-            name="excercisePlans"
-            control={control}
-            render={({ field }) => (
-          
-            )}
-          /> */}
         </div>
-
         <div className="flex flex-col  items-start gap-2 my-10">
           <CoreText> Find your meals: </CoreText>
 
           <CoreMultiSelect
+            name={"mealPlans"}
             loading={pendingMeal}
             data={meals}
-            name={"mealPlans"}
             register={register}
             searchFn={searchMeals}
             setValue={setValue}
+          />
+        </div>
+        <div className="flex flex-reverse gap-4 my-10">
+          <CoreCheckbox
+            name="preferences"
+            control={control}
+            label="Sunday"
+            value="0"
+          />
+          <CoreCheckbox
+            name="preferences"
+            control={control}
+            label="Monday"
+            value="1"
+          />
+          <CoreCheckbox
+            name="preferences"
+            control={control}
+            label="Tuesday"
+            value="2"
+          />{" "}
+          <CoreCheckbox
+            name="preferences"
+            control={control}
+            label="Wendsday"
+            value="3"
+          />{" "}
+          <CoreCheckbox
+            name="preferences"
+            control={control}
+            label="Thursday"
+            value="4"
+          />{" "}
+          <CoreCheckbox
+            name="preferences"
+            control={control}
+            label="Friday"
+            value="5"
+          />{" "}
+          <CoreCheckbox
+            name="preferences"
+            control={control}
+            label="Saturday"
+            value="6"
           />
         </div>
 

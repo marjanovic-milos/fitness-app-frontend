@@ -5,10 +5,8 @@ const CoreMultiSelect = (props) => {
   const { searchFn, name, data, loading, placeholder, setValue, register } =
     props;
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [test, setTest] = useState(null);
 
   const handleMultiSelection = (option) => {
-    setTest(option);
     if (selectedOptions.some((item) => item.id === option.id)) {
       setSelectedOptions(
         selectedOptions.filter((item) => item.id !== option.id)
@@ -19,16 +17,15 @@ const CoreMultiSelect = (props) => {
   };
 
   useEffect(() => {
-    setValue(name, selectedOptions);
+    setValue(
+      name,
+      selectedOptions.map((o) => o.id)
+    );
   }, [selectedOptions, name, setValue]);
 
   return (
     <div>
-      <input
-        type="hidden"
-        {...register(name)}
-        value={JSON.stringify(selectedOptions)}
-      />
+      <input type="hidden" {...register(name)} />
 
       <CoreSearch
         multi={true}
@@ -37,10 +34,8 @@ const CoreMultiSelect = (props) => {
         searchFn={searchFn}
         data={data}
         loading={loading}
-        name={name + "_search"}
-        register={name + "_search"}
         placeholder={placeholder}
-        {...props}
+        register={() => {}}
       />
       <div className="flex w-full gap-4 justify-end mt-2 px-4">
         {selectedOptions?.map((option) => (

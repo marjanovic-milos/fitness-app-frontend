@@ -13,3 +13,10 @@ export const getUsers = asyncHandler(async ({ page, limit = 5, sort }) => {
   );
   return res.data;
 });
+
+export const findUsers = asyncHandler(async ({ name }) => {
+  const res = await http.get(`/users?name=${name}&${ignorefileds}`, {
+    skipAuth: false,
+  });
+  return res.data?.data?.map((item) => ({ id: item._id, label: item.name }));
+});

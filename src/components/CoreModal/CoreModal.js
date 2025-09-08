@@ -42,7 +42,7 @@ const CoreModal = ({ isOpen, onClose, children, heading }) => {
           }`}
       >
         {heading ? (
-          <div className="flex justify-between items-center mb-6 p-10">
+          <div className="flex justify-between items-center px-10 py-5">
             <h2 className="text-xl font-semibold">{heading}</h2>
             <button
               onClick={onClose}
@@ -60,13 +60,7 @@ const CoreModal = ({ isOpen, onClose, children, heading }) => {
           </button>
         )}
 
-        <div
-          className={`${
-            heading ? "overflow-y-auto" : "overflow-y-hidden"
-          } h-full`}
-        >
-          {children}
-        </div>
+        <div className={"overflow-x-hidden"}>{children}</div>
       </div>
     </>
   );

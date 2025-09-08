@@ -37,7 +37,7 @@ const CoreMultiSelect = (props) => {
         placeholder={placeholder}
         register={() => {}}
       />
-      <div className="flex w-full gap-4 justify-end mt-2 px-4">
+      <div className="w-full flex flex-wrap gap-4 mt-5">
         {selectedOptions?.map((option) => (
           <span
             key={option?.id}

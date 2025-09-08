@@ -23,6 +23,7 @@ const CoreInput = (props) => {
     loading,
     action,
     close,
+    ...rest
   } = props;
 
   const rootStyles = `${dark ? "core-root-input-dark" : "core-root-input"} ${
@@ -53,8 +54,9 @@ const CoreInput = (props) => {
           label={label}
           className={`${rootInput} ${search ? "pl-10" : ""} w-full`}
           defaultValue={value}
+          name={name}
           {...register(name, required)}
-          {...props}
+          {...rest}
         />
 
         {search ? (

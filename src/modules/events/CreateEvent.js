@@ -10,9 +10,11 @@ import CoreText from "src/components/CoreText/CoreText";
 import { useForm } from "react-hook-form";
 import CoreButton from "src/components/CoreButton/CoreButton";
 import CoreDropdown from "src/components/CoreDropdown/CoreDropdown";
-
-import CoreCheckbox from "src/components/CoreCheckbox/CoreCheckbox";
-import Users from "./Users";
+import CoreCard from "src/components/CoreCard/CoreCard";
+import CoreHeading from "src/components/CoreHeading/CoreHeading";
+import Clients from "./Clients";
+import EventDate from "./EventDate";
+import { Calendar, Settings } from "lucide-react";
 const CreateEvent = () => {
   const [type, setType] = useState("group");
 
@@ -61,92 +63,75 @@ const CreateEvent = () => {
   };
 
   return (
-    <div className="mx-10  h-full">
-      <div className="flex items-center justify-between w-full">
-        <CoreText>Training type {trainingOption?.label}</CoreText>
+    <div className="overfllow-scroll max-h-[80vh]">
+      <div className="flex items-center justify-between w-full px-10 mb-10">
+        <CoreHeading type="h3" className="font-semibold" icon={Calendar}>
+          Event overview
+        </CoreHeading>
         <CoreDropdown
           options={trainingOptions}
           value={type}
           onChange={(val) => setType(val)}
         />
       </div>
-
       <form onSubmit={handleSubmit(submit)}>
-        <Users
-          trainingOption={trainingOption}
-          setValue={setValue}
-          register={register}
-        />
-        <div className="flex flex-col items-start gap-2 my-10">
-          <CoreText> Find your excercises:</CoreText>
+        <div className="flex flex-col gap-5">
+          <div className="grid xl:grid-cols-2 grid-cols-auto gap-5 px-10">
+            <CoreCard>
+              <div className="flex flex-col items-start gap-2 my-10 px-6">
+                <CoreText>Select users:</CoreText>
+                <Clients
+                  trainingOption={trainingOption}
+                  setValue={setValue}
+                  register={register}
+                />
+              </div>
+            </CoreCard>
 
-          <CoreMultiSelect
-            name="excercisePlans"
-            loading={pendingExcercise}
-            data={excercises}
-            register={register}
-            searchFn={searchExcercises}
-            setValue={setValue}
-          />
-        </div>
-        <div className="flex flex-col  items-start gap-2 my-10">
-          <CoreText> Find your meals: </CoreText>
+            <CoreCard>
+              <div className="flex flex-col items-start gap-2 my-10 px-6">
+                <CoreText> Find your excercises:</CoreText>
 
-          <CoreMultiSelect
-            name={"mealPlans"}
-            loading={pendingMeal}
-            data={meals}
-            register={register}
-            searchFn={searchMeals}
-            setValue={setValue}
-          />
-        </div>
-        <div className="flex flex-reverse gap-4 my-10">
-          <CoreCheckbox
-            name="preferences"
-            control={control}
-            label="Sunday"
-            value="0"
-          />
-          <CoreCheckbox
-            name="preferences"
-            control={control}
-            label="Monday"
-            value="1"
-          />
-          <CoreCheckbox
-            name="preferences"
-            control={control}
-            label="Tuesday"
-            value="2"
-          />{" "}
-          <CoreCheckbox
-            name="preferences"
-            control={control}
-            label="Wendsday"
-            value="3"
-          />{" "}
-          <CoreCheckbox
-            name="preferences"
-            control={control}
-            label="Thursday"
-            value="4"
-          />{" "}
-          <CoreCheckbox
-            name="preferences"
-            control={control}
-            label="Friday"
-            value="5"
-          />{" "}
-          <CoreCheckbox
-            name="preferences"
-            control={control}
-            label="Saturday"
-            value="6"
-          />
-        </div>
+                <CoreMultiSelect
+                  name="excercisePlans"
+                  loading={pendingExcercise}
+                  data={excercises}
+                  register={register}
+                  searchFn={searchExcercises}
+                  setValue={setValue}
+                />
+              </div>
+            </CoreCard>
 
-        <CoreButton type="submit">Submit</CoreButton>
+            {trainingOption?.value === "individual" && (
+              <CoreCard>
+                <div className="flex flex-col items-start gap-2 my-10 px-6">
+                  <CoreText> Find your meals: </CoreText>
+                  <CoreMultiSelect
+                    name={"mealPlans"}
+                    loading={pendingMeal}
+                    data={meals}
+                    register={register}
+                    searchFn={searchMeals}
+                    setValue={setValue}
+                  />
+                </div>
+              </CoreCard>
+            )}
+          </div>
+
+          <div className="flex flex-col items-start w-full gap-10 px-10">
+            <CoreHeading type="h3" className="font-semibold" icon={Settings}>
+              Additional Details
+            </CoreHeading>
+            <EventDate register={register} control={control} errors={errors} />
+          </div>
+          <div className="w-full flex justify-end my-10 px-10">
+            <CoreButton classes="w-xs" type="submit">
+              Save Event
+            </CoreButton>
+          </div>
+        </div>
       </form>
     </div>
   );

@@ -4,7 +4,7 @@ import CoreMultiSelect from "src/components/CoreMultiselect/CoreMultiSelect";
 import { useMutation } from "@tanstack/react-query";
 import { findUsers } from "src/http/api/users";
 
-const Users = ({ trainingOption, register, setValue }) => {
+const Clients = ({ trainingOption, register, setValue }) => {
   const { mutate, data, isPending } = useMutation({
     mutationFn: (search) => findUsers({ name: search }),
   });
@@ -40,4 +40,4 @@ const Users = ({ trainingOption, register, setValue }) => {
   );
 };
 
-export default Users;
+export default Clients;

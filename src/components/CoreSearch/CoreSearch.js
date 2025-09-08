@@ -43,6 +43,7 @@ const CoreSearch = (props) => {
   return (
     <div className="core-search-root">
       <input type="hidden" {...register(name)} />
+
       <CoreInput
         name={"search"}
         value={text}

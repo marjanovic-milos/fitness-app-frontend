@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import CoreInput from "../CoreInput/CoreInput";
 import { useDebounce } from "src/app/hooks/useDebounced";
 
@@ -15,6 +15,7 @@ const CoreSearch = (props) => {
     placeholder,
     register,
     setValue,
+    ...rest
   } = props;
 
   const [text, setText] = useState("");
@@ -30,11 +31,12 @@ const CoreSearch = (props) => {
       handleMultiSelection(data);
       setClose(true);
     } else {
-      setValue(name, data.id);
+      setValue(name, data?.id);
       setText(data?.label);
       setClose(true);
     }
   };
+
   const showList = useMemo(
     () => text && data?.length && !close,
     [text, data, close]
@@ -56,6 +58,7 @@ const CoreSearch = (props) => {
         close={!close}
         search={true}
         register={() => {}}
+        {...rest}
       />
       {showList && (
         <div className="core-search-list">

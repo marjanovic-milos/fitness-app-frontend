@@ -106,7 +106,7 @@ const CoreTable = (props) => {
           }
           return actionId === item?._id ? (
             <CoreInput
-              value={value}
+              defaultValue={value}
               key={key}
               name={key}
               register={register}

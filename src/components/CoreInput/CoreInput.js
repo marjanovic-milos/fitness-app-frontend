@@ -53,7 +53,7 @@ const CoreInput = (props) => {
           min={0}
           label={label}
           className={`${rootInput} ${search ? "pl-10" : ""} w-full`}
-          defaultValue={value}
+          value={value}
           name={name}
           {...register(name, required)}
           {...rest}

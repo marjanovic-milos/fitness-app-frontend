@@ -2,9 +2,24 @@ import React, { useEffect, useState } from "react";
 import CoreSearch from "../CoreSearch/CoreSearch";
 import { X as Close } from "lucide-react";
 const CoreMultiSelect = (props) => {
-  const { searchFn, name, data, loading, placeholder, setValue, register } =
-    props;
+  const {
+    searchFn,
+    name,
+    data,
+    loading,
+    placeholder,
+    setValue,
+    register,
+    ...rest
+  } = props;
   const [selectedOptions, setSelectedOptions] = useState([]);
+
+  useEffect(() => {
+    setValue(
+      name,
+      selectedOptions.map((o) => o.id)
+    );
+  }, [selectedOptions, name, setValue]);
 
   const handleMultiSelection = (option) => {
     if (selectedOptions.some((item) => item.id === option.id)) {
@@ -15,27 +30,20 @@ const CoreMultiSelect = (props) => {
       setSelectedOptions([...selectedOptions, option]);
     }
   };
-
-  useEffect(() => {
-    setValue(
-      name,
-      selectedOptions.map((o) => o.id)
-    );
-  }, [selectedOptions, name, setValue]);
-
   return (
     <div>
       <input type="hidden" {...register(name)} />
 
       <CoreSearch
         multi={true}
-        delay={2000}
+        delay={1000}
         handleMultiSelection={handleMultiSelection}
         searchFn={searchFn}
         data={data}
         loading={loading}
         placeholder={placeholder}
         register={() => {}}
+        {...rest}
       />
       <div className="w-full flex flex-wrap gap-4 mt-5">
         {selectedOptions?.map((option) => (

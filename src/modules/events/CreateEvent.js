@@ -14,7 +14,9 @@ import CoreCard from "src/components/CoreCard/CoreCard";
 import CoreHeading from "src/components/CoreHeading/CoreHeading";
 import Clients from "./Clients";
 import EventDate from "./EventDate";
-import { Calendar, Settings } from "lucide-react";
+import AdditionalSettings from "./AdditionalSettings";
+import moment from "moment";
+import { Calendar, Settings, Zap } from "lucide-react";
 const CreateEvent = () => {
   const [type, setType] = useState("group");
 
@@ -56,10 +58,20 @@ const CreateEvent = () => {
     (option) => option.value === type
   )?.[0];
 
-  const selected = watch("preferences");
+  const selected = watch("repeatDays");
 
   const submit = (data) => {
-    console.log(data, selected);
+    const start = moment(
+      `${data?.date} ${data.start}`,
+      "YYYY-MM-DD HH:mm"
+    ).toISOString();
+
+    const end = moment(
+      `${data?.date} ${data.end}`,
+      "YYYY-MM-DD HH:mm"
+    ).toISOString();
+
+    console.log(data, start, end, selected);
   };
 
   return (
@@ -75,10 +87,10 @@ const CreateEvent = () => {
         />
       </div>
       <form onSubmit={handleSubmit(submit)}>
-        <div className="flex flex-col gap-5">
-          <div className="grid xl:grid-cols-2 grid-cols-auto gap-5 px-10">
+        <div className="flex flex-col gap-5 px-10 ">
+          <div className="grid xl:grid-cols-2 grid-cols-auto gap-5 ">
             <CoreCard>
-              <div className="flex flex-col items-start gap-2 my-10 px-6">
+              <div className="flex flex-col items-start gap-2 p-6">
                 <CoreText>Select users:</CoreText>
                 <Clients
                   trainingOption={trainingOption}
@@ -87,46 +99,46 @@ const CreateEvent = () => {
                 />
               </div>
             </CoreCard>
+            <EventDate register={register} control={control} errors={errors} />
+          </div>
 
-            <CoreCard>
-              <div className="flex flex-col items-start gap-2 my-10 px-6">
-                <CoreText> Find your excercises:</CoreText>
-
-                <CoreMultiSelect
-                  name="excercisePlans"
-                  loading={pendingExcercise}
-                  data={excercises}
-                  register={register}
-                  searchFn={searchExcercises}
-                  setValue={setValue}
-                />
-              </div>
-            </CoreCard>
-
-            {trainingOption?.value === "individual" && (
-              <CoreCard>
-                <div className="flex flex-col items-start gap-2 my-10 px-6">
-                  <CoreText> Find your meals: </CoreText>
+          <CoreCard>
+            <div className="flex flex-col items-start gap-5 p-6">
+              <CoreHeading type="h3" className="font-semibold" icon={Zap}>
+                Additional Details
+              </CoreHeading>
+              <div className="flex xl:flex-row flex-col justify-between w-full">
+                <div className="flex flex-col items-start gap-2 w-full">
+                  <CoreText> Find your excercises:</CoreText>
                   <CoreMultiSelect
-                    name={"mealPlans"}
-                    loading={pendingMeal}
-                    data={meals}
+                    name="excercisePlans"
+                    loading={pendingExcercise}
+                    data={excercises}
                     register={register}
-                    searchFn={searchMeals}
+                    searchFn={searchExcercises}
                     setValue={setValue}
                   />
                 </div>
-              </CoreCard>
-            )}
-          </div>
 
-          <div className="flex flex-col items-start w-full gap-10 px-10">
-            <CoreHeading type="h3" className="font-semibold" icon={Settings}>
-              Additional Details
-            </CoreHeading>
-            <EventDate register={register} control={control} errors={errors} />
-          </div>
-          <div className="w-full flex justify-end my-10 px-10">
+                {trainingOption?.value === "individual" && (
+                  <div className="flex flex-col items-start gap-2 w-full">
+                    <CoreText> Find your meals: </CoreText>
+                    <CoreMultiSelect
+                      name={"mealPlans"}
+                      loading={pendingMeal}
+                      data={meals}
+                      register={register}
+                      searchFn={searchMeals}
+                      setValue={setValue}
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+          </CoreCard>
+
+          <AdditionalSettings control={control} />
+          <div className="w-full flex justify-end my-10">
             <CoreButton classes="w-xs" type="submit">
               Save Event
             </CoreButton>

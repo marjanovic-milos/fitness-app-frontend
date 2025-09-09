@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import CoreAccordion from "src/components/CoreAccordion/CoreAccordion";
+
 import CoreMultiSelect from "src/components/CoreMultiselect/CoreMultiSelect";
-import CoreInput from "src/components/CoreInput/CoreInput";
 
 import { findExcercise } from "src/http/api/excercises";
 import { useMutation } from "@tanstack/react-query";
@@ -16,8 +15,10 @@ import Clients from "./Clients";
 import EventDate from "./EventDate";
 import AdditionalSettings from "./AdditionalSettings";
 import moment from "moment";
-import { Calendar, Settings, Zap } from "lucide-react";
-const CreateEvent = () => {
+import { Calendar, Zap } from "lucide-react";
+import { addEvent } from "src/http/api/events";
+import toast from "react-hot-toast";
+const CreateEvent = ({ handleCLose }) => {
   const [type, setType] = useState("group");
 
   const {
@@ -27,6 +28,7 @@ const CreateEvent = () => {
     setValue,
     control,
     watch,
+    reset,
   } = useForm({
     defaultValues: {
       excercisePlans: [],
@@ -50,6 +52,20 @@ const CreateEvent = () => {
     mutationFn: (search) => findMeal({ title: search }),
   });
 
+  const {
+    mutate: createEvent,
+    data,
+    isPending,
+  } = useMutation({
+    mutationFn: addEvent,
+    onSuccess: () => {
+      // queryClient.invalidateQueries({ queryKey: [queryKey] });
+      toast.success("Successfully created!");
+      reset();
+      handleCLose();
+    },
+  });
+
   const trainingOptions = [
     { value: "group", label: "Group" },
     { value: "individual", label: "Individual" },
@@ -58,20 +74,26 @@ const CreateEvent = () => {
     (option) => option.value === type
   )?.[0];
 
-  const selected = watch("repeatDays");
+  const repeatDays = watch("repeatDays");
 
   const submit = (data) => {
     const start = moment(
       `${data?.date} ${data.start}`,
       "YYYY-MM-DD HH:mm"
-    ).toISOString();
+    ).format("YYYY-MM-DDTHH:mm:ss.SSSZ");
 
-    const end = moment(
-      `${data?.date} ${data.end}`,
-      "YYYY-MM-DD HH:mm"
-    ).toISOString();
+    const end = moment(`${data?.date} ${data.end}`, "YYYY-MM-DD HH:mm").format(
+      "YYYY-MM-DDTHH:mm:ss.SSSZ"
+    );
 
-    console.log(data, start, end, selected);
+    createEvent({
+      start,
+      end,
+      clients: data?.clients,
+      mealPlans: data?.mealPlans,
+      excercisePlans: data?.excercisePlans,
+      repeatDays,
+    });
   };
 
   return (

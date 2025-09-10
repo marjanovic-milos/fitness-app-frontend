@@ -7,6 +7,7 @@ const CoreTimePicker = ({
   register,
   errors,
   label,
+  value,
 }) => {
   const handleChange = (e) => {
     let val = e.target.value.replace(/[^\d:]/g, "");
@@ -27,6 +28,7 @@ const CoreTimePicker = ({
       placeholder="HH:MM"
       name={name}
       register={register}
+      value={value}
       required={{
         required: "Time is required",
         pattern: {

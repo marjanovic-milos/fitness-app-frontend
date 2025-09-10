@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import CoreMultiSelect from "src/components/CoreMultiselect/CoreMultiSelect";
 
 import { findExcercise } from "src/http/api/excercises";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { findMeal } from "src/http/api/meals";
 import CoreText from "src/components/CoreText/CoreText";
 import { useForm } from "react-hook-form";
@@ -20,6 +20,8 @@ import { addEvent } from "src/http/api/events";
 import toast from "react-hot-toast";
 const CreateEvent = ({ handleCLose }) => {
   const [type, setType] = useState("group");
+
+  const queryClient = useQueryClient();
 
   const {
     register,
@@ -52,14 +54,10 @@ const CreateEvent = ({ handleCLose }) => {
     mutationFn: (search) => findMeal({ title: search }),
   });
 
-  const {
-    mutate: createEvent,
-    data,
-    isPending,
-  } = useMutation({
+  const { mutate: createEvent, isPending } = useMutation({
     mutationFn: addEvent,
     onSuccess: () => {
-      // queryClient.invalidateQueries({ queryKey: [queryKey] });
+      queryClient.invalidateQueries({ queryKey: ["events"] });
       toast.success("Successfully created!");
       reset();
       handleCLose();

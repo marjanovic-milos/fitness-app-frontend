@@ -1,46 +1,21 @@
 "use client";
 import React, { useState } from "react";
-// import "react-big-calendar/lib/css/react-big-calendar.css";
-import dynamic from "next/dynamic";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+
 import { momentLocalizer } from "react-big-calendar";
+import moment from "moment";
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-import moment from "moment";
-
-// const Calendar = dynamic(
-//   () => import("react-big-calendar").then((mod) => mod.Calendar),
-//   { ssr: false }
-// );
-
-// import classes from "./CoreCalendar.module.css";
-
-const CoreCalendar = () => {
-  // const localizer = momentLocalizer(moment);
-  // const events = [
-  //   {
-  //     title: "Meeting",
-  //     start: new Date(2025, 7, 24, 10, 0), // Aug 24, 2025, 10:00
-  //     end: new Date(2025, 7, 24, 11, 0),
-  //   },
-  // ];
-
-  const [events, setEvents] = useState([
-    {
-      id: "1",
-      title: "Meeting",
-      start: new Date().toISOString(),
-      end: new Date(Date.now() + 60 * 60 * 1000).toISOString(),
-    },
-  ]);
+const CoreCalendar = ({ dates }) => {
   return (
     <div className={"core-table h-auto"}>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView='dayGridMonth'
+        initialView="dayGridMonth"
         headerToolbar={{
           left: "prev,next",
           center: "title",
@@ -48,7 +23,7 @@ const CoreCalendar = () => {
         }}
         selectable
         // editable
-        events={events}
+        events={dates}
         select={(info) => {
           // const newEvent = {
           //   id: String(events.length + 1),
@@ -59,7 +34,12 @@ const CoreCalendar = () => {
           // setEvents([...events, newEvent]);
         }}
         eventDrop={(info) => {
-          console.log("Dropped:", info.event.title, info.event.start, info.event.end);
+          console.log(
+            "Dropped:",
+            info.event.title,
+            info.event.start,
+            info.event.end
+          );
         }}
         // eventResize={(info) => {
         //   console.log("Resized:", info.event.title, info.event.start, info.event.end);

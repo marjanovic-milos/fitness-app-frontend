@@ -11,7 +11,8 @@ import CoreButton from "../CoreButton/CoreButton";
 import { Plus } from "lucide-react";
 
 import CreateEvent from "src/modules/events/CreateEvent";
-import CoreMultiSelect from "../CoreMultiselect/CoreMultiSelect";
+import { useQuery } from "@tanstack/react-query";
+import { getEvents } from "src/http/api/events";
 const CoreDashboard = () => {
   const [selected, setSelected] = useState("calendar");
   const [isOpen, setOpen] = useState(false);
@@ -21,6 +22,12 @@ const CoreDashboard = () => {
     { value: "weekly", label: "Weekly" },
   ];
 
+  const { data, isLoading } = useQuery({
+    queryKey: ["events"],
+    queryFn: () => getEvents("month"),
+  });
+
+  console.log(data, 2222);
   return (
     <>
       <div className="flex gap-6 ">
@@ -62,7 +69,7 @@ const CoreDashboard = () => {
                   Add New
                 </CoreButton>
               </div>
-              <CoreCalendar />
+              <CoreCalendar dates={data} />
               <CoreModal
                 heading="Create New Event"
                 isOpen={isOpen}

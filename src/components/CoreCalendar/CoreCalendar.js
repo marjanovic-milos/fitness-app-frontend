@@ -10,7 +10,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-const CoreCalendar = ({ dates }) => {
+const CoreCalendar = ({ events, setSelectedDate, dayCalendarRef }) => {
   return (
     <div className={"core-table h-auto"}>
       <FullCalendar
@@ -23,27 +23,18 @@ const CoreCalendar = ({ dates }) => {
         }}
         selectable
         // editable
-        events={dates}
+        events={events}
         select={(info) => {
-          // const newEvent = {
-          //   id: String(events.length + 1),
-          //   title: "New Event",
-          //   start: info.startStr,
-          //   end: info.endStr,
-          // };
-          // setEvents([...events, newEvent]);
+          setSelectedDate(info.date);
+          const dayApi = dayCalendarRef.current.getApi();
+          dayApi.gotoDate(info.date);
         }}
-        eventDrop={(info) => {
-          console.log(
-            "Dropped:",
-            info.event.title,
-            info.event.start,
-            info.event.end
-          );
-        }}
-        // eventResize={(info) => {
-        //   console.log("Resized:", info.event.title, info.event.start, info.event.end);
+        // select={(info) => {
+        //   console.log(info);
+        //   setDate(info);
         // }}
+        eventDrop={(info) => {}}
+        eventResize={(info) => {}}
       />
     </div>
   );

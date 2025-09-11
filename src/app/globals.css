@@ -56,17 +56,11 @@
 }
 
 .no-spinner {
-  -moz-appearance: textfield; /* Firefox */
+  -moz-appearance: textfield;
 }
 
 .container {
   @apply bg-red-200;
-}
-
-.core-table {
-  /* background-color: red; */
-  max-width: 50rem;
-  max-height: 50rem;
 }
 
 .core-table .fc .fc-table,
@@ -75,7 +69,7 @@
   border: none !important;
   width: 50px;
 }
-.core-table .fc-table {
+.core-table .fc .fc-table {
   max-height: 500px;
   max-width: 500px;
 }

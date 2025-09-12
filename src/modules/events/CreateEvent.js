@@ -19,7 +19,7 @@ import { Calendar, Zap } from "lucide-react";
 import { addEvent } from "src/http/api/events";
 import toast from "react-hot-toast";
 const CreateEvent = ({ handleCLose }) => {
-  const [type, setType] = useState("group");
+  const [type, setType] = useState("individual");
 
   const queryClient = useQueryClient();
 

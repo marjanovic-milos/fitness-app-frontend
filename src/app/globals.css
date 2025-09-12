@@ -63,15 +63,30 @@
   @apply bg-red-200;
 }
 
+.day-view-calendar {
+  @apply w-full;
+}
+.day-view-calendar .fc {
+  @apply h-[500px];
+}
+
+.day-view-calendar .fc .fc-table,
+.day-view-calendar .fc-theme-standard td,
+.day-view-calendar .fc-theme-standard th {
+  border-color: transparent !important;
+}
+.core-table .fc-theme-standard .fc-scrollgrid,
+.day-view-calendar .fc-theme-standard .fc-scrollgrid {
+  border: none !important;
+}
 .core-table .fc .fc-table,
 .core-table .fc-theme-standard td,
 .core-table .fc-theme-standard th {
   border: none !important;
   width: 50px;
 }
-.core-table .fc .fc-table {
-  max-height: 500px;
-  max-width: 500px;
+.core-table .fc {
+  max-height: auto !important;
 }
 .core-table .fc-theme-standard td {
   max-height: 50px;
@@ -86,6 +101,8 @@
 .core-table .fc .fc-highlight {
   @apply min-h-14 max-w-14  !rounded-full;
 }
+
+.day-view-calendar .fc .fc-day-today,
 .core-table .fc .fc-day-today {
   @apply !bg-transparent;
 }

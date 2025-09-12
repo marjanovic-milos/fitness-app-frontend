@@ -12,7 +12,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 
 const CoreCalendar = ({ events, setSelectedDate, dayCalendarRef }) => {
   return (
-    <div className={"core-table h-auto"}>
+    <div className={"core-table"}>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
@@ -25,9 +25,8 @@ const CoreCalendar = ({ events, setSelectedDate, dayCalendarRef }) => {
         // editable
         events={events}
         select={(info) => {
-          setSelectedDate(info.date);
-          const dayApi = dayCalendarRef.current.getApi();
-          dayApi.gotoDate(info.date);
+          // console.log(info);
+          setSelectedDate(info.start);
         }}
         // select={(info) => {
         //   console.log(info);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import CoreSearch from "../CoreSearch/CoreSearch";
 import { X as Close } from "lucide-react";
 const CoreMultiSelect = (props) => {
@@ -10,16 +10,24 @@ const CoreMultiSelect = (props) => {
     placeholder,
     setValue,
     register,
+    defaultOptions = [],
     ...rest
   } = props;
-  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const [selectedOptions, setSelectedOptions] = useState(defaultOptions);
 
   useEffect(() => {
-    setValue(
-      name,
-      selectedOptions.map((o) => o.id)
-    );
-  }, [selectedOptions, name, setValue]);
+    if (defaultOptions?.length) {
+      setSelectedOptions((prev) => {
+        const ids = new Set(prev.map((o) => o.id));
+        const merged = [...prev];
+        defaultOptions.forEach((opt) => {
+          if (!ids.has(opt.id)) merged.push(opt);
+        });
+        return merged;
+      });
+    }
+  }, [defaultOptions]);
 
   const handleMultiSelection = (option) => {
     if (selectedOptions.some((item) => item.id === option.id)) {
@@ -30,21 +38,9 @@ const CoreMultiSelect = (props) => {
       setSelectedOptions([...selectedOptions, option]);
     }
   };
-  return (
-    <div>
-      <input type="hidden" {...register(name)} />
 
-      <CoreSearch
-        multi={true}
-        delay={1000}
-        handleMultiSelection={handleMultiSelection}
-        searchFn={searchFn}
-        data={data}
-        loading={loading}
-        placeholder={placeholder}
-        register={() => {}}
-        {...rest}
-      />
+  const options = useMemo(
+    () => (
       <div className="w-full flex flex-wrap gap-4 mt-5">
         {selectedOptions?.map((option) => (
           <span
@@ -60,6 +56,25 @@ const CoreMultiSelect = (props) => {
           </span>
         ))}
       </div>
+    ),
+    [handleMultiSelection, selectedOptions]
+  );
+  return (
+    <div>
+      <input type="hidden" {...register(name)} />
+
+      <CoreSearch
+        multi={true}
+        delay={1000}
+        handleMultiSelection={handleMultiSelection}
+        searchFn={searchFn}
+        data={data}
+        loading={loading}
+        placeholder={placeholder}
+        register={() => {}}
+        {...rest}
+      />
+      {options}
     </div>
   );
 };

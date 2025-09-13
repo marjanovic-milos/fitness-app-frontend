@@ -3,8 +3,10 @@ import CoreInput from "src/components/CoreInput/CoreInput";
 import CoreTimePicker from "src/components/CoreTimePicker/CoreTimePicker";
 import CoreCard from "src/components/CoreCard/CoreCard";
 import moment from "moment";
-const EventDate = ({ register, errors }) => {
-  const currerntDate = moment().format("YYYY-MM-DD");
+const EventDate = ({ register, errors, defaultValue }) => {
+  const currerntDate = defaultValue
+    ? moment(defaultValue).format("YYYY-MM-DD")
+    : moment().format("YYYY-MM-DD");
   return (
     <CoreCard>
       <div className="p-6 max-w-2xl">

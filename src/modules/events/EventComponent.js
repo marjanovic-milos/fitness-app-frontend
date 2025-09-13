@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import CoreMultiSelect from "src/components/CoreMultiselect/CoreMultiSelect";
 
@@ -18,9 +18,11 @@ import moment from "moment";
 import { Calendar, Zap } from "lucide-react";
 import { addEvent } from "src/http/api/events";
 import toast from "react-hot-toast";
-const CreateEvent = ({ handleCLose }) => {
-  const [type, setType] = useState("individual");
+import { useModals } from "src/context/modal";
 
+const EventComponent = ({ modalName, event }) => {
+  const [type, setType] = useState("individual");
+  const { toggleModal } = useModals();
   const queryClient = useQueryClient();
 
   const {
@@ -38,6 +40,7 @@ const CreateEvent = ({ handleCLose }) => {
       clients: [],
     },
   });
+
   const {
     mutate: searchExcercises,
     data: excercises,
@@ -60,7 +63,8 @@ const CreateEvent = ({ handleCLose }) => {
       queryClient.invalidateQueries({ queryKey: ["events"] });
       toast.success("Successfully created!");
       reset();
-      handleCLose();
+
+      toggleModal(modalName);
     },
   });
 
@@ -137,6 +141,7 @@ const CreateEvent = ({ handleCLose }) => {
                     register={register}
                     searchFn={searchExcercises}
                     setValue={setValue}
+                    defaultOptions={event?.excercisePlans}
                   />
                 </div>
 
@@ -169,4 +174,4 @@ const CreateEvent = ({ handleCLose }) => {
   );
 };
 
-export default CreateEvent;
+export default EventComponent;

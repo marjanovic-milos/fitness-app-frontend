@@ -4,7 +4,8 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import CoreCard from "../CoreCard/CoreCard";
-const DayView = ({ events, dayCalendarRef, initialDate }) => {
+
+const DayView = ({ events, dayCalendarRef, initialDate, handleEventClick }) => {
   return (
     <CoreCard>
       <div className="day-view-calendar p-5">
@@ -16,20 +17,15 @@ const DayView = ({ events, dayCalendarRef, initialDate }) => {
             center: "",
             right: "",
           }}
+          allDaySlot={false}
           editable={true}
-          selectable
+          selectable={true}
           ref={dayCalendarRef}
           events={events}
           initialDate={initialDate}
-          select={(info) => {
-            console.log(info);
-            // const newEvent = {
-            //   id: String(events.length + 1),
-            //   title: "New Event",
-            //   start: info.startStr,
-            //   end: info.endStr,
-            // };
-            // setEvents([...events, newEvent]);
+          eventClick={(info) => {
+            // console.log(info.event);
+            handleEventClick(info.event);
           }}
           eventDrop={(info) => {
             console.log(
@@ -39,10 +35,6 @@ const DayView = ({ events, dayCalendarRef, initialDate }) => {
               info.event.end
             );
           }}
-          allDaySlot={false}
-          // eventResize={(info) => {
-          //   console.log("Resized:", info.event.title, info.event.start, info.event.end);
-          // }}
         />
       </div>
     </CoreCard>

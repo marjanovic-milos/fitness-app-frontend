@@ -3,17 +3,17 @@ import CoreHeading from "../CoreHeading/CoreHeading";
 import CoreDropdown from "../CoreDropdown/CoreDropdown";
 import CoreButton from "../CoreButton/CoreButton";
 import CoreModal from "../CoreModal/CoreModal";
-import CreateEvent from "src/modules/events/CreateEvent";
+import EventComponent from "src/modules/events/EventComponent";
 import { Calendar, LayoutDashboard, Plus } from "lucide-react";
-
+import { useModals } from "src/context/modal";
 const DashboardHeading = () => {
   const [selected, setSelected] = useState("calendar");
-  const [isOpen, setOpen] = useState(false);
 
   const options = [
     { value: "calendar", label: "Calendar" },
     { value: "weekly", label: "Weekly" },
   ];
+  const { openModal, toggleModal, modals } = useModals();
 
   return (
     <>
@@ -34,7 +34,7 @@ const DashboardHeading = () => {
         <div className="flex gap-4">
           <CoreButton
             classes="w-fit !text-sm"
-            onClick={() => setOpen(true)}
+            onClick={() => openModal("add-new")}
             icon={Plus}
           >
             Add New
@@ -49,10 +49,10 @@ const DashboardHeading = () => {
 
       <CoreModal
         heading="Create New Event"
-        isOpen={isOpen}
-        onClose={() => setOpen(false)}
+        modalName={"add-new"}
+        toggleModal={() => toggleModal("add-new")}
       >
-        <CreateEvent handleCLose={() => setOpen(false)} />
+        <EventComponent modalName="add-new" />
       </CoreModal>
     </>
   );

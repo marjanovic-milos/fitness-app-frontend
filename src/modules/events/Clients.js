@@ -4,17 +4,17 @@ import CoreMultiSelect from "src/components/CoreMultiselect/CoreMultiSelect";
 import { useMutation } from "@tanstack/react-query";
 import { findUsers } from "src/http/api/users";
 
-const Clients = ({ trainingOption, register, setValue }) => {
+const Clients = ({ trainingOption, register, setValue, defaultOptions }) => {
   const { mutate, data, isPending } = useMutation({
     mutationFn: (search) => findUsers({ name: search }),
   });
 
   return (
     <>
-      <div className="w-full">
+      <div className='w-full'>
         {trainingOption?.value === "group" ? (
           <CoreMultiSelect
-            placeholder="Select Users"
+            placeholder='Select Users'
             delay={2000}
             loading={isPending}
             data={data}
@@ -22,10 +22,11 @@ const Clients = ({ trainingOption, register, setValue }) => {
             searchFn={mutate}
             register={register}
             setValue={setValue}
+            defaultOptions={defaultOptions}
           />
         ) : (
           <CoreSearch
-            placeholder="Select User"
+            placeholder='Select User'
             delay={2000}
             loading={isPending}
             data={data}
@@ -33,6 +34,7 @@ const Clients = ({ trainingOption, register, setValue }) => {
             searchFn={mutate}
             register={register}
             setValue={setValue}
+            defaultValue={defaultOptions}
           />
         )}
       </div>

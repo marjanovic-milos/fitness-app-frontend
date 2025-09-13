@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import CoreInput from "../CoreInput/CoreInput";
 import { useDebounce } from "src/app/hooks/useDebounced";
 
@@ -15,6 +15,7 @@ const CoreSearch = (props) => {
     placeholder,
     register,
     setValue,
+    defaultValue = null,
     ...rest
   } = props;
 
@@ -22,9 +23,16 @@ const CoreSearch = (props) => {
   const [close, setClose] = useState(false);
   const debounced = useDebounce(text, delay);
 
-  useMemo(() => {
+  useEffect(() => {
     if (debounced) searchFn(debounced);
   }, [debounced, searchFn]);
+
+  useEffect(() => {
+    if (!multi && defaultValue) {
+      setText(defaultValue?.[0]?.label);
+      setValue(name, defaultValue?.[0]?.id);
+    }
+  }, [multi, defaultValue, name, setValue]);
 
   const handleSelection = (data) => {
     if (multi) {
@@ -37,17 +45,14 @@ const CoreSearch = (props) => {
     }
   };
 
-  const showList = useMemo(
-    () => text && data?.length && !close,
-    [text, data, close]
-  );
+  const showList = useMemo(() => text && data?.length && !close && !defaultValue, [text, data, close, defaultValue]);
 
   return (
-    <div className="core-search-root">
-      <input type="hidden" {...register(name)} />
+    <div className='core-search-root'>
+      <input type='hidden' {...register(name)} />
 
       <CoreInput
-        name={"search"}
+        name='search'
         value={text}
         classes={classes}
         placeholder={placeholder || "Search..."}
@@ -60,14 +65,11 @@ const CoreSearch = (props) => {
         register={() => {}}
         {...rest}
       />
+
       {showList && (
-        <div className="core-search-list">
+        <div className='core-search-list'>
           {data?.map((option) => (
-            <p
-              key={option?._id}
-              className="core-search-list-element"
-              onClick={() => handleSelection(option)}
-            >
+            <p key={option?._id || option?.id} className='core-search-list-element' onClick={() => handleSelection(option)}>
               {option.label}
             </p>
           ))}

@@ -1,14 +1,7 @@
 import React from "react";
 import CoreInput from "../CoreInput/CoreInput";
 
-const CoreTimePicker = ({
-  name,
-  defaultValue = [],
-  register,
-  errors,
-  label,
-  value,
-}) => {
+const CoreTimePicker = ({ name, defaultValue, register, errors, label, value, setValue }) => {
   const handleChange = (e) => {
     let val = e.target.value.replace(/[^\d:]/g, "");
 
@@ -21,11 +14,11 @@ const CoreTimePicker = ({
 
   return (
     <CoreInput
-      type="text"
+      type='text'
       label={label}
       defaultValue={defaultValue}
       maxLength={5}
-      placeholder="HH:MM"
+      placeholder='HH:MM'
       name={name}
       register={register}
       value={value}

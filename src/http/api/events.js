@@ -29,9 +29,9 @@ export const addEvent = asyncHandler(async (data) => {
 
 export const updateEvent = asyncHandler(async (params) => {
   const { id, data } = params;
-  console.log("pred", params);
+
   const request = await http.put(
-    `/excercises/${id}`,
+    `/events/${id}`,
     {
       ...data,
     },
@@ -42,29 +42,9 @@ export const updateEvent = asyncHandler(async (params) => {
   return request;
 });
 
-// export const findExcercise = asyncHandler(async ({ name }) => {
-//   const res = await http.get(`/excercises?name=${name}&${ignorefileds}`, {
-//     skipAuth: false,
-//   });
-//   return res.data?.data?.map((item) => ({ id: item._id, label: item.name }));
-// });
-
-// export const saveExcercise = asyncHandler(async (data) => {
-//   const request = await http.post(
-//     "/excercises/addExcercise",
-//     {
-//       ...data,
-//     },
-//     {
-//       skipAuth: false,
-//     }
-//   );
-//   return request;
-// });
-
-// export const deleteExcercise = asyncHandler(async (id) => {
-//   const res = await http.delete(`/excercises/${id}`, {
-//     skipAuth: false,
-//   });
-//   return res.data;
-// });
+export const deleteEvent = asyncHandler(async (id) => {
+  const res = await http.delete(`/events/${id}`, {
+    skipAuth: false,
+  });
+  return res.data;
+});

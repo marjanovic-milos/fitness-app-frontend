@@ -5,21 +5,24 @@ import { getSavedMeals } from "src/http/api/meals";
 import { getExcercises } from "src/http/api/excercises";
 import { getUsers } from "src/http/api/users";
 const EditEvent = ({ events, eventId }) => {
-  const values = useMemo(() => events?.find((event) => event.id === eventId), [events, eventId]);
+  const values = events?.find((event) => event.id === eventId);
 
   const { data: excercisePlans } = useQuery({
-    queryKey: ["existed-excercises"],
-    queryFn: () => getExcercises({ ids: values?.excercisePlans, skipPagination: true }),
+    queryKey: ["existed-excercises", values?.excercisePlans],
+    queryFn: () =>
+      getExcercises({ ids: values?.excercisePlans, skipPagination: true }),
     enabled: !!values?.excercisePlans?.length,
   });
+
   const { data: mealPlans } = useQuery({
-    queryKey: ["existed-meals"],
-    queryFn: () => getSavedMeals({ ids: values?.mealPlans, skipPagination: true }),
+    queryKey: ["existed-meals", values?.mealPlans],
+    queryFn: () =>
+      getSavedMeals({ ids: values?.mealPlans, skipPagination: true }),
     enabled: !!values?.mealPlans?.length,
   });
 
   const { data: clients } = useQuery({
-    queryKey: ["existed-clients"],
+    queryKey: ["existed-clients", values?.clients],
     queryFn: () => getUsers({ ids: values?.clients, skipPagination: true }),
     enabled: !!values?.clients?.length,
   });
@@ -43,7 +46,7 @@ const EditEvent = ({ events, eventId }) => {
     start: values?.start,
     end: values?.end,
     repeatDays: values?.repeatDays,
-    id: eventId,
+    id: values?._id,
   };
 
   return <EventComponent event={event} modalName={"edit-event"} />;

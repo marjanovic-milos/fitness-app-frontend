@@ -4,8 +4,28 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import CoreCard from "../CoreCard/CoreCard";
+import { updateEvent } from "src/http/api/events";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const DayView = ({ events, dayCalendarRef, initialDate, handleEventClick }) => {
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: updateEvent,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["events"],
+      });
+      toast.success("Successfully updated!");
+      console.log("radi");
+    },
+    onError: (err) => {
+      console.error("❌ Error:", err);
+      toast.error("Something went wrong!");
+    },
+  });
+
   return (
     <CoreCard>
       <div className="day-view-calendar p-5">
@@ -24,16 +44,27 @@ const DayView = ({ events, dayCalendarRef, initialDate, handleEventClick }) => {
           events={events}
           initialDate={initialDate}
           eventClick={(info) => {
-            // console.log(info.event);
             handleEventClick(info.event);
           }}
           eventDrop={(info) => {
-            console.log(
-              "Dropped:",
-              info.event.title,
-              info.event.start,
-              info.event.end
-            );
+            const selectedEvent = events.filter(
+              (event) => event.id === info.event.id
+            )[0]?._id;
+
+            mutate({
+              data: { start: info.event.start, end: info.event.end },
+              id: selectedEvent,
+            });
+          }}
+          eventResize={(info) => {
+            const selectedEvent = events.filter(
+              (event) => event.id === info.event.id
+            )[0]?._id;
+
+            mutate({
+              data: { start: info.event.start, end: info.event.end },
+              id: selectedEvent,
+            });
           }}
         />
       </div>

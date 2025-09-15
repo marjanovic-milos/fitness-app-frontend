@@ -18,7 +18,7 @@ const ExcercisesPage = () => {
     "",
     t("excercises.name"),
     t("excercises.notes"),
-    t("excercises.video"),
+    // t("excercises.video"),
     t("excercises.actions"),
   ];
 

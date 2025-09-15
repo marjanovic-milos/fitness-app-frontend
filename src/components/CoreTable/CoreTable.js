@@ -72,12 +72,14 @@ const CoreTable = (props) => {
       key === "fat" ||
       key === "calories" ||
       key === "protein";
+
     return (
       <CoreTableRow
         key={item._id}
         className={`lg:grid-cols-[repeat(auto-fit,minmax(50px,1fr))] w-full`}
       >
         {entries?.map(([key, value]) => {
+          const rowLink = value;
           if (key === "image") {
             return (
               <div className="core-center" key={key}>
@@ -92,18 +94,69 @@ const CoreTable = (props) => {
               </div>
             );
           }
+
           if (key === "sourceUrl") {
             return (
-              <div key={key} className="core-button-row-wrapper h-full">
-                <Link href={value}>
-                  <LinkIcon
-                    className="lg:block hidden w-4 w-4"
-                    strokeWidth={1.5}
-                  />
-                </Link>
+              <div>
+                {actionId ? (
+                  actionId === item?._id ? (
+                    <div
+                      className="core-button-row-wrapper h-full"
+                      key={item._id}
+                    >
+                      <button disabled={actionId !== item?._id} type="button">
+                        <Check
+                          onClick={handleSubmit((data) => {
+                            onSubmit(data);
+                          })}
+                          className="core-table-confirm"
+                          strokeWidth={1.5}
+                        />
+                      </button>
+                      <button
+                        disabled={actionId !== item?._id}
+                        type="button"
+                        onClick={resetForm}
+                      >
+                        <CloseIcon
+                          className="core-table-cancel"
+                          strokeWidth={1.5}
+                        />
+                      </button>
+                    </div>
+                  ) : null
+                ) : (
+                  <div
+                    key={item._id}
+                    className="core-button-row-wrapper h-full"
+                  >
+                    <button type="button" onClick={() => setActionId(item._id)}>
+                      <Pencil className="core-table-edit" strokeWidth={1.5} />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => deleteMutation.mutate(item?._id)}
+                    >
+                      <Trash2 className="core-table-delete" strokeWidth={1.5} />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => deleteMutation.mutate(item?._id)}
+                    >
+                      <Link href={value}>
+                        <LinkIcon
+                          className="lg:block hidden w-4 w-4"
+                          strokeWidth={1.5}
+                        />
+                      </Link>
+                    </button>
+                  </div>
+                )}
               </div>
             );
           }
+
           return actionId === item?._id ? (
             <CoreInput
               defaultValue={value}
@@ -134,41 +187,6 @@ const CoreTable = (props) => {
             </div>
           );
         })}
-
-        {actionId ? (
-          actionId === item?._id ? (
-            <div className="core-button-row-wrapper h-full" key={item._id}>
-              <button disabled={actionId !== item?._id} type="button">
-                <Check
-                  onClick={handleSubmit((data) => {
-                    onSubmit(data);
-                  })}
-                  className="core-table-confirm"
-                  strokeWidth={1.5}
-                />
-              </button>
-              <button
-                disabled={actionId !== item?._id}
-                type="button"
-                onClick={resetForm}
-              >
-                <CloseIcon className="core-table-cancel" strokeWidth={1.5} />
-              </button>
-            </div>
-          ) : null
-        ) : (
-          <div key={item._id} className="core-button-row-wrapper h-full">
-            <button type="button" onClick={() => setActionId(item._id)}>
-              <Pencil className="core-table-edit" strokeWidth={1.5} />
-            </button>
-            <button
-              type="button"
-              onClick={() => deleteMutation.mutate(item?._id)}
-            >
-              <Trash2 className="core-table-delete" strokeWidth={1.5} />
-            </button>
-          </div>
-        )}
       </CoreTableRow>
     );
   });

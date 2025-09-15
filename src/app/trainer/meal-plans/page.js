@@ -26,7 +26,7 @@ const MealPlansPage = () => {
 
     t("meals.carbs"),
 
-    t("meals.links"),
+    // t("meals.links"),
 
     t("meals.actions"),
   ];

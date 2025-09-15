@@ -22,17 +22,10 @@ const CoreCalendar = ({ events, setSelectedDate, dayCalendarRef }) => {
           right: "",
         }}
         selectable
-        // editable
         events={events}
         select={(info) => {
           setSelectedDate(info.start);
         }}
-        // select={(info) => {
-        //   console.log(info);
-        //   setDate(info);
-        // }}
-        // eventDrop={(info) => {}}
-        // eventResize={(info) => {}}
       />
     </div>
   );

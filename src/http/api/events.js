@@ -5,10 +5,11 @@ export const getEvents = asyncHandler(async (filter) => {
   const res = await http.get(`/events?dateFilter=${filter}`, {
     skipAuth: false,
   });
+  console.log(res.data.data);
   return res.data.data?.map((item) => ({
     ...item,
     id: item._id,
-    title: "Some event",
+    // title: "Some event",
     start: new Date(item.start),
     end: new Date(item.end),
   }));

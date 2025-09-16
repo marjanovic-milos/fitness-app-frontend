@@ -1,9 +1,9 @@
-import { Banknote, User, Dumbbell, Soup, LayoutDashboard } from "lucide-react";
+import { Banknote, Users, Dumbbell, Apple, LayoutDashboard, Gauge } from "lucide-react";
 
 export const TRAINER_URLS = [
   {
     url: "/trainer",
-    icon: LayoutDashboard,
+    icon: Gauge,
     label: "Dashboard",
   },
   {
@@ -13,12 +13,12 @@ export const TRAINER_URLS = [
   },
   {
     url: "/trainer/meal-plans",
-    icon: Soup,
+    icon: Apple,
     label: "Meal Plans",
   },
   {
     url: "/trainer/users",
-    icon: User,
+    icon: Users,
     label: "Users",
   },
   // {

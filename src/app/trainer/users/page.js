@@ -2,13 +2,15 @@
 import React from "react";
 import PageGuard from "src/page-guards/pageGuard";
 import { Users } from "lucide-react";
-import { getUsers } from "src/http/api/users";
+import { getUsers, saveUser } from "src/http/api/users";
 import CoreTableComponent from "src/components/CoreTableComponent/CoreTableComponent";
 import { useTranslation } from "react-i18next";
+import CreateUser from "src/modules/users/CreateUser";
+
 const UsersPage = () => {
   const { t } = useTranslation();
 
-  const columns = ["", t("users.name"), t("users.email"), t("users.actions")];
+  const columns = ["", t("users.name"), t("users.email"), "Platform Access", t("users.actions")];
 
   return (
     <PageGuard roles={["trainer"]}>
@@ -17,10 +19,10 @@ const UsersPage = () => {
         queryFn={getUsers}
         deleteFn={() => {}}
         updateFn={() => {}}
-        createFn={() => {}}
-        createForm={null}
+        createFn={saveUser}
+        createForm={CreateUser}
         queryKey={"users"}
-        buttonText={null}
+        buttonText={"Create User"}
         heading={t("users.tableHeading")}
         icon={Users}
       />

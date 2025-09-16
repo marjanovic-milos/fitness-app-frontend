@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import CoreTableRow from "./CoreTableRow";
 import CoreText from "../CoreText/CoreText";
 import Link from "next/link";
-import { Link as LinkIcon, Trash2, Pencil, X as CloseIcon, Check } from "lucide-react";
+import { ExternalLink as LinkIcon, Trash2, Pencil, X as CloseIcon, Check } from "lucide-react";
 import Image from "next/image";
 import CoreInput from "../CoreInput/CoreInput";
 import { useForm } from "react-hook-form";
@@ -58,13 +58,17 @@ const CoreTable = (props) => {
     return (
       <CoreTableRow key={item._id} className={`lg:grid-cols-[repeat(auto-fit,minmax(50px,1fr))] w-full`}>
         {entries?.map(([key, value]) => {
-          const rowLink = value;
+          console.log(value);
           if (key === "image") {
             return (
               <div className='core-center' key={key}>
                 <Image src={value} alt='Example local image' width={50} height={50} className='core-table-image' priority />
               </div>
             );
+          }
+
+          if (key === "profileUrl") {
+            return <div key={key}>Profile</div>;
           }
 
           if (key === "sourceUrl") {
@@ -96,7 +100,7 @@ const CoreTable = (props) => {
                       <Trash2 className='core-table-delete' strokeWidth={1.5} />
                     </button>
 
-                    <button type='button' onClick={() => deleteMutation.mutate(item?._id)}>
+                    <button type='button'>
                       <Link href={value}>
                         <LinkIcon className='lg:block hidden w-4 w-4' strokeWidth={1.5} />
                       </Link>
@@ -127,7 +131,7 @@ const CoreTable = (props) => {
           ) : (
             <div key={key} className='flex lg:justify-center text-sm justify-start items-center gap-1 h-full'>
               <CoreText className='lg:hidden block'>{conditionNumbersOnly(key) && `${key.charAt(0).toUpperCase() + key.slice(1)} :`}</CoreText>{" "}
-              <CoreText>{value}</CoreText>
+              <CoreText>{typeof value === "boolean" ? (value ? "Yes" : "No") : value}</CoreText>
             </div>
           );
         })}

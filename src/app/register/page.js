@@ -38,44 +38,29 @@ const Register = () => {
   return (
     <div className={styles.root}>
       <div className={styles.leftSide}>
-        <Image
-          src={avatar}
-          alt="My Photo"
-          className={styles.image}
-          width={400}
-          height={300}
-        />
+        <Image src={avatar} alt='My Photo' className={styles.image} width={400} height={300} />
       </div>
       <div className={styles.rightSide}>
         <div className={styles.formWrap}>
           <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-            <CoreHeading variant="h3" className="font-bold">
+            <CoreHeading variant='h3' className='font-bold'>
               Sign Up
             </CoreHeading>
-            <CoreInput
-              name="email"
-              type="email"
-              label="Email"
-              register={register}
-              {...register("email")}
-            />
+            <CoreInput name='email' type='email' label='Email' register={register} {...register("email")} />
             <CoreInput
               classes={{ root: "mt-2" }}
-              name="password"
+              name='password'
               register={register}
               required={"Password is required field"}
               {...register("password")}
-              type="password"
-              label="Password"
+              type='password'
+              label='Password'
             />
-            <CoreButton classes={"w-full"}>Login</CoreButton>
-            <div className="flex justify-center ">
+            <CoreButton classes={"w-full"}></CoreButton>
+            <div className='flex justify-center '>
               <CoreText>
                 Already have an account?
-                <Link
-                  href="/login"
-                  className="flex justify-center underline mx-2"
-                >
+                <Link href='/' className='flex justify-center underline mx-2'>
                   Sign in
                 </Link>
               </CoreText>

@@ -9,15 +9,13 @@ const EditEvent = ({ events, eventId }) => {
 
   const { data: excercisePlans } = useQuery({
     queryKey: ["existed-excercises", values?.excercisePlans],
-    queryFn: () =>
-      getExcercises({ ids: values?.excercisePlans, skipPagination: true }),
+    queryFn: () => getExcercises({ ids: values?.excercisePlans, skipPagination: true }),
     enabled: !!values?.excercisePlans?.length,
   });
 
   const { data: mealPlans } = useQuery({
     queryKey: ["existed-meals", values?.mealPlans],
-    queryFn: () =>
-      getSavedMeals({ ids: values?.mealPlans, skipPagination: true }),
+    queryFn: () => getSavedMeals({ ids: values?.mealPlans, skipPagination: true }),
     enabled: !!values?.mealPlans?.length,
   });
 
@@ -26,6 +24,8 @@ const EditEvent = ({ events, eventId }) => {
     queryFn: () => getUsers({ ids: values?.clients, skipPagination: true }),
     enabled: !!values?.clients?.length,
   });
+
+  console.log(clients, "clients");
 
   const event = {
     excercisePlans:

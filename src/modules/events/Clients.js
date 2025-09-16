@@ -12,7 +12,7 @@ const Clients = ({ trainingOption, register, setValue, defaultOptions }) => {
   return (
     <>
       <div className='w-full'>
-        {trainingOption?.value === "group" ? (
+        {trainingOption ? (
           <CoreMultiSelect
             placeholder='Select Users'
             delay={2000}

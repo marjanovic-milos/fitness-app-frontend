@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 
 import CoreMultiSelect from "src/components/CoreMultiselect/CoreMultiSelect";
 
@@ -94,20 +94,13 @@ const EventComponent = ({ modalName, event }) => {
     { value: "group", label: "Group" },
     { value: "individual", label: "Individual" },
   ];
-  const trainingOption = trainingOptions.filter(
-    (option) => option.value === type
-  )?.[0];
+  const trainingOption = trainingOptions.filter((option) => option.value === type)?.[0];
 
   const repeatDays = watch("repeatDays");
 
   const submit = (data) => {
-    const start = moment(
-      `${data?.date} ${data.start}`,
-      "YYYY-MM-DD HH:mm"
-    ).format("YYYY-MM-DDTHH:mm:ss.SSSZ");
-    const end = moment(`${data?.date} ${data.end}`, "YYYY-MM-DD HH:mm").format(
-      "YYYY-MM-DDTHH:mm:ss.SSSZ"
-    );
+    const start = moment(`${data?.date} ${data.start}`, "YYYY-MM-DD HH:mm").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+    const end = moment(`${data?.date} ${data.end}`, "YYYY-MM-DD HH:mm").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
     const eventDetails = {
       start,
       end,
@@ -117,66 +110,53 @@ const EventComponent = ({ modalName, event }) => {
       repeatDays,
     };
 
-    !event
-      ? createEvent(eventDetails)
-      : updateMutation({ data: eventDetails, id: event?.id });
+    !event ? createEvent(eventDetails) : updateMutation({ data: eventDetails, id: event?.id });
   };
 
+  const trainingOptionDefault = useMemo(() => {
+    if (event?.clients) {
+      return event.clients.length > 1 ? "group" : "individual";
+    } else {
+      return trainingOption;
+    }
+  }, [event, trainingOption]);
+
   return (
-    <div className="overfllow-scroll max-h-[80vh]">
-      <div className="flex items-center justify-between w-full px-10 mb-10">
-        <CoreHeading type="h3" className="font-semibold" icon={Calendar}>
+    <div className='overfllow-scroll max-h-[80vh]'>
+      <div className='flex items-center justify-between w-full px-10 mb-10'>
+        <CoreHeading type='h3' className='font-semibold' icon={Calendar}>
           Event overview
         </CoreHeading>
         {!event ? (
-          <CoreDropdown
-            options={trainingOptions}
-            value={type}
-            onChange={(val) => setType(val)}
-          />
+          <CoreDropdown options={trainingOptions} value={type} onChange={(val) => setType(val)} />
         ) : (
-          <CoreButton
-            classes="w-fit !text-sm"
-            onClick={() => deleteMutation(event?.id)}
-            icon={Trash}
-          >
+          <CoreButton classes='w-fit !text-sm' onClick={() => deleteMutation(event?.id)} icon={Trash}>
             Delete
           </CoreButton>
         )}
       </div>
       <form onSubmit={handleSubmit(submit)}>
-        <div className="flex flex-col gap-5 px-10 ">
-          <div className="grid xl:grid-cols-2 grid-cols-auto gap-5 ">
+        <div className='flex flex-col gap-5 px-10 '>
+          <div className='grid xl:grid-cols-2 grid-cols-auto gap-5 '>
             <CoreCard>
-              <div className="flex flex-col items-start gap-2 p-6">
+              <div className='flex flex-col items-start gap-2 p-6'>
                 <CoreText>Select users:</CoreText>
-                <Clients
-                  trainingOption={trainingOption}
-                  setValue={setValue}
-                  register={register}
-                  defaultOptions={event?.clients}
-                />
+                <Clients trainingOption={trainingOptionDefault} setValue={setValue} register={register} defaultOptions={event?.clients} />
               </div>
             </CoreCard>
-            <EventDate
-              register={register}
-              control={control}
-              errors={errors}
-              setValue={setValue}
-              defaultValue={event}
-            />
+            <EventDate register={register} control={control} errors={errors} setValue={setValue} defaultValue={event} />
           </div>
 
           <CoreCard>
-            <div className="flex flex-col items-start gap-5 p-6">
-              <CoreHeading type="h3" className="font-semibold" icon={Zap}>
+            <div className='flex flex-col items-start gap-5 p-6'>
+              <CoreHeading type='h3' className='font-semibold' icon={Zap}>
                 Additional Details
               </CoreHeading>
-              <div className="flex xl:flex-row flex-col justify-between w-full">
-                <div className="flex flex-col items-start gap-2 w-full">
+              <div className='flex xl:flex-row flex-col justify-between w-full'>
+                <div className='flex flex-col items-start gap-2 w-full'>
                   <CoreText> Find your excercises:</CoreText>
                   <CoreMultiSelect
-                    name="excercisePlans"
+                    name='excercisePlans'
                     loading={pendingExcercise}
                     data={excercises}
                     register={register}
@@ -187,7 +167,7 @@ const EventComponent = ({ modalName, event }) => {
                 </div>
 
                 {trainingOption?.value === "individual" && (
-                  <div className="flex flex-col items-start gap-2 w-full">
+                  <div className='flex flex-col items-start gap-2 w-full'>
                     <CoreText> Find your meals: </CoreText>
                     <CoreMultiSelect
                       name={"mealPlans"}
@@ -204,8 +184,8 @@ const EventComponent = ({ modalName, event }) => {
             </div>
           </CoreCard>
           {!event && <AdditionalSettings control={control} />}
-          <div className="w-full flex justify-end my-10">
-            <CoreButton classes="w-xs" type="submit">
+          <div className='w-full flex justify-end my-10'>
+            <CoreButton classes='w-xs' type='submit'>
               Save Event
             </CoreButton>
           </div>

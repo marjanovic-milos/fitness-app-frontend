@@ -11,10 +11,10 @@ const Clients = ({ trainingOption, register, setValue, defaultOptions }) => {
 
   return (
     <>
-      <div className='w-full'>
-        {trainingOption ? (
+      <div className="w-full">
+        {trainingOption === "group" ? (
           <CoreMultiSelect
-            placeholder='Select Users'
+            placeholder="Select Users"
             delay={2000}
             loading={isPending}
             data={data}
@@ -26,7 +26,7 @@ const Clients = ({ trainingOption, register, setValue, defaultOptions }) => {
           />
         ) : (
           <CoreSearch
-            placeholder='Select User'
+            placeholder="Select User"
             delay={2000}
             loading={isPending}
             data={data}

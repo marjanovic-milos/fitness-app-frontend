@@ -17,7 +17,7 @@ const DashboardHeading = () => {
 
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex xl:flex-row flex-col items-start gap-4 justify-between">
         {selected === "weekly" ? (
           <CoreHeading
             type="h2"

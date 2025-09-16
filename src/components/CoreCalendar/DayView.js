@@ -9,7 +9,7 @@ import { updateEvent } from "src/http/api/events";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import styles from "./DayView.module.css";
-import { Pencil } from "lucide-react";
+import { User, Users } from "lucide-react";
 
 const DayView = ({ events, dayCalendarRef, initialDate, handleEventClick }) => {
   const queryClient = useQueryClient();
@@ -21,14 +21,12 @@ const DayView = ({ events, dayCalendarRef, initialDate, handleEventClick }) => {
         queryKey: ["events"],
       });
       toast.success("Successfully updated!");
-      console.log("radi");
     },
     onError: (err) => {
       console.error("❌ Error:", err);
       toast.error("Something went wrong!");
     },
   });
-  console.log(events);
 
   return (
     <CoreCard>
@@ -36,9 +34,11 @@ const DayView = ({ events, dayCalendarRef, initialDate, handleEventClick }) => {
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView="timeGridDay"
+          slotDuration="00:30:00"
+          snapDuration="00:30:00"
           headerToolbar={{
             left: "",
-            center: "",
+            center: ``,
             right: "",
           }}
           allDaySlot={false}
@@ -70,16 +70,35 @@ const DayView = ({ events, dayCalendarRef, initialDate, handleEventClick }) => {
               id: selectedEvent,
             });
           }}
-          eventContent={(eventInfo) => {
-            console.log(eventInfo, "info");
+          eventContent={(arg) => {
             return (
-              <div className={styles.customEvent}>
-                <span className={styles.iconWrapper}>
-                  <Pencil className={styles.icon} strokeWidth={1.5} />
-                </span>
-
-                <b>{eventInfo.timeText}</b>
-                <b>{eventInfo.event.extendedProps.trainingType}</b>
+              <div className="flex gap-20 w-xs py-2">
+                <div>
+                  {arg.event.extendedProps.clients.length > 1 ? (
+                    <div className="relative">
+                      <div className="absolute left-4 z-2 border w-10 h-10 rounded-full flex items-center justify-center bg-gray-300 text-gray-900">
+                        <User className="w-4 h-4" strokeWidth={1.5} />
+                      </div>
+                      <div className="absolute z-1 left-6 w-10 h-10 border rounded-full flex items-center justify-center bg-gray-300 text-gray-900">
+                        <User className="w-2 h-2" strokeWidth={1.5} />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="relative">
+                      <div className="absolute left-4 z-2 border w-10 h-10 rounded-full flex items-center justify-center bg-gray-300 text-gray-900">
+                        <User className="w-4 h-4" strokeWidth={1.5} />
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="">
+                  <div>
+                    {arg.event.extendedProps.clients.length > 1
+                      ? "Group"
+                      : "Individualni"}
+                  </div>
+                  <div>{arg.timeText}</div>
+                </div>
               </div>
             );
           }}

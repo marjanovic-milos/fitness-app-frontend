@@ -20,7 +20,7 @@ const CoreButton = (props) => {
     <button className={rootInput} disabled={isLoading} {...props}>
       {children}
       {icon && (
-        <div className="flex items-center justify-center bg-gray-700 rounded-full w-7 h-7 ">
+        <div className="flex items-center justify-center bg-gray-700 rounded-full w-6 h-6 ">
           <Icon className="w-4 h-4" strokeWidth={1.5} />
         </div>
       )}

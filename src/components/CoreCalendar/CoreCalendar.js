@@ -10,7 +10,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-const CoreCalendar = ({ events, setSelectedDate, dayCalendarRef }) => {
+const CoreCalendar = ({ events, setSelectedDate }) => {
   return (
     <div className={"core-table"}>
       <FullCalendar
@@ -23,6 +23,7 @@ const CoreCalendar = ({ events, setSelectedDate, dayCalendarRef }) => {
         }}
         selectable
         events={events}
+        dayMaxEvents={1}
         select={(info) => {
           setSelectedDate(info.start);
         }}

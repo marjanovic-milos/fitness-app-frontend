@@ -19,6 +19,7 @@
 @import "../components/CoreTableComponent/coreTableComponent.module.css";
 @import "../components/CoreTableComponent/HeaderTableComponent/headerTableComponent.module.css";
 @import "../components/CoreSlider/coreSlider.module.css";
+@import "../components/CoreCalendar/DayView.module.css";
 
 @layer base {
   h1 {
@@ -80,7 +81,6 @@
 }
 
 .day-view-calendar .fc-event-main-frame {
-  background-color: lightblue;
   border-radius: 50px;
 }
 
@@ -104,6 +104,7 @@
   border: none !important;
   width: 50px;
 }
+
 .core-table .fc {
   max-height: auto !important;
 }
@@ -112,13 +113,13 @@
 }
 
 .core-table .fc .fc-daygrid-day-frame {
-  @apply flex flex-col bg-gray-900 min-h-14 max-w-14 flex items-center justify-center !rounded-full text-center m-auto;
+  @apply flex flex-col bg-gray-900 lg:min-h-14 lg:max-w-14 min-h-10 max-w-10 flex items-center justify-center !rounded-full text-center m-auto;
 }
 .core-table .fc .fc-day-other > div {
-  @apply bg-[repeating-linear-gradient(145deg,_#f3f4f6_0px,_#f3f4f6_10px,_#e5e7eb_10px,_#e5e7eb_20px)] !min-h-14 !max-w-14 !rounded-full;
+  @apply bg-[repeating-linear-gradient(145deg,_#f3f4f6_0px,_#f3f4f6_10px,_#e5e7eb_10px,_#e5e7eb_20px)] lg:min-h-14 lg:max-w-14 !rounded-full;
 }
 .core-table .fc .fc-highlight {
-  @apply min-h-14 max-w-14  !rounded-full;
+  @apply lg:min-h-14 lg:max-w-14 min-h-10 max-w-10   !rounded-full;
 }
 
 .day-view-calendar .fc .fc-day-today,
@@ -135,9 +136,17 @@
 .core-table .fc .fc-event-title {
   display: none !important;
 }
-
+.core-table .fc-direction-ltr .fc-daygrid-more-link {
+  display: none !important;
+}
 .core-center {
   @apply flex justify-center items-center;
+}
+
+@media screen and (max-width: 1024px) {
+  .day-view-calendar .fc-theme-standard td {
+    padding: 1rem 0;
+  }
 }
 
 @layer utilities {

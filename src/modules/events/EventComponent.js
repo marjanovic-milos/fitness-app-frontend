@@ -1,28 +1,17 @@
-import React, { useState, useMemo } from "react";
-
-import CoreMultiSelect from "src/components/CoreMultiselect/CoreMultiSelect";
-
-import { findExcercise } from "src/http/api/excercises";
+import React, { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { findMeal } from "src/http/api/meals";
-import CoreText from "src/components/CoreText/CoreText";
-import { useForm } from "react-hook-form";
-import CoreButton from "src/components/CoreButton/CoreButton";
-import CoreDropdown from "src/components/CoreDropdown/CoreDropdown";
-import CoreCard from "src/components/CoreCard/CoreCard";
-import CoreHeading from "src/components/CoreHeading/CoreHeading";
-import Clients from "./Clients";
-import EventDate from "./EventDate";
-import AdditionalSettings from "./AdditionalSettings";
 import moment from "moment";
-import { Calendar, Zap, Trash } from "lucide-react";
-import { addEvent, updateEvent, deleteEvent } from "src/http/api/events";
 import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
 import { useModals } from "src/context/modal";
+
+import CoreDropdown from "src/components/CoreDropdown/CoreDropdown";
+
+import { addEvent, updateEvent } from "src/http/api/events";
+import EventDetails from "./edit/EventDetails";
 
 const EventComponent = ({ modalName, event }) => {
   const [type, setType] = useState("individual");
-  const [editType, setEditType] = useState("attendance");
   const { toggleModal } = useModals();
   const queryClient = useQueryClient();
 
@@ -40,22 +29,6 @@ const EventComponent = ({ modalName, event }) => {
       mealPlans: [],
       clients: [],
     },
-  });
-
-  const {
-    mutate: searchExcercises,
-    data: excercises,
-    isPending: pendingExcercise,
-  } = useMutation({
-    mutationFn: (search) => findExcercise({ name: search }),
-  });
-
-  const {
-    mutate: searchMeals,
-    data: meals,
-    isPending: pendingMeal,
-  } = useMutation({
-    mutationFn: (search) => findMeal({ title: search }),
   });
 
   const { mutate: createEvent } = useMutation({
@@ -81,32 +54,21 @@ const EventComponent = ({ modalName, event }) => {
     },
   });
 
-  const { mutate: deleteMutation } = useMutation({
-    mutationFn: deleteEvent,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["events"] });
-      reset();
-      toggleModal(modalName);
-      toast.success("Successfully deleted!");
-    },
-  });
-
   const trainingOptions = [
     { value: "group", label: "Group" },
     { value: "individual", label: "Individual" },
   ];
 
-  const editOptions = [
-    { value: "attendance", label: "Attendance" },
-    { value: "edit", label: "Event Edit" },
-  ];
-  const trainingOption = trainingOptions.filter((option) => option.value === type)?.[0];
-
   const repeatDays = watch("repeatDays");
 
   const submit = (data) => {
-    const start = moment(`${data?.date} ${data.start}`, "YYYY-MM-DD HH:mm").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
-    const end = moment(`${data?.date} ${data.end}`, "YYYY-MM-DD HH:mm").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+    const start = moment(
+      `${data?.date} ${data.start}`,
+      "YYYY-MM-DD HH:mm"
+    ).format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+    const end = moment(`${data?.date} ${data.end}`, "YYYY-MM-DD HH:mm").format(
+      "YYYY-MM-DDTHH:mm:ss.SSSZ"
+    );
     const eventDetails = {
       start,
       end,
@@ -115,91 +77,30 @@ const EventComponent = ({ modalName, event }) => {
       excercisePlans: data?.excercisePlans,
       repeatDays,
     };
-
-    !event ? createEvent(eventDetails) : updateMutation({ data: eventDetails, id: event?.id });
+    !event
+      ? createEvent(eventDetails)
+      : updateMutation({ data: eventDetails, id: event?.id });
   };
 
-  const trainingOptionDefault = useMemo(() => {
-    if (event?.clients) {
-      return event.clients.length > 1 ? "group" : "individual";
-    } else {
-      return trainingOption?.value;
-    }
-  }, [event, trainingOption]);
-
   return (
-    <div className='overfllow-scroll max-h-[80vh]'>
-      <div className='flex items-center justify-between w-full px-10 mb-10'>
-        <CoreHeading type='h3' className='font-semibold' icon={Calendar}>
-          Event overview
-        </CoreHeading>
-        {!event ? (
-          <CoreDropdown options={trainingOptions} value={type} onChange={(val) => setType(val)} />
-        ) : (
-          <div className='flex gap-4'>
-            <CoreButton classes='w-fit !text-sm' onClick={() => deleteMutation(event?.id)} icon={Trash}>
-              Delete
-            </CoreButton>
-
-            <CoreDropdown options={editOptions} value={editType} onChange={(val) => setEditType(val)} />
-          </div>
-        )}
-      </div>
+    <div className="overfllow-scroll max-h-[80vh]">
+      {!event && (
+        <CoreDropdown
+          options={trainingOptions}
+          value={type}
+          onChange={(val) => setType(val)}
+        />
+      )}
       <form onSubmit={handleSubmit(submit)}>
-        <div className='flex flex-col gap-5 px-10 '>
-          <div className='grid xl:grid-cols-2 grid-cols-auto gap-5 '>
-            <CoreCard>
-              <div className='flex flex-col items-start gap-2 p-6'>
-                <CoreText>Select users:</CoreText>
-                <Clients trainingOption={trainingOptionDefault} setValue={setValue} register={register} defaultOptions={event?.clients} />
-              </div>
-            </CoreCard>
-            <EventDate register={register} control={control} errors={errors} setValue={setValue} defaultValue={event} />
-          </div>
-
-          <CoreCard>
-            <div className='flex flex-col items-start gap-5 p-6'>
-              <CoreHeading type='h3' className='font-semibold' icon={Zap}>
-                Additional Details
-              </CoreHeading>
-              <div className='flex xl:flex-row flex-col justify-between w-full'>
-                <div className='flex flex-col items-start gap-2 w-full'>
-                  <CoreText> Find your excercises:</CoreText>
-                  <CoreMultiSelect
-                    name='excercisePlans'
-                    loading={pendingExcercise}
-                    data={excercises}
-                    register={register}
-                    searchFn={searchExcercises}
-                    setValue={setValue}
-                    defaultOptions={event?.excercisePlans}
-                  />
-                </div>
-
-                {trainingOption?.value === "individual" && (
-                  <div className='flex flex-col items-start gap-2 w-full'>
-                    <CoreText> Find your meals: </CoreText>
-                    <CoreMultiSelect
-                      name={"mealPlans"}
-                      loading={pendingMeal}
-                      data={meals}
-                      register={register}
-                      searchFn={searchMeals}
-                      setValue={setValue}
-                      defaultOptions={event?.mealPlans}
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-          </CoreCard>
-          <AdditionalSettings clients={event?.clients} control={control} />
-          <div className='w-full flex justify-end my-10'>
-            <CoreButton classes='w-xs' type='submit'>
-              Save Event
-            </CoreButton>
-          </div>
-        </div>
+        <EventDetails
+          trainingOptions={trainingOptions}
+          setValue={setValue}
+          register={register}
+          control={control}
+          type={type}
+          event={event}
+          errors={errors}
+        />
       </form>
     </div>
   );

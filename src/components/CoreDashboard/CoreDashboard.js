@@ -5,7 +5,7 @@ import DayView from "../CoreCalendar/DayView";
 import CoreCalendar from "../CoreCalendar/CoreCalendar";
 import DashboardHeading from "./DashboardHeading";
 import CoreModal from "../CoreModal/CoreModal";
-import EditEvent from "src/modules/events/EditEvent";
+import SelectEvent from "src/modules/events/SelectEvent";
 import { useQuery } from "@tanstack/react-query";
 import { getEvents } from "src/http/api/events";
 import { useModals } from "src/context/modal";
@@ -54,7 +54,7 @@ const CoreDashboard = () => {
               modalName={"edit-event"}
               toggleModal={() => toggleModal("edit-event")}
             >
-              <EditEvent
+              <SelectEvent
                 events={data}
                 eventId={eventId}
                 modalName="edit-event"

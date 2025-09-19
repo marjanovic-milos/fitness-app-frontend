@@ -84,13 +84,15 @@ const EventComponent = ({ modalName, event }) => {
 
   return (
     <div className="overfllow-scroll max-h-[80vh]">
-      {!event && (
-        <CoreDropdown
-          options={trainingOptions}
-          value={type}
-          onChange={(val) => setType(val)}
-        />
-      )}
+      <div className="w-full flex justify-end px-10 mb-10">
+        {!event && (
+          <CoreDropdown
+            options={trainingOptions}
+            value={type}
+            onChange={(val) => setType(val)}
+          />
+        )}
+      </div>
       <form onSubmit={handleSubmit(submit)}>
         <EventDetails
           trainingOptions={trainingOptions}

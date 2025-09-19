@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import CoreInput from "../CoreInput/CoreInput";
-import { useDebounce } from "src/app/hooks/useDebounced";
+import { useDebounce } from "src/hooks/useDebounced";
 
 const CoreSearch = (props) => {
   const {
@@ -45,14 +45,17 @@ const CoreSearch = (props) => {
     }
   };
 
-  const showList = useMemo(() => text && data?.length && !close && !defaultValue, [text, data, close, defaultValue]);
+  const showList = useMemo(
+    () => text && data?.length && !close && !defaultValue,
+    [text, data, close, defaultValue]
+  );
 
   return (
-    <div className='core-search-root'>
-      <input type='hidden' {...register(name)} />
+    <div className="core-search-root">
+      <input type="hidden" {...register(name)} />
 
       <CoreInput
-        name='search'
+        name="search"
         value={text}
         classes={classes}
         placeholder={placeholder || "Search..."}
@@ -67,9 +70,13 @@ const CoreSearch = (props) => {
       />
 
       {showList && (
-        <div className='core-search-list'>
+        <div className="core-search-list">
           {data?.map((option) => (
-            <p key={option?._id || option?.id} className='core-search-list-element' onClick={() => handleSelection(option)}>
+            <p
+              key={option?._id || option?.id}
+              className="core-search-list-element"
+              onClick={() => handleSelection(option)}
+            >
               {option.label}
             </p>
           ))}

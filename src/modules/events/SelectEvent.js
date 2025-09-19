@@ -7,23 +7,24 @@ import { getUsers } from "src/http/api/users";
 import { useForm } from "react-hook-form";
 import { deleteEvent } from "src/http/api/events";
 import CoreCheckbox from "src/components/CoreCheckbox/CoreCheckbox";
-import CoreDropdown from "src/components/CoreDropdown/CoreDropdown";
+
 import CoreButton from "src/components/CoreButton/CoreButton";
 import { useMutation } from "@tanstack/react-query";
-import { Trash, Check, UndoIcon } from "lucide-react";
+import { Trash, Check } from "lucide-react";
 import CoreText from "src/components/CoreText/CoreText";
-import CoreSwitch from "src/components/CoreSwitch/CoreSwitch";
+
+import CoreCard from "src/components/CoreCard/CoreCard";
 
 const SelectEvent = ({ events, eventId }) => {
   const values = events?.find((event) => event.id === eventId);
 
-  const [editType, setEditType] = useState("attendance");
-  const [test, setTest] = useState(false);
+  // const [editType, setEditType] = useState("attendance");
+  // const [test, setTest] = useState(false);
 
-  const editOptions = [
-    { value: "attendance", label: "Attendance" },
-    { value: "edit", label: "Event Edit" },
-  ];
+  // const editOptions = [
+  //   { value: "attendance", label: "Attendance" },
+  //   { value: "edit", label: "Event Edit" },
+  // ];
 
   const { data: excercisePlans } = useQuery({
     queryKey: ["existed-excercises", values?.excercisePlans],
@@ -89,13 +90,7 @@ const SelectEvent = ({ events, eventId }) => {
   console.log(event, "event");
   return (
     <div className="min-h-screen w-full p-5">
-      <div className="flex justify-end gap-4  w-full">
-        <CoreDropdown
-          options={editOptions}
-          value={editType}
-          onChange={(val) => setEditType(val)}
-        />
-
+      <div className="flex justify-end gap-4 w-full px-10">
         <CoreButton
           classes="w-fit !text-sm"
           onClick={() => deleteMutation(event?.id)}
@@ -104,42 +99,34 @@ const SelectEvent = ({ events, eventId }) => {
           Delete
         </CoreButton>
       </div>
+      <div className="px-10 my-10">
+        {event && (
+          <CoreCard>
+            <div className="flex flex-col gap-5 items-start px-10">
+              <CoreText>Attendance</CoreText>
+              <form onSubmit={handleSubmit(submit)}>
+                <div className="flex gap-5">
+                  {event?.clients?.map((client) => (
+                    <CoreCheckbox
+                      name="ids"
+                      key={client.id}
+                      control={control}
+                      label={client.label}
+                      value={client.id}
+                    />
+                  ))}
+                </div>
 
-      <div className="bg-blue-400 w-[50%] h-20 flex rounded-lg shadow-lg p-5 my-10">
-        <CoreText>Short overview</CoreText>
+                <CoreButton type="submit" classes="my-5" icon={Check}>
+                  Save
+                </CoreButton>
+              </form>
+            </div>
+          </CoreCard>
+        )}
       </div>
-      {editType === "attendance" ? (
-        <form onSubmit={handleSubmit(submit)}>
-          <div className="flex gap-5">
-            {event?.clients?.map((client) => (
-              <CoreCheckbox
-                key={client.id}
-                name="ids"
-                control={control}
-                label={client.label}
-                value={client.id}
-              />
-            ))}
-          </div>
 
-          <div className="flex w-full px-10">
-            <CoreSwitch
-              id="test"
-              name="test"
-              label={"Test"}
-              checked={test}
-              onChange={setTest}
-              leftIcon={UndoIcon}
-              rightIcon={Check}
-            />
-            <CoreButton type="submit" classes="" icon={""}>
-              Save
-            </CoreButton>
-          </div>
-        </form>
-      ) : (
-        <EventComponent event={event} modalName={"edit-event"} />
-      )}
+      <EventComponent event={event} modalName={"edit-event"} />
     </div>
   );
 };

@@ -3,7 +3,13 @@ import React, { useState } from "react";
 import CoreTableRow from "./CoreTableRow";
 import CoreText from "../CoreText/CoreText";
 import Link from "next/link";
-import { ExternalLink as LinkIcon, Trash2, Pencil, X as CloseIcon, Check } from "lucide-react";
+import {
+  ExternalLink as LinkIcon,
+  Trash2,
+  Pencil,
+  X as CloseIcon,
+  Check,
+} from "lucide-react";
 import Image from "next/image";
 import CoreInput from "../CoreInput/CoreInput";
 import { useForm } from "react-hook-form";
@@ -11,7 +17,15 @@ import TableHeaders from "./TableHeaders";
 
 import { useTranslation } from "react-i18next";
 const CoreTable = (props) => {
-  const { columns, className, loading = true, data, deleteMutation, updateMutation, sortingHandler } = props;
+  const {
+    columns,
+    className,
+    loading = true,
+    data,
+    deleteMutation,
+    updateMutation,
+    sortingHandler,
+  } = props;
 
   const { t } = useTranslation();
 
@@ -27,8 +41,8 @@ const CoreTable = (props) => {
   const root = `core-table ${className?.root}`;
 
   const loader = Array.from({ length: 5 }, (_, i) => (
-    <div className='my-2 px-5' key={i}>
-      <div className='core-table-loader' />
+    <div className="my-2 px-5" key={i}>
+      <div className="core-table-loader" />
     </div>
   ));
 
@@ -53,22 +67,44 @@ const CoreTable = (props) => {
       return 0;
     });
 
-    const conditionNumbersOnly = (key) => key === "carbs" || key === "fat" || key === "calories" || key === "protein";
+    const conditionNumbersOnly = (key) =>
+      key === "carbs" ||
+      key === "fat" ||
+      key === "calories" ||
+      key === "protein";
 
     return (
-      <CoreTableRow key={item._id} className={`lg:grid-cols-[repeat(auto-fit,minmax(50px,1fr))] w-full`}>
+      <CoreTableRow
+        key={item._id}
+        className={`lg:grid-cols-[repeat(auto-fit,minmax(50px,1fr))] w-full`}
+      >
         {entries?.map(([key, value]) => {
-          console.log(value);
           if (key === "image") {
             return (
-              <div className='core-center' key={key}>
-                <Image src={value} alt='Example local image' width={50} height={50} className='core-table-image' priority />
+              <div className="core-center" key={key}>
+                <Image
+                  src={value}
+                  alt="Example local image"
+                  width={50}
+                  height={50}
+                  className="core-table-image"
+                  priority
+                />
               </div>
             );
           }
 
           if (key === "profileUrl") {
-            return <div key={key}>Profile</div>;
+            return (
+              <div key={key}>
+                <Link
+                  className="underline"
+                  href={`/trainer/users/${item?._id}`}
+                >
+                  Profile
+                </Link>
+              </div>
+            );
           }
 
           if (key === "sourceUrl") {
@@ -76,33 +112,52 @@ const CoreTable = (props) => {
               <div key={key}>
                 {actionId ? (
                   actionId === item?._id ? (
-                    <div className='core-button-row-wrapper h-full' key={item._id}>
-                      <button disabled={actionId !== item?._id} type='button'>
+                    <div
+                      className="core-button-row-wrapper h-full"
+                      key={item._id}
+                    >
+                      <button disabled={actionId !== item?._id} type="button">
                         <Check
                           onClick={handleSubmit((data) => {
                             onSubmit(data);
                           })}
-                          className='core-table-confirm'
+                          className="core-table-confirm"
                           strokeWidth={1.5}
                         />
                       </button>
-                      <button disabled={actionId !== item?._id} type='button' onClick={resetForm}>
-                        <CloseIcon className='core-table-cancel' strokeWidth={1.5} />
+                      <button
+                        disabled={actionId !== item?._id}
+                        type="button"
+                        onClick={resetForm}
+                      >
+                        <CloseIcon
+                          className="core-table-cancel"
+                          strokeWidth={1.5}
+                        />
                       </button>
                     </div>
                   ) : null
                 ) : (
-                  <div key={item._id} className='core-button-row-wrapper h-full'>
-                    <button type='button' onClick={() => setActionId(item._id)}>
-                      <Pencil className='core-table-edit' strokeWidth={1.5} />
+                  <div
+                    key={item._id}
+                    className="core-button-row-wrapper h-full"
+                  >
+                    <button type="button" onClick={() => setActionId(item._id)}>
+                      <Pencil className="core-table-edit" strokeWidth={1.5} />
                     </button>
-                    <button type='button' onClick={() => deleteMutation.mutate(item?._id)}>
-                      <Trash2 className='core-table-delete' strokeWidth={1.5} />
+                    <button
+                      type="button"
+                      onClick={() => deleteMutation.mutate(item?._id)}
+                    >
+                      <Trash2 className="core-table-delete" strokeWidth={1.5} />
                     </button>
 
-                    <button type='button'>
+                    <button type="button">
                       <Link href={value}>
-                        <LinkIcon className='lg:block hidden w-4 w-4' strokeWidth={1.5} />
+                        <LinkIcon
+                          className="lg:block hidden w-4 w-4"
+                          strokeWidth={1.5}
+                        />
                       </Link>
                     </button>
                   </div>
@@ -117,7 +172,7 @@ const CoreTable = (props) => {
               key={key}
               name={key}
               register={register}
-              fieldType='flat'
+              fieldType="flat"
               label={key.charAt(0).toUpperCase() + key.slice(1)}
               required={{
                 required: t("validation.fieldRequired", { key }),
@@ -129,9 +184,17 @@ const CoreTable = (props) => {
               errors={errors}
             />
           ) : (
-            <div key={key} className='flex lg:justify-center text-sm justify-start items-center gap-1 h-full'>
-              <CoreText className='lg:hidden block'>{conditionNumbersOnly(key) && `${key.charAt(0).toUpperCase() + key.slice(1)} :`}</CoreText>{" "}
-              <CoreText>{typeof value === "boolean" ? (value ? "Yes" : "No") : value}</CoreText>
+            <div
+              key={key}
+              className="flex lg:justify-center text-sm justify-start items-center gap-1 h-full"
+            >
+              <CoreText className="lg:hidden block">
+                {conditionNumbersOnly(key) &&
+                  `${key.charAt(0).toUpperCase() + key.slice(1)} :`}
+              </CoreText>{" "}
+              <CoreText>
+                {typeof value === "boolean" ? (value ? "Yes" : "No") : value}
+              </CoreText>
             </div>
           );
         })}
@@ -144,8 +207,12 @@ const CoreTable = (props) => {
   }
   return (
     <div className={root}>
-      <TableHeaders columns={columns} sortingHandler={sortingHandler} className={className} />
-      <div className='core-table-body'>{loading ? loader : content}</div>
+      <TableHeaders
+        columns={columns}
+        sortingHandler={sortingHandler}
+        className={className}
+      />
+      <div className="core-table-body">{loading ? loader : content}</div>
     </div>
   );
 };

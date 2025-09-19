@@ -202,9 +202,6 @@ const CoreTable = (props) => {
     );
   });
 
-  if (!data?.length && !loading) {
-    return <p>There are no data available!</p>;
-  }
   return (
     <div className={root}>
       <TableHeaders

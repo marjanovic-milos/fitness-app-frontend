@@ -6,7 +6,18 @@ import CorePagination from "../CorePagination/CorePagination";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 const CoreTableComponent = (props) => {
-  const { columns, queryFn, queryKey, deleteFn, createFn, updateFn, heading, buttonText, icon, createForm: RightSide } = props;
+  const {
+    columns,
+    queryFn,
+    queryKey,
+    deleteFn,
+    createFn,
+    updateFn,
+    heading,
+    buttonText,
+    icon,
+    createForm: RightSide,
+  } = props;
 
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState({});
@@ -65,14 +76,28 @@ const CoreTableComponent = (props) => {
   const handlePageChange = (page) => setPage(page);
   const handleForm = () => setCreateForm(!createFormState);
 
-  const sortingHandler = ({ column, sort: localSort }) => setSort({ ...sort, [column]: localSort });
+  const sortingHandler = ({ column, sort: localSort }) =>
+    setSort({ ...sort, [column]: localSort });
+
+  if ((!data?.data || !data) && !loading) {
+    return <p>Nothing available for this search</p>;
+  }
 
   return (
-    <div className={`xl:grid  ${createFormState ? "grid-cols-[4fr_1fr]" : "grid-cols-1fr"}  gap-4 flex flex-col-reverse h-full`}>
+    <div
+      className={`xl:grid  ${
+        createFormState ? "grid-cols-[4fr_1fr]" : "grid-cols-1fr"
+      }  gap-4 flex flex-col-reverse h-full`}
+    >
       <CoreCard>
-        <div className='p-6'>
-          <HeaderTableComponent setCreateForm={handleForm} heading={heading} button={buttonText} icon={icon} />
-          <div className='flex flex-col'>
+        <div className="p-6">
+          <HeaderTableComponent
+            setCreateForm={handleForm}
+            heading={heading}
+            button={buttonText}
+            icon={icon}
+          />
+          <div className="flex flex-col">
             <CoreTable
               loading={loading || isRefetching}
               columns={columns}
@@ -84,11 +109,18 @@ const CoreTableComponent = (props) => {
                 header: `lg:grid-cols-[repeat(auto-fit,minmax(50px,1fr))] w-full`,
               }}
             />
-            <CorePagination handleChange={handlePageChange} page={page} limit={limit} totalPages={data?.totalPages} />
+            <CorePagination
+              handleChange={handlePageChange}
+              page={page}
+              limit={limit}
+              totalPages={data?.totalPages}
+            />
           </div>
         </div>
       </CoreCard>
-      {createFormState && <RightSide handleCreateForm={handleForm} createFn={createMutation} />}
+      {createFormState && (
+        <RightSide handleCreateForm={handleForm} createFn={createMutation} />
+      )}
     </div>
   );
 };

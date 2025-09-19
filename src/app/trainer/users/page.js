@@ -10,7 +10,13 @@ import CreateUser from "src/modules/users/CreateUser";
 const UsersPage = () => {
   const { t } = useTranslation();
 
-  const columns = ["", t("users.name"), t("users.email"), "Platform Access", t("users.actions")];
+  const columns = [
+    "",
+    t("users.name"),
+    t("users.email"),
+    "Platform Access",
+    t("users.actions"),
+  ];
 
   return (
     <PageGuard roles={["trainer"]}>

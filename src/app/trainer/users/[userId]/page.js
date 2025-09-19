@@ -15,7 +15,7 @@ const UserPage = ({ params }) => {
           Membership
         </span>
       </div>
-      <MembershipList />
+      <MembershipList params={params} />
     </PageGuard>
   );
 };

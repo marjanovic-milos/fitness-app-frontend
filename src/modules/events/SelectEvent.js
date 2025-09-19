@@ -99,7 +99,7 @@ const SelectEvent = ({ events, eventId }) => {
           Delete
         </CoreButton>
       </div>
-      <div className="px-10 my-10">
+      <div className="px-10 my-5">
         {event && (
           <CoreCard>
             <div className="flex flex-col gap-5 items-start px-10">

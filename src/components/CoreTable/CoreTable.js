@@ -9,6 +9,7 @@ import {
   Pencil,
   X as CloseIcon,
   Check,
+  Ban,
 } from "lucide-react";
 import Image from "next/image";
 import CoreInput from "../CoreInput/CoreInput";
@@ -107,9 +108,20 @@ const CoreTable = (props) => {
             );
           }
 
-          if (key === "membership") {
-            return <div key={key}>membership</div>;
-          }
+          // if (key === "membership") {
+          //   return (
+          //     <div key={key}>
+          //       <button
+          //         type="button"
+          //         onClick={handleSubmit((data) => {
+          //           onSubmit(data);
+          //         })}
+          //       >
+          //         <IBandCard className="core-table-edit" strokeWidth={1.5} />
+          //       </button>
+          //     </div>
+          //   );
+          // }
 
           if (key === "sourceUrl") {
             return (

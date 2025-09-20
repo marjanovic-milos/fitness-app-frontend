@@ -13,6 +13,33 @@ import { AppErrorBoundary } from "src/components/AppError/AppErrorBoundary";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+const toasterOptions = {
+  position: "bottom-left",
+  containerStyle: {
+    bottom: 80,
+    left: 20,
+  },
+  toastOptions: {
+    style: {
+      background: "#333",
+      color: "#fff",
+      height: 90,
+      borderRadius: "12px",
+      padding: "16px",
+    },
+    error: {
+      style: {
+        borderLeft: "5px solid red",
+      },
+    },
+    success: {
+      style: {
+        borderLeft: "5px solid green",
+      },
+    },
+  },
+};
+
 export default function RootLayout({ children }) {
   const [queryClient] = useState(() => new QueryClient());
   return (
@@ -22,7 +49,7 @@ export default function RootLayout({ children }) {
           <ModalProvider>
             <ThemeProvider>
               <CoreLayout>
-                <Toaster />
+                <Toaster {...toasterOptions} />
                 <AppErrorBoundary>{children}</AppErrorBoundary>
               </CoreLayout>
             </ThemeProvider>

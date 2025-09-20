@@ -21,7 +21,7 @@ export const getUserMemberships = asyncHandler(
         ...item,
         createdAt: moment(item?.createdAt).format("YYYY-MM-DD"),
         expiryDate: moment(item?.expiryDate).format("YYYY-MM-DD"),
-        membership: "",
+        // membership: "",
       })),
     };
   }
@@ -33,6 +33,17 @@ export const createMembership = asyncHandler(async (data) => {
     {
       ...data,
     },
+    {
+      skipAuth: false,
+    }
+  );
+  return request;
+});
+
+export const updateMembership = asyncHandler(async ({ ids }) => {
+  const request = await http.put(
+    `/memberships/ids=${ids}`,
+
     {
       skipAuth: false,
     }

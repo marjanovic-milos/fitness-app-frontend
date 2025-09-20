@@ -12,19 +12,15 @@ import CoreButton from "src/components/CoreButton/CoreButton";
 import { useMutation } from "@tanstack/react-query";
 import { Trash, Check } from "lucide-react";
 import CoreText from "src/components/CoreText/CoreText";
+import toast from "react-hot-toast";
 
 import CoreCard from "src/components/CoreCard/CoreCard";
-
+import { updateMembership } from "src/http/api/memberships";
+import { useModals } from "src/context/modal";
 const SelectEvent = ({ events, eventId }) => {
   const values = events?.find((event) => event.id === eventId);
 
-  // const [editType, setEditType] = useState("attendance");
-  // const [test, setTest] = useState(false);
-
-  // const editOptions = [
-  //   { value: "attendance", label: "Attendance" },
-  //   { value: "edit", label: "Event Edit" },
-  // ];
+  const { toggleModal } = useModals();
 
   const { data: excercisePlans } = useQuery({
     queryKey: ["existed-excercises", values?.excercisePlans],
@@ -51,12 +47,23 @@ const SelectEvent = ({ events, eventId }) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["events"] });
       reset();
-      toggleModal(modalName);
+      toggleModal("edit-event");
       toast.success("Successfully deleted!");
     },
   });
 
-  const { handleSubmit, control, reset } = useForm({
+  const { mutate: updateAttendance, data } = useMutation({
+    mutationFn: updateMembership,
+    onSuccess: () => {
+      console.log(111111);
+      toggleModal("edit-event");
+      toast.success("Successfully updated!");
+    },
+  });
+
+  console.log(data, 222);
+
+  const { handleSubmit, control, reset, setValue } = useForm({
     defaultValues: {
       ids: [],
     },
@@ -83,11 +90,8 @@ const SelectEvent = ({ events, eventId }) => {
     id: values?._id,
   };
 
-  const submit = (data) => {
-    console.log(data);
-  };
+  const submitAttendance = (data) => updateAttendance(data);
 
-  console.log(event, "event");
   return (
     <div className="min-h-screen w-full p-5">
       <div className="flex justify-end gap-4 w-full px-10">
@@ -102,9 +106,9 @@ const SelectEvent = ({ events, eventId }) => {
       <div className="px-10 my-5">
         {event && (
           <CoreCard>
-            <div className="flex flex-col gap-5 items-start px-10">
+            <div className="flex flex-col gap-5 items-start px-5">
               <CoreText>Attendance</CoreText>
-              <form onSubmit={handleSubmit(submit)}>
+              <form onSubmit={handleSubmit(submitAttendance)}>
                 <div className="flex gap-5">
                   {event?.clients?.map((client) => (
                     <CoreCheckbox
@@ -113,6 +117,7 @@ const SelectEvent = ({ events, eventId }) => {
                       control={control}
                       label={client.label}
                       value={client.id}
+                      setValue={setValue}
                     />
                   ))}
                 </div>

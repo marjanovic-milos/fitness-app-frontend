@@ -23,6 +23,13 @@ export const getUsers = asyncHandler(
   }
 );
 
+export const getUser = asyncHandler(async (id) => {
+  const res = await http.get(`/users/${id}`, {
+    skipAuth: false,
+  });
+  return res.data.data;
+});
+
 export const findUsers = asyncHandler(async ({ name }) => {
   const res = await http.get(`/users?name=${name}&${ignorefileds}`, {
     skipAuth: false,

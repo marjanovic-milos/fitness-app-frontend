@@ -1,33 +1,36 @@
+"use client";
 import React from "react";
 import CoreCard from "src/components/CoreCard/CoreCard";
 import CoreInput from "src/components/CoreInput/CoreInput";
 import CoreButton from "src/components/CoreButton/CoreButton";
 import CoreHeading from "src/components/CoreHeading/CoreHeading";
 import CoreText from "src/components/CoreText/CoreText";
-import CoreTimePicker from "src/components/CoreTimePicker/CoreTimePicker";
-import { Plus, FilePlus2 } from "lucide-react";
+
+import { FilePlus2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
+import { usePathname } from "next/navigation";
 const Membership = ({ handleCreateForm, createFn }) => {
   const { t } = useTranslation();
+  const router = usePathname();
 
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm();
 
-  const submit = (data) => {
-    console.log(data);
+  const userId = router.split("/").filter(Boolean).pop();
 
+  const submit = (data) => {
     const details = {
       ...data,
+      price: parseInt(data.price),
       trainingCount: parseInt(data.trainingCount),
       userId,
     };
+    handleCreateForm();
     createFn.mutate(details);
-    // handleCreateForm();
   };
 
   return (
@@ -76,7 +79,7 @@ const Membership = ({ handleCreateForm, createFn }) => {
 
               <div className="flex justify-between items-center gap-6 mt-10">
                 <CoreButton type="submit" classes="w-full !m-0">
-                  Save Membership
+                  Save
                 </CoreButton>
 
                 <CoreButton

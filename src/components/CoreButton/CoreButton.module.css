@@ -16,3 +16,7 @@
 .core-button-outline-dark {
   @apply flex justify-center items-center gap-2 text-base bg-transparent text-white cursor-pointer h-[2.5rem] rounded-full border border-stone-100;
 }
+
+.core-button-left-icon {
+  @apply pl-2 pr-3;
+}

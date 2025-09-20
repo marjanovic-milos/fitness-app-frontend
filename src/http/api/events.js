@@ -9,7 +9,6 @@ export const getEvents = asyncHandler(async (filter) => {
   return res.data.data?.map((item) => ({
     ...item,
     id: item._id,
-    // title: "Some event",
     start: new Date(item.start),
     end: new Date(item.end),
   }));

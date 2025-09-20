@@ -107,6 +107,10 @@ const CoreTable = (props) => {
             );
           }
 
+          if (key === "membership") {
+            return <div key={key}>membership</div>;
+          }
+
           if (key === "sourceUrl") {
             return (
               <div key={key}>
@@ -202,6 +206,9 @@ const CoreTable = (props) => {
     );
   });
 
+  if (!data && !loading) {
+    return <p>Nothing available for this search</p>;
+  }
   return (
     <div className={root}>
       <TableHeaders

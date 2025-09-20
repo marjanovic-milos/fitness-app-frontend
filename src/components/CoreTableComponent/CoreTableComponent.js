@@ -79,10 +79,6 @@ const CoreTableComponent = (props) => {
   const sortingHandler = ({ column, sort: localSort }) =>
     setSort({ ...sort, [column]: localSort });
 
-  if ((!data?.data || !data) && !loading) {
-    return <p>Nothing available for this search</p>;
-  }
-
   return (
     <div
       className={`xl:grid  ${
@@ -109,12 +105,14 @@ const CoreTableComponent = (props) => {
                 header: `lg:grid-cols-[repeat(auto-fit,minmax(50px,1fr))] w-full`,
               }}
             />
-            <CorePagination
-              handleChange={handlePageChange}
-              page={page}
-              limit={limit}
-              totalPages={data?.totalPages}
-            />
+            {(data?.data || data) && (
+              <CorePagination
+                handleChange={handlePageChange}
+                page={page}
+                limit={limit}
+                totalPages={data?.totalPages}
+              />
+            )}
           </div>
         </div>
       </CoreCard>

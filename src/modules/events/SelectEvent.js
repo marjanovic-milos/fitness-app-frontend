@@ -55,13 +55,10 @@ const SelectEvent = ({ events, eventId }) => {
   const { mutate: updateAttendance, data } = useMutation({
     mutationFn: updateMembership,
     onSuccess: () => {
-      console.log(111111);
       toggleModal("edit-event");
       toast.success("Successfully updated!");
     },
   });
-
-  console.log(data, 222);
 
   const { handleSubmit, control, reset, setValue } = useForm({
     defaultValues: {

@@ -40,7 +40,7 @@ const MealPlansPage = () => {
         updateFn={updateMeal}
         createFn={saveMeal}
         createForm={CreateMeal}
-        queryKey={"meals"}
+        queryKey={["meals"]}
         buttonText={t("meals.addNew")}
         heading={t("meals.tableHeading")}
         icon={Salad}

@@ -16,6 +16,7 @@ const CoreTableComponent = (props) => {
     heading,
     buttonText,
     icon,
+
     createForm: RightSide,
   } = props;
 
@@ -32,7 +33,7 @@ const CoreTableComponent = (props) => {
     isLoading: loading,
     isRefetching,
   } = useQuery({
-    queryKey: [queryKey, page, limit, sort],
+    queryKey: [...queryKey, page, limit, sort],
     queryFn: () =>
       queryFn({
         page,
@@ -47,7 +48,7 @@ const CoreTableComponent = (props) => {
   const deleteMutation = useMutation({
     mutationFn: deleteFn,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [queryKey] });
+      queryClient.invalidateQueries({ queryKey: [...queryKey] });
       toast.success("Successfully deleted!");
     },
   });
@@ -55,7 +56,7 @@ const CoreTableComponent = (props) => {
   const updateMutation = useMutation({
     mutationFn: updateFn,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [queryKey] });
+      queryClient.invalidateQueries({ queryKey: [...queryKey] });
       toast.success("Successfully updated!");
     },
   });
@@ -64,12 +65,13 @@ const CoreTableComponent = (props) => {
     mutationKey: [queryKey],
     mutationFn: createFn,
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: [queryKey] });
+      queryClient.invalidateQueries({ queryKey: [...queryKey] });
       toast.success("Successfully created!");
     },
     onError: (err) => {
-      console.error("❌ Error:", err);
-      toast.error("Something went wrong!");
+      if (err.code === 409) {
+        toast.error("You already have an active membership");
+      }
     },
   });
 

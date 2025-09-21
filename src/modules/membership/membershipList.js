@@ -4,25 +4,23 @@ import Membership from "./membership";
 import { createMembership, getUserMemberships } from "src/http/api/memberships";
 import { IdCard } from "lucide-react";
 
-const MembershipList = ({ params }) => {
+const MembershipList = ({ userId, clientData }) => {
   const columns = ["Expiry Date", "Count", "Price", "Active", "Created At"];
 
   return (
-    <div>
+    <div className="bg-[var(--color-secondary)]">
       <CoreTableComponent
         columns={columns}
-        queryFn={() =>
-          getUserMemberships({ filter: { userId: params?.userId } })
-        }
+        queryFn={() => getUserMemberships({ filter: { userId } })}
         deleteFn={() => {}}
         updateFn={() => {}}
         createFn={createMembership}
         createForm={Membership}
-        queryKey={"userMemberships"}
+        queryKey={["userMemberships", userId]}
         buttonText={"Add New"}
-        heading={"Users memberships"}
+        heading={`${clientData?.name} memberships `}
         icon={IdCard}
-      />
+/>
     </div>
   );
 };

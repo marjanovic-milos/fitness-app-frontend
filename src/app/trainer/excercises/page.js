@@ -31,7 +31,7 @@ const ExcercisesPage = () => {
         updateFn={updateExcercise}
         createFn={saveExcercise}
         createForm={CreateExcercise}
-        queryKey={"excercises"}
+        queryKey={["excercises"]}
         buttonText={t("excercises.addNewExcercise")}
         heading={t("excercises.tableHeading")}
         icon={Dumbbell}

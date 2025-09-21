@@ -27,7 +27,7 @@ const UsersPage = () => {
         updateFn={() => {}}
         createFn={saveUser}
         createForm={CreateUser}
-        queryKey={"users"}
+        queryKey={["users"]}
         buttonText={"Create User"}
         heading={t("users.tableHeading")}
         icon={Users}

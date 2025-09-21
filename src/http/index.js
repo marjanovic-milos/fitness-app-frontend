@@ -1,4 +1,5 @@
 import axios from "axios";
+import i18next from "i18next";
 
 const http = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
@@ -29,6 +30,7 @@ http.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       localStorage.removeItem("token");
       window.location.href = "/login";
+      return Promise.reject(i18next.t("errors.unauthorized"));
     }
 
     return Promise.reject(error);

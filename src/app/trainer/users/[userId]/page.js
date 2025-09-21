@@ -11,7 +11,7 @@ import { getUser } from "src/http/api/users";
 const UserPage = ({ params }) => {
   const userId = params?.userId;
 
-  const { data } = useQuery({
+  const { data: clientData } = useQuery({
     queryKey: ["client", userId],
     queryFn: () => getUser(userId),
     enabled: !!userId,
@@ -29,21 +29,17 @@ const UserPage = ({ params }) => {
         <CoreButton
           classes="w-fit !text-sm"
           icon={ArrowBigLeft}
-          // variant="outline"
+          variant="outline"
           position="left"
         >
           <Link href={`/trainer/users/`}>Back to Users</Link>
         </CoreButton>
-        {/* 
-        <span className="bg-gray-700 text-white px-2 py-1 m-2 text-md rounded-2xl cursor-pointer">
-          Memberships
-        </span> */}
       </div>
 
-      {data?.ownerId !== userData?._id ? (
+      {clientData?.ownerId !== userData?._id ? (
         <div>Hmmm, something wrong, you don't manage this person. Go back</div>
       ) : (
-        <MembershipList params={params} />
+        <MembershipList userId={userId} clientData={clientData} />
       )}
     </PageGuard>
   );

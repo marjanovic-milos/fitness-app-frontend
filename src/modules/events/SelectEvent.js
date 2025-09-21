@@ -1,134 +1,87 @@
-import React, { useState } from "react";
+import React from "react";
 import EventComponent from "./EventComponent";
-import { useQuery } from "@tanstack/react-query";
-import { getSavedMeals } from "src/http/api/meals";
-import { getExcercises } from "src/http/api/excercises";
-import { getUsers } from "src/http/api/users";
-import { useForm } from "react-hook-form";
-import { deleteEvent } from "src/http/api/events";
+
 import CoreCheckbox from "src/components/CoreCheckbox/CoreCheckbox";
 
 import CoreButton from "src/components/CoreButton/CoreButton";
-import { useMutation } from "@tanstack/react-query";
+
 import { Trash, Check } from "lucide-react";
 import CoreText from "src/components/CoreText/CoreText";
-import toast from "react-hot-toast";
 
 import CoreCard from "src/components/CoreCard/CoreCard";
-import { updateMembership } from "src/http/api/memberships";
-import { useModals } from "src/context/modal";
+import { useForm } from "react-hook-form";
+import { useSelectEvent } from "src/talons/useSelectEvent";
+
 const SelectEvent = ({ events, eventId }) => {
-  const values = events?.find((event) => event.id === eventId);
-
-  const { toggleModal } = useModals();
-
-  const { data: excercisePlans } = useQuery({
-    queryKey: ["existed-excercises", values?.excercisePlans],
-    queryFn: () =>
-      getExcercises({ ids: values?.excercisePlans, skipPagination: true }),
-    enabled: !!values?.excercisePlans?.length,
-  });
-
-  const { data: mealPlans } = useQuery({
-    queryKey: ["existed-meals", values?.mealPlans],
-    queryFn: () =>
-      getSavedMeals({ ids: values?.mealPlans, skipPagination: true }),
-    enabled: !!values?.mealPlans?.length,
-  });
-
-  const { data: clients } = useQuery({
-    queryKey: ["existed-clients", values?.clients],
-    queryFn: () => getUsers({ ids: values?.clients, skipPagination: true }),
-    enabled: !!values?.clients?.length,
-  });
-
-  const { mutate: deleteMutation } = useMutation({
-    mutationFn: deleteEvent,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["events"] });
-      reset();
-      toggleModal("edit-event");
-      toast.success("Successfully deleted!");
-    },
-  });
-
-  const { mutate: updateAttendance, data } = useMutation({
-    mutationFn: updateMembership,
-    onSuccess: () => {
-      toggleModal("edit-event");
-      toast.success("Successfully updated!");
-    },
-  });
-
-  const { handleSubmit, control, reset, setValue } = useForm({
+  const { handleSubmit, control, setValue, reset } = useForm({
     defaultValues: {
       ids: [],
     },
   });
-  const event = {
-    excercisePlans:
-      excercisePlans?.data?.map((plans) => ({
-        id: plans._id,
-        label: plans.name,
-      })) || [],
-    mealPlans:
-      mealPlans?.data?.map((plans) => ({
-        id: plans._id,
-        label: plans.title,
-      })) || [],
-    clients:
-      clients?.data?.map((client) => ({
-        id: client._id,
-        label: client.name,
-      })) || [],
-    start: values?.start,
-    end: values?.end,
-    repeatDays: values?.repeatDays,
-    id: values?._id,
-  };
+  const {
+    informationDetails,
+    updateAttendance,
+    selectedEvent,
+    deleteMutation,
+  } = useSelectEvent({ events, eventId, reset });
 
-  const submitAttendance = (data) => updateAttendance(data);
-
+  console.log(informationDetails, "informationDetails");
   return (
     <div className="min-h-screen w-full p-5">
       <div className="flex justify-end gap-4 w-full px-10">
         <CoreButton
           classes="w-fit !text-sm"
-          onClick={() => deleteMutation(event?.id)}
+          onClick={() => deleteMutation(selectedEvent?.id)}
           icon={Trash}
         >
           Delete
         </CoreButton>
       </div>
       <div className="px-10 my-5">
-        {event && (
+        {selectedEvent && (
           <CoreCard>
-            <div className="flex flex-col gap-5 items-start px-5">
-              <CoreText>Attendance</CoreText>
-              <form onSubmit={handleSubmit(submitAttendance)}>
-                <div className="flex gap-5">
-                  {event?.clients?.map((client) => (
-                    <CoreCheckbox
-                      name="ids"
-                      key={client.id}
-                      control={control}
-                      label={client.label}
-                      value={client.id}
-                      setValue={setValue}
-                    />
+            <div className="flex gap-5 justify-between items-start px-5">
+              <div className="flex flex-col items-start gap-5">
+                <CoreText>Attendance</CoreText>
+                <form onSubmit={handleSubmit(updateAttendance)}>
+                  <div className="flex gap-5">
+                    {selectedEvent?.clients?.map((client) => (
+                      <CoreCheckbox
+                        name="ids"
+                        key={client.id}
+                        control={control}
+                        label={client.label}
+                        value={client.id}
+                        setValue={setValue}
+                      />
+                    ))}
+                  </div>
+
+                  <CoreButton type="submit" classes="my-5" icon={Check}>
+                    Save
+                  </CoreButton>
+                </form>
+              </div>
+
+              {informationDetails?.length ? (
+                <div className="flex flex-col">
+                  <CoreText className="mb-4">
+                    These users don't have memberships active.
+                  </CoreText>
+                  {informationDetails?.map((info) => (
+                    <div className="flex flex-col items-start w-fit p-2 gap-1 bg-blue-600 rounded-lg text-sm ">
+                      <p>{info?.name}</p>
+                      <p> {info?.email}</p>
+                    </div>
                   ))}
                 </div>
-
-                <CoreButton type="submit" classes="my-5" icon={Check}>
-                  Save
-                </CoreButton>
-              </form>
+              ) : null}
             </div>
           </CoreCard>
         )}
       </div>
 
-      <EventComponent event={event} modalName={"edit-event"} />
+      <EventComponent event={selectedEvent} modalName={"edit-event"} />
     </div>
   );
 };

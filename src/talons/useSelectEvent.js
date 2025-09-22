@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { getExcercises } from "src/http/api/excercises";
@@ -12,6 +12,7 @@ export const useSelectEvent = ({ events, eventId, reset }) => {
   const values = events?.find((event) => event.id === eventId);
   const { toggleModal } = useModals();
   const queryClient = useQueryClient();
+  const [attendanceData, setAttendanceData] = useState();
 
   const { data: excercisePlans } = useQuery({
     queryKey: ["existed-excercises", values?.excercisePlans],
@@ -37,19 +38,22 @@ export const useSelectEvent = ({ events, eventId, reset }) => {
     mutationFn: deleteEvent,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["events"] });
+
       reset();
-      //   toggleModal("edit-event");
+      toggleModal("edit-event");
       toast.success("Successfully deleted!");
     },
   });
 
-  const { mutate: updateAttendance, data: attendanceData } = useMutation({
+  const { mutate: updateAttendance } = useMutation({
     mutationFn: updateMembership,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      setAttendanceData(data);
       toast.success("Successfully updated!");
     },
   });
 
+  const onSubmit = (data) => updateAttendance(data);
   const selectedEvent = {
     excercisePlans:
       excercisePlans?.data?.map((plans) => ({
@@ -72,19 +76,20 @@ export const useSelectEvent = ({ events, eventId, reset }) => {
     id: values?._id,
   };
 
-  //   const informationDetails = useMemo(() => {
-  //     const skippedIds = new Set(
-  //       attendanceData?.data
-  //         ?.filter((data) => data?.status === "skipped")
-  //         .map((value) => value.id)
-  //     );
-  //     return clients?.data?.filter((user) => skippedIds.has(user._id));
-  //   }, [attendanceData, clients]);
+  const informationDetails = useMemo(() => {
+    if (!attendanceData?.data?.data || !clients?.data) return [];
+    const skippedIds = new Set(
+      attendanceData?.data?.data
+        .filter((d) => d?.status === "skipped")
+        .map((v) => v.id)
+    );
+    return clients.data.filter((user) => skippedIds.has(user._id));
+  }, [attendanceData, clients]);
 
   return {
     excercisePlans,
-    informationDetails: [],
-    updateAttendance,
+    informationDetails,
+    onSubmit,
     selectedEvent,
     deleteMutation,
   };

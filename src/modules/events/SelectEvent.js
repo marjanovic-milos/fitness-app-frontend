@@ -18,12 +18,8 @@ const SelectEvent = ({ events, eventId }) => {
       ids: [],
     },
   });
-  const {
-    informationDetails,
-    updateAttendance,
-    selectedEvent,
-    deleteMutation,
-  } = useSelectEvent({ events, eventId, reset });
+  const { informationDetails, onSubmit, selectedEvent, deleteMutation } =
+    useSelectEvent({ events, eventId, reset });
 
   console.log(informationDetails, "informationDetails");
   return (
@@ -43,7 +39,7 @@ const SelectEvent = ({ events, eventId }) => {
             <div className="flex gap-5 justify-between items-start px-5">
               <div className="flex flex-col items-start gap-5">
                 <CoreText>Attendance</CoreText>
-                <form onSubmit={handleSubmit(updateAttendance)}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex gap-5">
                     {selectedEvent?.clients?.map((client) => (
                       <CoreCheckbox

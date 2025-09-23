@@ -11,7 +11,7 @@ import CoreMultiSelect from "src/components/CoreMultiselect/CoreMultiSelect";
 import AdditionalSettings from "./AdditionalSettings";
 import Clients from "./Clients";
 import EventDate from "./EventDate";
-import { Zap } from "lucide-react";
+import { Zap, Save } from "lucide-react";
 
 const EventDetails = ({
   trainingOptions,
@@ -114,7 +114,7 @@ const EventDetails = ({
         <AdditionalSettings clients={event?.clients} control={control} />
       )}
       <div className="w-full flex justify-end my-10">
-        <CoreButton classes="w-xs" type="submit">
+        <CoreButton position="left" icon={Save} classes="w-fit" type="submit">
           Save Event
         </CoreButton>
       </div>

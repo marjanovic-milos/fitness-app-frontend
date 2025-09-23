@@ -2,6 +2,7 @@ import CoreInput from "src/components/CoreInput/CoreInput";
 import CoreButton from "src/components/CoreButton/CoreButton";
 import { useTranslation } from "react-i18next";
 import { useModals } from "src/context/modal";
+import { Save, X } from "lucide-react";
 export const SpoonacularForm = ({
   onSubmit,
   register,
@@ -89,7 +90,12 @@ export const SpoonacularForm = ({
       </div>
 
       <div className="flex justify-between items-center gap-6 mt-10">
-        <CoreButton type="submit" classes="w-full !m-0">
+        <CoreButton
+          type="submit"
+          classes="w-full !m-0"
+          icon={Save}
+          position="left"
+        >
           {t("meals.searchBtn")}
         </CoreButton>
 
@@ -98,6 +104,8 @@ export const SpoonacularForm = ({
           onClick={() => toggleModal("meal-form")}
           classes="w-full !m-0"
           variant="outline"
+          icon={X}
+          position="left"
         >
           {t("meals.cancelBtn")}
         </CoreButton>
@@ -213,7 +221,12 @@ export const CreateYourForm = ({
         />
       </div>
       <div className="flex justify-between items-center gap-6 mt-10">
-        <CoreButton type="submit" classes="w-full !m-0">
+        <CoreButton
+          type="submit"
+          classes="w-full !m-0"
+          icon={Save}
+          position="left"
+        >
           {t("meals.saveBtn")}
         </CoreButton>
 
@@ -222,6 +235,8 @@ export const CreateYourForm = ({
           onClick={() => toggleModal("meal-form")}
           classes="w-full !m-0"
           variant="outline"
+          icon={X}
+          position="left"
         >
           {t("meals.cancelBtn")}
         </CoreButton>

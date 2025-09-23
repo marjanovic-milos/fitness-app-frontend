@@ -6,7 +6,7 @@ import CoreButton from "src/components/CoreButton/CoreButton";
 import CoreHeading from "src/components/CoreHeading/CoreHeading";
 import CoreText from "src/components/CoreText/CoreText";
 
-import { FilePlus2 } from "lucide-react";
+import { FilePlus2, Save, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { usePathname } from "next/navigation";
@@ -70,7 +70,12 @@ const CreateMembership = ({ createFn }) => {
               />
 
               <div className="flex justify-between items-center gap-6 mt-10">
-                <CoreButton type="submit" classes="w-full !m-0">
+                <CoreButton
+                  type="submit"
+                  classes="w-full !m-0"
+                  position="left"
+                  icon={Save}
+                >
                   Save
                 </CoreButton>
 
@@ -79,6 +84,8 @@ const CreateMembership = ({ createFn }) => {
                   onClick={() => toggleModal("memberships-form")}
                   classes="w-full !m-0"
                   variant="outline"
+                  position="left"
+                  icon={X}
                 >
                   Cancel
                 </CoreButton>

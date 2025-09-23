@@ -8,6 +8,7 @@ import { FilePlus2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useModals } from "src/context/modal";
+import { Save, X } from "lucide-react";
 const CreateUser = ({ createFn }) => {
   const { t } = useTranslation();
   const { toggleModal } = useModals();
@@ -59,7 +60,12 @@ const CreateUser = ({ createFn }) => {
               />
 
               <div className="flex justify-between items-center gap-6 mt-10">
-                <CoreButton type="submit" classes="w-full !m-0">
+                <CoreButton
+                  type="submit"
+                  classes="w-full !m-0"
+                  position="left"
+                  icon={Save}
+                >
                   {/* {t("excercises.saveBtn")} */}
                   Save Client
                 </CoreButton>
@@ -69,6 +75,8 @@ const CreateUser = ({ createFn }) => {
                   onClick={() => toggleModal("users-form")}
                   classes="w-full !m-0"
                   variant="outline"
+                  position="left"
+                  icon={X}
                 >
                   {/* {t("excercises.cancelBtn")} */}
                   Cancel

@@ -13,13 +13,13 @@ const CoreButton = (props) => {
   } = props;
   const { dark } = useContext(ThemeContext);
 
-  const rootInput = `${classes} ${dark ? "core-button-dark" : "core-button"} ${
+  const rootInput = ` ${dark ? "core-button-dark" : "core-button"} ${
     variant === "outline"
       ? dark
         ? "core-button-outline-dark"
         : "core-button-outline"
       : "core-button"
-  } ${position === "left" ? "core-button-left-icon" : ""} `;
+  } ${position === "left" ? "core-button-left-icon" : ""} ${classes} `;
 
   const Icon = icon;
 

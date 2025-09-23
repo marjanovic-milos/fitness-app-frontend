@@ -16,6 +16,7 @@ const CoreSearch = (props) => {
     register,
     setValue,
     defaultValue = null,
+    error,
     ...rest
   } = props;
 

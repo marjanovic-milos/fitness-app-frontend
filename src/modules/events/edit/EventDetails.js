@@ -38,6 +38,7 @@ const EventDetails = ({
     mutate: searchExcercises,
     data: excercises,
     isPending: pendingExcercise,
+    error: excercisesError,
   } = useMutation({
     mutationFn: (search) => findExcercise({ name: search }),
   });
@@ -46,12 +47,13 @@ const EventDetails = ({
     mutate: searchMeals,
     data: meals,
     isPending: pendingMeal,
+    error: mealsError,
   } = useMutation({
     mutationFn: (search) => findMeal({ title: search }),
   });
 
   return (
-    <div className="flex flex-col gap-5 px-10">
+    <div className="flex flex-col gap-5 px-10 ">
       <div className="grid xl:grid-cols-2 grid-cols-auto gap-5 ">
         <CoreCard>
           <div className="flex flex-col items-start gap-2 p-6">
@@ -89,6 +91,7 @@ const EventDetails = ({
                 searchFn={searchExcercises}
                 setValue={setValue}
                 defaultOptions={event?.excercisePlans}
+                error={excercisesError}
               />
             </div>
 
@@ -103,6 +106,7 @@ const EventDetails = ({
                   searchFn={searchMeals}
                   setValue={setValue}
                   defaultOptions={event?.mealPlans}
+                  error={mealsError}
                 />
               </div>
             )}

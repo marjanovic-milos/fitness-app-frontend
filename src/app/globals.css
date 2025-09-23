@@ -20,6 +20,7 @@
 @import "../components/CoreTableComponent/HeaderTableComponent/headerTableComponent.module.css";
 @import "../components/CoreSlider/coreSlider.module.css";
 @import "../components/CoreCalendar/DayView.module.css";
+@import "../components/AppError/AppError.module.css";
 
 @layer base {
   h1 {

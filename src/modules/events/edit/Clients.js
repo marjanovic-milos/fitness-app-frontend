@@ -5,10 +5,10 @@ import { useMutation } from "@tanstack/react-query";
 import { findUsers } from "src/http/api/users";
 
 const Clients = ({ trainingOption, register, setValue, defaultOptions }) => {
-  const { mutate, data, isPending } = useMutation({
+  const { mutate, data, isPending, error } = useMutation({
     mutationFn: (search) => findUsers({ name: search }),
   });
-
+  console.log(error, 222);
   return (
     <>
       <div className="w-full">
@@ -23,6 +23,7 @@ const Clients = ({ trainingOption, register, setValue, defaultOptions }) => {
             register={register}
             setValue={setValue}
             defaultOptions={defaultOptions}
+            error={error}
           />
         ) : (
           <CoreSearch
@@ -35,6 +36,7 @@ const Clients = ({ trainingOption, register, setValue, defaultOptions }) => {
             register={register}
             setValue={setValue}
             defaultValue={defaultOptions}
+            error={error}
           />
         )}
       </div>

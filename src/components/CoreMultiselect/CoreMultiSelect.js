@@ -12,6 +12,7 @@ const CoreMultiSelect = (props) => {
     setValue,
     register,
     defaultOptions = [],
+    error,
     ...rest
   } = props;
 
@@ -55,7 +56,7 @@ const CoreMultiSelect = (props) => {
   };
 
   return (
-    <div>
+    <div className="relative">
       <input type="hidden" {...register(name)} />
 
       <CoreSearch
@@ -86,6 +87,19 @@ const CoreMultiSelect = (props) => {
           </span>
         ))}
       </div>
+      {error && (
+        <>
+          {error?.status === 404 ? (
+            <p className="text-xs absolute text-red-500 left-2 top-10 h-auto">
+              There is nothing for this search
+            </p>
+          ) : (
+            <p className="text-xs absolute text-red-500 left-2 bottom-[-20px] h-auto">
+              Something went wrong, try again later.
+            </p>
+          )}
+        </>
+      )}
     </div>
   );
 };

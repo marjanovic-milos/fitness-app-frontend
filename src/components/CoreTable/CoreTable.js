@@ -74,6 +74,22 @@ const CoreTable = (props) => {
       key === "calories" ||
       key === "protein";
 
+    const mobileColumns = [
+      "carbs",
+      "protein",
+      "calories",
+      "fat",
+      "name",
+      "notes",
+      "email",
+      "hasAuth",
+      "trainingCount",
+      "price",
+      "active",
+      "expiryDate",
+      "createdAt",
+    ];
+
     return (
       <CoreTableRow
         key={item._id}
@@ -205,7 +221,8 @@ const CoreTable = (props) => {
               className="flex lg:justify-center text-sm justify-start items-center gap-1 h-full"
             >
               <CoreText className="lg:hidden block">
-                {conditionNumbersOnly(key) &&
+                {console.log(key, "kljuc")}
+                {mobileColumns.includes(key) &&
                   `${key.charAt(0).toUpperCase() + key.slice(1)} :`}
               </CoreText>{" "}
               <CoreText>

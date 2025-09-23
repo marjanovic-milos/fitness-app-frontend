@@ -22,7 +22,7 @@ const SelectEvent = ({ events, eventId }) => {
     useSelectEvent({ events, eventId, reset });
 
   return (
-    <div className="min-h-screen w-full p-5">
+    <div className="w-full lg:max-h-full max-h-[80vh] overflow-y-scroll">
       <div className="flex justify-end gap-4 w-full px-10">
         <CoreButton
           classes="w-fit !text-sm"
@@ -35,7 +35,7 @@ const SelectEvent = ({ events, eventId }) => {
       <div className="px-10 my-5">
         {selectedEvent && (
           <CoreCard>
-            <div className="flex gap-5 justify-between items-start px-5">
+            <div className="flex lg:flex-row flex-col gap-5 justify-between items-start px-5">
               <div className="flex flex-col items-start gap-5">
                 <CoreText>Attendance</CoreText>
                 <form onSubmit={handleSubmit(onSubmit)}>

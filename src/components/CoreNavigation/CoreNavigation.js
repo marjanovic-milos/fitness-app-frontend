@@ -24,7 +24,7 @@ const CoreNavigation = () => {
   const menuItemStyle = `core-menu-item ${
     dark ? "core-menu-item-dark" : ""
   }   `;
-  console.log(pathname, "pathname");
+
   return (
     <div className="core-menu">
       <img

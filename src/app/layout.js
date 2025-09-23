@@ -13,6 +13,13 @@ import { AppErrorBoundary } from "src/components/AppError/AppErrorBoundary";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
+
 const toasterOptions = {
   position: "bottom-left",
   containerStyle: {
@@ -43,7 +50,7 @@ const toasterOptions = {
 export default function RootLayout({ children }) {
   const [queryClient] = useState(() => new QueryClient());
   return (
-    <html lang="en">
+    <html lang="en" className={`${roboto.className}`}>
       <body className={`root-layout`}>
         <QueryClientProvider client={queryClient}>
           <ModalProvider>

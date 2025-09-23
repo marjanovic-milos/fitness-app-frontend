@@ -5,14 +5,15 @@ import { useMutation } from "@tanstack/react-query";
 import { CoreSlider } from "../../components/CoreSlider/CoreSlider";
 
 import { Maximize2 } from "lucide-react";
-import CoreText from "src/components/CoreText/CoreText";
+
 import { SpoonacularForm } from "./mealForms";
 import { useForm } from "react-hook-form";
 import CoreModal from "src/components/CoreModal/CoreModal";
 import MealView from "./mealView";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
-const Spoonacular = ({ cancelForm, createFn }) => {
+
+const Spoonacular = ({ createFn }) => {
   const [recepies, setRecepies] = useState();
   const [selectedRecepie, setRecepie] = useState();
 
@@ -157,7 +158,7 @@ const Spoonacular = ({ cancelForm, createFn }) => {
         register={register}
         errors={errors}
         onSubmit={onSubmit}
-        cancelForm={cancelForm}
+        // cancelForm={cancelForm}
       />
 
       <CoreModal isOpen={selectedRecepie} onClose={handleClose}>

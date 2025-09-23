@@ -35,6 +35,7 @@ const ExcercisesPage = () => {
         buttonText={t("excercises.addNewExcercise")}
         heading={t("excercises.tableHeading")}
         icon={Dumbbell}
+        modalName={"excercise-form"}
       />
     </PageGuard>
   );

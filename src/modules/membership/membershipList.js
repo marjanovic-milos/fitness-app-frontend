@@ -1,6 +1,6 @@
 import React from "react";
 import CoreTableComponent from "src/components/CoreTableComponent/CoreTableComponent";
-import Membership from "./membership";
+import CreateMembership from "./createMembership";
 import { createMembership, getUserMemberships } from "src/http/api/memberships";
 import { IdCard } from "lucide-react";
 
@@ -15,12 +15,13 @@ const MembershipList = ({ userId, clientData }) => {
         deleteFn={() => {}}
         updateFn={() => {}}
         createFn={createMembership}
-        createForm={Membership}
+        createForm={CreateMembership}
         queryKey={["userMemberships", userId]}
         buttonText={"Add New"}
         heading={`${clientData?.name} memberships `}
         icon={IdCard}
-/>
+        modalName={"memberships-form"}
+      />
     </div>
   );
 };

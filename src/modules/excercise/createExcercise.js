@@ -4,10 +4,11 @@ import CoreInput from "src/components/CoreInput/CoreInput";
 import CoreButton from "src/components/CoreButton/CoreButton";
 import CoreHeading from "src/components/CoreHeading/CoreHeading";
 import CoreText from "src/components/CoreText/CoreText";
-import { Plus, FilePlus2 } from "lucide-react";
+import { FilePlus2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-const CreateExcercise = ({ handleCreateForm, createFn }) => {
+import { useModals } from "src/context/modal";
+const CreateExcercise = ({ createFn }) => {
   const { t } = useTranslation();
 
   const {
@@ -15,10 +16,10 @@ const CreateExcercise = ({ handleCreateForm, createFn }) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const { toggleModal } = useModals();
   const submit = (data) => {
     createFn.mutate(data);
-    handleCreateForm();
+    toggleModal("excercise-form");
   };
 
   return (
@@ -73,7 +74,7 @@ const CreateExcercise = ({ handleCreateForm, createFn }) => {
 
                 <CoreButton
                   type="button"
-                  onClick={() => handleCreateForm()}
+                  onClick={() => toggleModal("excercise-form")}
                   classes="w-full !m-0"
                   variant="outline"
                 >

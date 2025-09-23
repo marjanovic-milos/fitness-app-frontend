@@ -11,7 +11,7 @@ import CoreText from "src/components/CoreText/CoreText";
 import { Info } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-export const CreateMeal = ({ handleCreateForm, createFn }) => {
+export const CreateMeal = ({ createFn }) => {
   const [selected, setSelected] = useState("spoonacular");
 
   const { t } = useTranslation();
@@ -65,14 +65,13 @@ export const CreateMeal = ({ handleCreateForm, createFn }) => {
 
         <div className="xl:w-md w-full">
           {selected === "spoonacular" ? (
-            <Spoonacular cancelForm={handleCreateForm} createFn={createFn} />
+            <Spoonacular createFn={createFn} />
           ) : (
             <CreateYourForm
               handleSubmit={handleSubmit}
               register={register}
               errors={errors}
               createFn={createFn}
-              cancelForm={handleCreateForm}
             />
           )}
         </div>

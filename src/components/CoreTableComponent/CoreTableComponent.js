@@ -5,6 +5,7 @@ import HeaderTableComponent from "./HeaderTableComponent/HeaderTableComponent";
 import CorePagination from "../CorePagination/CorePagination";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { useModals } from "src/context/modal";
 const CoreTableComponent = (props) => {
   const {
     columns,
@@ -16,15 +17,16 @@ const CoreTableComponent = (props) => {
     heading,
     buttonText,
     icon,
-
+    modalName,
     createForm: RightSide,
   } = props;
 
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState({});
-  const [createFormState, setCreateForm] = useState(false);
 
+  const { modals } = useModals();
   const queryClient = useQueryClient();
+  const isOpen = modals?.[modalName];
 
   const limit = 5;
 
@@ -64,7 +66,7 @@ const CoreTableComponent = (props) => {
   const createMutation = useMutation({
     mutationKey: [queryKey],
     mutationFn: createFn,
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [...queryKey] });
       toast.success("Successfully created!");
     },
@@ -76,7 +78,6 @@ const CoreTableComponent = (props) => {
   });
 
   const handlePageChange = (page) => setPage(page);
-  const handleForm = () => setCreateForm(!createFormState);
 
   const sortingHandler = ({ column, sort: localSort }) =>
     setSort({ ...sort, [column]: localSort });
@@ -84,13 +85,13 @@ const CoreTableComponent = (props) => {
   return (
     <div
       className={`xl:grid  ${
-        createFormState ? "grid-cols-[4fr_1fr]" : "grid-cols-1fr"
+        isOpen ? "grid-cols-[4fr_1fr]" : "grid-cols-1fr"
       }  gap-4 flex flex-col-reverse h-full`}
     >
       <CoreCard>
         <div className="p-6">
           <HeaderTableComponent
-            setCreateForm={handleForm}
+            modalName={modalName}
             heading={heading}
             button={buttonText}
             icon={icon}
@@ -118,9 +119,7 @@ const CoreTableComponent = (props) => {
           </div>
         </div>
       </CoreCard>
-      {createFormState && (
-        <RightSide handleCreateForm={handleForm} createFn={createMutation} />
-      )}
+      {isOpen && <RightSide createFn={createMutation} />}
     </div>
   );
 };

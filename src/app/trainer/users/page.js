@@ -31,6 +31,7 @@ const UsersPage = () => {
         buttonText={"Create User"}
         heading={t("users.tableHeading")}
         icon={Users}
+        modalName={"users-form"}
       />
     </PageGuard>
   );

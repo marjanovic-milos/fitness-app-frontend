@@ -44,6 +44,7 @@ const MealPlansPage = () => {
         buttonText={t("meals.addNew")}
         heading={t("meals.tableHeading")}
         icon={Salad}
+        modalName={"meal-form"}
       />
     </PageGuard>
   );

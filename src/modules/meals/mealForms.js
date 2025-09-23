@@ -1,15 +1,16 @@
 import CoreInput from "src/components/CoreInput/CoreInput";
 import CoreButton from "src/components/CoreButton/CoreButton";
 import { useTranslation } from "react-i18next";
-
+import { useModals } from "src/context/modal";
 export const SpoonacularForm = ({
   onSubmit,
   register,
   handleSubmit,
   errors,
-  cancelForm,
+  // cancelForm,
 }) => {
   const { t } = useTranslation();
+  const { toggleModal } = useModals();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -94,7 +95,7 @@ export const SpoonacularForm = ({
 
         <CoreButton
           type="button"
-          onClick={cancelForm}
+          onClick={() => toggleModal("meal-form")}
           classes="w-full !m-0"
           variant="outline"
         >
@@ -110,7 +111,7 @@ export const CreateYourForm = ({
   register,
   handleSubmit,
   errors,
-  cancelForm,
+  // cancelForm,
 }) => {
   const { t } = useTranslation();
   return (
@@ -218,7 +219,7 @@ export const CreateYourForm = ({
 
         <CoreButton
           type="button"
-          onClick={cancelForm}
+          onClick={() => toggleModal("meal-form")}
           classes="w-full !m-0"
           variant="outline"
         >

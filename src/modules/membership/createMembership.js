@@ -10,10 +10,11 @@ import { FilePlus2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { usePathname } from "next/navigation";
-const Membership = ({ handleCreateForm, createFn }) => {
+import { useModals } from "src/context/modal";
+const CreateMembership = ({ createFn }) => {
   const { t } = useTranslation();
   const router = usePathname();
-
+  const { toggleModal } = useModals();
   const {
     register,
     handleSubmit,
@@ -29,7 +30,7 @@ const Membership = ({ handleCreateForm, createFn }) => {
       trainingCount: parseInt(data.trainingCount),
       userId,
     };
-    handleCreateForm();
+    toggleModal("memberships-form");
     createFn.mutate(details);
   };
 
@@ -75,7 +76,7 @@ const Membership = ({ handleCreateForm, createFn }) => {
 
                 <CoreButton
                   type="button"
-                  onClick={() => handleCreateForm()}
+                  onClick={() => toggleModal("memberships-form")}
                   classes="w-full !m-0"
                   variant="outline"
                 >
@@ -90,4 +91,4 @@ const Membership = ({ handleCreateForm, createFn }) => {
   );
 };
 
-export default Membership;
+export default CreateMembership;

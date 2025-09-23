@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
 import { getExcercises } from "src/http/api/excercises";
 import { getUsers } from "src/http/api/users";
 import { useModals } from "src/context/modal";
@@ -8,6 +7,7 @@ import { getSavedMeals } from "src/http/api/meals";
 import { deleteEvent } from "src/http/api/events";
 import { updateMembership } from "src/http/api/memberships";
 import { useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 export const useSelectEvent = ({ events, eventId, reset }) => {
   const values = events?.find((event) => event.id === eventId);
   const { toggleModal } = useModals();

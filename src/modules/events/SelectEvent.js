@@ -21,7 +21,6 @@ const SelectEvent = ({ events, eventId }) => {
   const { informationDetails, onSubmit, selectedEvent, deleteMutation } =
     useSelectEvent({ events, eventId, reset });
 
-  console.log(informationDetails, "informationDetails");
   return (
     <div className="min-h-screen w-full p-5">
       <div className="flex justify-end gap-4 w-full px-10">
@@ -64,8 +63,11 @@ const SelectEvent = ({ events, eventId }) => {
                   <CoreText className="mb-4">
                     These users don't have memberships active.
                   </CoreText>
-                  {informationDetails?.map((info) => (
-                    <div className="flex flex-col items-start w-fit p-2 gap-1 bg-blue-600 rounded-lg text-sm ">
+                  {informationDetails?.map((info, key) => (
+                    <div
+                      key={key}
+                      className="flex flex-col items-start w-fit p-2 gap-1 bg-blue-600 rounded-lg text-sm "
+                    >
                       <p>{info?.name}</p>
                       <p> {info?.email}</p>
                     </div>

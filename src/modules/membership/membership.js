@@ -46,15 +46,6 @@ const Membership = ({ handleCreateForm, createFn }) => {
 
           <form onSubmit={handleSubmit(submit)} className="w-full">
             <div className="flex flex-col gap-y-8 gap-x-5">
-              {/* <CoreInput
-                name="name"
-                register={register}
-                label="Name"
-                required={{
-                  required: t("meals.requiredField"),
-                }}
-                errors={errors}
-              /> */}
               <CoreInput
                 name="price"
                 register={register}

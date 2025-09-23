@@ -46,11 +46,11 @@ const CoreModal = ({ modalName, toggleModal, children, heading }) => {
           }`}
       >
         {heading ? (
-          <div className="flex justify-between items-center px-10 py-5">
+          <div className="flex justify-between items-center px-10 py-5 ">
             <h2 className="text-xl font-semibold">{heading}</h2>
             <button
               onClick={toggleModal}
-              className="text-gray-500 hover:text-gray-800 text-2xl z-99"
+              className="text-gray-500 hover:text-gray-800 text-2xl z-99 cursor-pointer"
             >
               ✕
             </button>
@@ -58,7 +58,7 @@ const CoreModal = ({ modalName, toggleModal, children, heading }) => {
         ) : (
           <button
             onClick={toggleModal}
-            className="absolute top-10 right-10 text-white text-2xl z-99"
+            className="absolute top-10 right-10 text-white text-2xl z-99 cursor-pointer"
           >
             ✕
           </button>

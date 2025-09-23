@@ -1,20 +1,20 @@
 .core-button {
-  @apply flex justify-center items-center gap-2 text-base bg-gray-800 rounded-full text-white text-center cursor-pointer font-medium  h-[2.4rem] pr-2 pl-3;
+  @apply flex justify-center items-center gap-2 text-sm bg-gray-800 rounded-full text-white text-center cursor-pointer font-medium  h-[2.4rem] pr-2 pl-3;
 }
 
 .core-button-dark {
-  @apply flex justify-center items-center gap-2 text-base bg-gray-900 rounded-full text-white text-center cursor-pointer font-medium   h-[2.4rem] pr-2 pl-3;
+  @apply flex justify-center items-center gap-2 text-sm bg-gray-900 rounded-full text-white text-center cursor-pointer font-medium   h-[2.4rem] pr-2 pl-3;
 }
 
 .core-button-link {
 }
 
 .core-button-outline {
-  @apply flex justify-center items-center gap-2 text-base bg-transparent text-gray-800 cursor-pointer h-[2.5rem] rounded-full border border-gray-800;
+  @apply flex justify-center items-center gap-2 text-sm bg-transparent text-gray-800 cursor-pointer h-[2.5rem] rounded-full border border-gray-800;
 }
 
 .core-button-outline-dark {
-  @apply flex justify-center items-center gap-2 text-base bg-transparent text-white cursor-pointer h-[2.5rem] rounded-full border border-stone-100;
+  @apply flex justify-center items-center gap-2 text-sm bg-transparent text-white cursor-pointer h-[2.5rem] rounded-full border border-stone-100;
 }
 
 .core-button-left-icon {

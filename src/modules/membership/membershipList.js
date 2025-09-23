@@ -8,7 +8,7 @@ const MembershipList = ({ userId, clientData }) => {
   const columns = ["Expiry Date", "Count", "Price", "Active", "Created At"];
 
   return (
-    <div className="bg-[var(--color-secondary)]">
+    <div className="">
       <CoreTableComponent
         columns={columns}
         queryFn={() => getUserMemberships({ filter: { userId } })}

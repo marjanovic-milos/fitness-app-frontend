@@ -1,7 +1,7 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useContext } from "react";
 import CoreInput from "../CoreInput/CoreInput";
 import { useDebounce } from "src/hooks/useDebounced";
-
+import { ThemeContext } from "src/context/theme";
 const CoreSearch = (props) => {
   const {
     delay,
@@ -22,6 +22,7 @@ const CoreSearch = (props) => {
   const [text, setText] = useState("");
   const [close, setClose] = useState(false);
   const debounced = useDebounce(text, delay);
+  const { dark } = useContext(ThemeContext);
 
   useEffect(() => {
     if (debounced) searchFn(debounced);
@@ -70,11 +71,17 @@ const CoreSearch = (props) => {
       />
 
       {showList && (
-        <div className="core-search-list">
+        <div
+          className={`${dark ? "core-search-list-dark" : "core-search-list"}`}
+        >
           {data?.map((option) => (
             <p
               key={option?._id || option?.id}
-              className="core-search-list-element"
+              className={`${
+                dark
+                  ? "core-search-list-element-dark"
+                  : "core-search-list-element"
+              }`}
               onClick={() => handleSelection(option)}
             >
               {option.label}

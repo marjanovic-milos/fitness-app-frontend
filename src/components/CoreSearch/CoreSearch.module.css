@@ -2,6 +2,9 @@
   @apply w-fit relative;
 }
 .core-search-list {
+  @apply absolute bg-white shadow-xl bottom-[-10] left-0 rounded-xl w-full overflow-y-scroll z-100;
+}
+.core-search-list-dark {
   @apply absolute bg-gray-700 bottom-[-10] left-0 rounded-xl w-full overflow-y-scroll z-100;
 }
 
@@ -14,5 +17,9 @@
 }
 
 .core-search-list-element:hover {
+  @apply bg-gray-200;
+}
+
+.core-search-list-element-dark:hover {
   @apply bg-gray-900;
 }

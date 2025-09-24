@@ -50,7 +50,7 @@ const CoreDashboard = () => {
             />
 
             <CoreModal
-              heading="Edit Event"
+              heading=""
               modalName={"edit-event"}
               toggleModal={() => toggleModal("edit-event")}
             >

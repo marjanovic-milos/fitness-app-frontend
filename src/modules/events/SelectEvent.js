@@ -5,9 +5,9 @@ import CoreCheckbox from "src/components/CoreCheckbox/CoreCheckbox";
 
 import CoreButton from "src/components/CoreButton/CoreButton";
 
-import { Trash, Check } from "lucide-react";
+import { Trash, Check, Zap } from "lucide-react";
 import CoreText from "src/components/CoreText/CoreText";
-
+import CoreHeading from "src/components/CoreHeading/CoreHeading";
 import CoreCard from "src/components/CoreCard/CoreCard";
 import { useForm } from "react-hook-form";
 import { useSelectEvent } from "src/talons/useSelectEvent";
@@ -22,8 +22,11 @@ const SelectEvent = ({ events, eventId }) => {
     useSelectEvent({ events, eventId, reset });
 
   return (
-    <div className="w-full lg:max-h-full max-h-[80vh] overflow-y-scroll">
-      <div className="flex justify-end gap-4 w-full px-10">
+    <div className="w-full lg:max-h-full max-h-[80vh] mt-22 lg:overflow-hidden overflow-y-scroll">
+      <div className="flex justify-between gap-4 w-full px-10">
+        <CoreHeading type="h2" className="font-semibold" icon={Zap}>
+          Edit event
+        </CoreHeading>
         <CoreButton
           classes="w-fit !text-sm"
           onClick={() => deleteMutation(selectedEvent?.id)}
@@ -37,7 +40,7 @@ const SelectEvent = ({ events, eventId }) => {
           <CoreCard>
             <div className="flex lg:flex-row flex-col gap-5 justify-between items-start px-5">
               <div className="flex flex-col items-start gap-5">
-                <CoreText>Attendance</CoreText>
+                <CoreText>Training Attendance</CoreText>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex gap-5">
                     {selectedEvent?.clients?.map((client) => (
@@ -52,24 +55,27 @@ const SelectEvent = ({ events, eventId }) => {
                     ))}
                   </div>
 
-                  <CoreButton type="submit" classes="my-5" icon={Check}>
+                  <CoreButton
+                    type="submit"
+                    classes="my-5 w-[100px]"
+                    icon={Check}
+                  >
                     Save
                   </CoreButton>
                 </form>
               </div>
 
               {informationDetails?.length ? (
-                <div className="flex flex-col">
+                <div className="flex flex-col gap-2 p-5">
                   <CoreText className="mb-4">
                     These users don't have memberships active.
                   </CoreText>
                   {informationDetails?.map((info, key) => (
                     <div
                       key={key}
-                      className="flex flex-col items-start w-fit p-2 gap-1 bg-blue-600 rounded-lg text-sm "
+                      className="flex items-start w-fit p-3 gap-1 bg-[var(--color-third)] rounded-full text-sm "
                     >
-                      <p>{info?.name}</p>
-                      <p> {info?.email}</p>
+                      <p>{info?.name}</p>-<p> {info?.email}</p>
                     </div>
                   ))}
                 </div>

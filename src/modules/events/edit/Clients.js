@@ -8,7 +8,7 @@ const Clients = ({ trainingOption, register, setValue, defaultOptions }) => {
   const { mutate, data, isPending, error } = useMutation({
     mutationFn: (search) => findUsers({ name: search }),
   });
-  console.log(error, 222);
+
   return (
     <>
       <div className="w-full">

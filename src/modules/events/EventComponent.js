@@ -4,9 +4,9 @@ import moment from "moment";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { useModals } from "src/context/modal";
-
+import { Zap } from "lucide-react";
 import CoreDropdown from "src/components/CoreDropdown/CoreDropdown";
-
+import CoreHeading from "src/components/CoreHeading/CoreHeading";
 import { addEvent, updateEvent } from "src/http/api/events";
 import EventDetails from "./edit/EventDetails";
 
@@ -83,19 +83,22 @@ const EventComponent = ({ modalName, event }) => {
   };
 
   return (
-    <div className="">
-      <div className="w-full flex justify-end px-10 mb-10">
-        {!event && (
+    <div className="w-full lg:max-h-full max-h-[80vh] mt-22 lg:overflow-hidden overflow-y-scroll">
+      {!event && (
+        <div className="w-full flex justify-between px-10 mb-10">
+          <CoreHeading type="h2" className="font-semibold" icon={Zap}>
+            Select training type
+          </CoreHeading>
           <CoreDropdown
             options={trainingOptions}
             value={type}
             onChange={(val) => setType(val)}
           />
-        )}
-      </div>
+        </div>
+      )}
       <form
         onSubmit={handleSubmit(submit)}
-        className="lg:max-h-full max-h-[70vh] overflow-y-scroll"
+        className="lg:max-h-full max-h-[70vh] lg:overflow-hidden overflow-y-scroll"
       >
         <EventDetails
           trainingOptions={trainingOptions}

@@ -48,7 +48,7 @@ const DashboardHeading = () => {
       </div>
 
       <CoreModal
-        heading="Create New Event"
+        // heading="Create New Event"
         modalName={"add-new"}
         toggleModal={() => toggleModal("add-new")}
       >

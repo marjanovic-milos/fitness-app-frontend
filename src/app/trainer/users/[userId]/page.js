@@ -37,7 +37,7 @@ const UserPage = ({ params }) => {
       </div>
 
       {clientData?.ownerId !== userData?._id ? (
-        <div>Hmmm, something wrong, you don't manage this person. Go back</div>
+        <div>Hmmm, something wrong, you dont manage this person. Go back</div>
       ) : (
         <MembershipList userId={userId} clientData={clientData} />
       )}

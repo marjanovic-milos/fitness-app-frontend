@@ -83,9 +83,9 @@ const EventComponent = ({ modalName, event }) => {
   };
 
   return (
-    <div className="w-full lg:max-h-full max-h-[80vh] mt-22 lg:overflow-hidden overflow-y-scroll">
+    <div className="w-full lg:max-h-full max-h-[80vh] mt-22 lg:overflow-hidden overflow-y-scroll lg:px-10 px-5">
       {!event && (
-        <div className="w-full flex justify-between px-10 mb-10">
+        <div className="w-full flex justify-between mb-10 gap-2">
           <CoreHeading type="h2" className="font-semibold" icon={Zap}>
             Select training type
           </CoreHeading>

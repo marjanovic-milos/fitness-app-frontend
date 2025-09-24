@@ -51,9 +51,9 @@ const EventDetails = ({
   } = useMutation({
     mutationFn: (search) => findMeal({ title: search }),
   });
-  console.log(trainingOption, "trainingOption");
+
   return (
-    <div className="flex flex-col gap-5 px-10 ">
+    <div className="flex flex-col gap-5">
       <div className="grid xl:grid-cols-2 grid-cols-auto gap-5 ">
         <div className="flex flex-col items-start gap-2">
           <CoreText>Select users:</CoreText>

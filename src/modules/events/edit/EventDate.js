@@ -9,7 +9,7 @@ const EventDate = ({ register, errors, setValue, defaultValue }) => {
     : moment().format("YYYY-MM-DD");
 
   return (
-    <div className="grid xl:grid-cols-3 grid-cols-auto gap-4">
+    <div className="grid xl:grid-cols-3 grid-cols-auto xl:gap-4 gap-5">
       <CoreInput
         name="date"
         defaultValue={currerntDate}

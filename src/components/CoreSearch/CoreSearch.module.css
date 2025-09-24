@@ -1,5 +1,5 @@
 .core-search-root {
-  @apply w-fit relative;
+  @apply lg:w-fit w-full relative;
 }
 .core-search-list {
   @apply absolute bg-white shadow-xl bottom-[-10] left-0 rounded-xl w-full overflow-y-scroll z-100;

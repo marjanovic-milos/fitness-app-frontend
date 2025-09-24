@@ -14,7 +14,7 @@
 }
 
 .core-input-label-dark {
-  @apply text-white font-semibold;
+  @apply text-white;
 }
 .core-root-input-dark {
   @apply relative rounded-full flex flex-col w-full;
@@ -25,5 +25,5 @@
 }
 
 .error-input-message {
-  @apply absolute bottom-[-3.5rem] text-xs text-red-400 w-full flex justify-start m-1;
+  @apply absolute xl:bottom-[-3.5rem] bottom-[-2.8rem] text-xs text-red-400 w-full flex justify-start m-1;
 }

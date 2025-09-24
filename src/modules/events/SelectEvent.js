@@ -23,19 +23,19 @@ const SelectEvent = ({ events, eventId }) => {
 
   return (
     <div className="w-full lg:max-h-full max-h-[80vh] mt-22 lg:overflow-hidden overflow-y-scroll">
-      <div className="flex justify-between gap-4 w-full px-10">
-        <CoreHeading type="h2" className="font-semibold" icon={Zap}>
-          Edit event
-        </CoreHeading>
-        <CoreButton
-          classes="w-fit !text-sm"
-          onClick={() => deleteMutation(selectedEvent?.id)}
-          icon={Trash}
-        >
-          Delete
-        </CoreButton>
-      </div>
-      <div className="px-10 my-5">
+      <div className="lg:px-10 px-5">
+        <div className="flex justify-between gap-4 w-full my-5">
+          <CoreHeading type="h2" className="font-semibold" icon={Zap}>
+            Edit event
+          </CoreHeading>
+          <CoreButton
+            classes="w-fit !text-sm"
+            onClick={() => deleteMutation(selectedEvent?.id)}
+            icon={Trash}
+          >
+            Delete
+          </CoreButton>
+        </div>
         {selectedEvent && (
           <CoreCard>
             <div className="flex lg:flex-row flex-col gap-5 justify-between items-start px-5">

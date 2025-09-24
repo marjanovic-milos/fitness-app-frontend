@@ -34,7 +34,7 @@ const CoreDashboard = () => {
   return (
     <div className="">
       <CoreCard>
-        <div className="p-6 ">
+        <div className="xl:p-6 p-2">
           <DashboardHeading />
           <div className="grid lg:grid-cols-[2fr_3fr] gtid-cols-auto gap-6">
             <CoreCalendar

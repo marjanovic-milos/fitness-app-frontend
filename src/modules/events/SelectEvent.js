@@ -73,7 +73,7 @@ const SelectEvent = ({ events, eventId }) => {
                   {informationDetails?.map((info, key) => (
                     <div
                       key={key}
-                      className="flex items-start w-fit p-3 gap-1 bg-[var(--color-third)] rounded-full text-sm "
+                      className="flex items-start w-fit p-3 gap-1 bg-[var(--color-third)] text-white rounded-full text-sm "
                     >
                       <p>{info?.name}</p>-<p> {info?.email}</p>
                     </div>

@@ -39,6 +39,7 @@
   }
   .rightSide {
     padding: 0 2rem;
+    display: none;
   }
   .formWrap {
     width: 100%;

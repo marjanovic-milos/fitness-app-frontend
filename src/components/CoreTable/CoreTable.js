@@ -221,7 +221,6 @@ const CoreTable = (props) => {
               className="flex lg:justify-center text-sm justify-start items-center gap-1 h-full"
             >
               <CoreText className="lg:hidden block">
-                {console.log(key, "kljuc")}
                 {mobileColumns.includes(key) &&
                   `${key.charAt(0).toUpperCase() + key.slice(1)} :`}
               </CoreText>{" "}

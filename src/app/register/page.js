@@ -71,7 +71,7 @@ const Register = () => {
           </form>
         </div>
       </div>
-      <div className={`${styles.rightSide} lg:block !hidden`}></div>
+      <div className={`${styles.rightSide}`}></div>
     </div>
   );
 };

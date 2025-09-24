@@ -68,7 +68,7 @@ const SelectEvent = ({ events, eventId }) => {
               {informationDetails?.length ? (
                 <div className="flex flex-col gap-2 p-5">
                   <CoreText className="mb-4">
-                    These users don't have memberships active.
+                    These users dont have memberships active.
                   </CoreText>
                   {informationDetails?.map((info, key) => (
                     <div

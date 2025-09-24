@@ -8,7 +8,6 @@ export const SpoonacularForm = ({
   register,
   handleSubmit,
   errors,
-  // cancelForm,
 }) => {
   const { t } = useTranslation();
   const { toggleModal } = useModals();
@@ -119,7 +118,6 @@ export const CreateYourForm = ({
   register,
   handleSubmit,
   errors,
-  // cancelForm,
 }) => {
   const { t } = useTranslation();
   return (

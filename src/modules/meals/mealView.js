@@ -76,7 +76,7 @@ const MealView = (props) => {
     const Icon = icon;
     return (
       <div
-        className={`flex flex-col justify-center gap-4 p-4 rounded-2xl w-full h-full ${className}`}
+        className={`flex flex-col justify-center gap-4 p-4 rounded-2xl w-full h-full min-h-50 ${className}`}
       >
         <div className="flex flex-col items-center gap-4 px-2">
           <div className={`core-center bg-black/10 h-10 w-10 rounded-full`}>
@@ -96,46 +96,14 @@ const MealView = (props) => {
     );
   };
 
-  const DietComponent = ({ value, icon, title }) => {
-    const Icon = icon;
-    return (
-      <span
-        className={`flex items-center gap-2 bg-transperent border ${
-          value ? "border-green-500" : "border-red-700"
-        } w-fit h-8 rounded-full px-2`}
-      >
-        {value ? (
-          <Icon
-            className={`h-4 w-4 ${value ? "text-green-500" : "!text-red-700"} `}
-            strokeWidth={1.5}
-          />
-        ) : (
-          <XCircle
-            className={` h-4 w-4 ${
-              value ? "text-green-500" : "text-red-700"
-            }  `}
-            strokeWidth={1.5}
-          />
-        )}
-        <p
-          className={`text-xs  ${
-            value ? "text-green-500" : "text-red-700"
-          }  font-semibold `}
-        >
-          {title}
-        </p>
-      </span>
-    );
-  };
-
   return (
-    <div className="relative h-full">
+    <div className="relative h-full ">
       <span className="absolute inset-0 bg-black/30 rounded-xl z-0">
-        <div className="w-full flex flex-col justify-between items-center h-full w-full">
-          <div className="flex items-end w-full h-[50%] p-10">
+        <div className="w-full flex flex-col justify-between items-center lg:h-full h-fit w-full">
+          <div className="flex items-end w-full xl:h-[50%] h-60 p-10">
             <Image
               src={logo}
-              alt="Example local image"
+              alt="Spoonacular logo"
               width={100}
               height={100}
               className="absolute top-2 left-2"
@@ -144,12 +112,12 @@ const MealView = (props) => {
             <h1 className="text-white h-auto text-2xl"> {dummy.title}</h1>
           </div>
           <div
-            className={`flex lg:flex-row flex-col-reverse gap-5 h-full overflow-y-auto rounded-xl w-full p-5 z-99 ${
+            className={`flex lg:flex-row flex-col-reverse gap-5 h-full rounded-xl w-full p-5 z-99 ${
               dark ? "bg-gray-800" : "bg-white"
             }`}
           >
-            <div className="lg:w-[50%] w-full h-full">
-              <div className="grid lg:grid-cols-4 grid-cols-2 gap-4 pb-10 h-full">
+            <div className="lg:w-[50%] w-full lg:overflow-y-hidden overflow-y-scroll h-full">
+              <div className="grid lg:grid-cols-4 grid-cols-2 gap-4 h-auto">
                 <NutritionComponent
                   className="bg-blue-400"
                   title={t("meals.calories")}
@@ -163,7 +131,7 @@ const MealView = (props) => {
                   icon={Wheat}
                 />
                 <NutritionComponent
-                  className="bg-green-400"
+                  className="bg-indigo-800"
                   title={t("meals.protein")}
                   data={recepie?.protein}
                   icon={Ham}
@@ -174,43 +142,52 @@ const MealView = (props) => {
                   data={recepie?.carbs}
                   icon={LeafyGreen}
                 />
-              </div>
-            </div>
-            <div className="flex flex-col gap-5 lg:w-[50%] w-full h-full">
-              <div className="flex items-center flex-wrap gap-2">
-                <DietComponent
-                  value={dummy.vegan}
-                  icon={Vegan}
+                <NutritionComponent
+                  className={`${dummy.vegan ? "bg-green-900" : "bg-red-900"}`}
                   title={`${
                     dummy.vegan ? t("meals.vegan") : t("meals.notVegan")
                   }`}
+                  data={dummy.vegan}
+                  icon={Vegan}
                 />
-                <DietComponent
-                  value={dummy.vegetarian}
-                  icon={Salad}
+                <NutritionComponent
+                  className={`${
+                    dummy.vegetarian ? "bg-green-900" : "bg-red-900"
+                  }`}
                   title={`${
                     dummy.vegetarian ? t("meals.veget") : t("meals.notVeget")
                   }`}
+                  data={dummy.vegetarian}
+                  icon={Salad}
                 />
-                <DietComponent
-                  value={dummy.glutenFree}
-                  icon={Wheat}
+                <NutritionComponent
+                  className={`${
+                    dummy.glutenFree ? "bg-green-600" : "bg-red-900"
+                  }`}
                   title={`${
                     dummy.glutenFree
                       ? t("meals.glutenFree")
                       : t("meals.notGlutenFree")
                   }`}
+                  data={dummy.glutenFree}
+                  icon={Wheat}
                 />
-                <DietComponent
-                  value={dummy.dairyFree}
-                  icon={Milk}
+                <NutritionComponent
+                  className={`${
+                    dummy.dairyFree ? "bg-green-900" : "bg-red-900"
+                  }`}
                   title={`${
                     dummy.dairyFree
                       ? t("meals.diaryFree")
                       : t("meals.notDiaryFree")
                   }`}
+                  data={dummy.dairyFree}
+                  icon={Milk}
                 />
               </div>
+            </div>
+            <div className="flex flex-col gap-5 lg:w-[50%] w-full h-full">
+              <div className="flex items-center flex-wrap gap-2"></div>
               <div className="w-full">
                 <div className={"truncate-text text-lg font-thin"}>
                   {dummy.instructions}

@@ -12,10 +12,12 @@ import CoreModal from "src/components/CoreModal/CoreModal";
 import MealView from "./mealView";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
+import { useModals } from "src/context/modal";
 
 const Spoonacular = ({ createFn }) => {
   const [recepies, setRecepies] = useState();
   const [selectedRecepie, setRecepie] = useState();
+  const { toggleModal } = useModals();
 
   const { t } = useTranslation();
 
@@ -47,7 +49,10 @@ const Spoonacular = ({ createFn }) => {
   const handleClose = () => {
     setRecepie(false);
   };
-
+  const openRecepie = (recepie) => {
+    toggleModal("open-recepie");
+    setRecepie(recepie);
+  };
   const dummyData = [
     {
       id: 634927,
@@ -158,10 +163,12 @@ const Spoonacular = ({ createFn }) => {
         register={register}
         errors={errors}
         onSubmit={onSubmit}
-        // cancelForm={cancelForm}
       />
 
-      <CoreModal isOpen={selectedRecepie} onClose={handleClose}>
+      <CoreModal
+        modalName={"open-recepie"}
+        toggleModal={() => toggleModal("open-recepie")}
+      >
         <MealView
           recepie={selectedRecepie}
           createFn={createFn}
@@ -189,7 +196,7 @@ const Spoonacular = ({ createFn }) => {
                   </span>
                 </div>
                 <span
-                  onClick={() => setRecepie(recepie)}
+                  onClick={() => openRecepie(recepie)}
                   className="absolute top-5 right-5 bg-gray-200 p-2 text-gray-800 rounded-full cursor-pointer"
                 >
                   <Maximize2 className="h-4 w-4" strokeWidth={1.5} />

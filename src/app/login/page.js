@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import avatar from "../.././../public/sportive.png";
 import CoreText from "src/components/CoreText/CoreText";
 import CoreHeading from "src/components/CoreHeading/CoreHeading";
+import { Signal } from "lucide-react";
 import Link from "next/link";
 const ClientLogin = () => {
   const {
@@ -34,30 +35,41 @@ const ClientLogin = () => {
   const onSubmit = (data) => {
     mutate({ data });
   };
-  // console.log(errors, "errors");
+
   return (
     <div className={styles.root}>
       <div className={styles.leftSide}>
         <div className={styles.formWrap}>
           <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-            <CoreHeading variant='h3' className='font-bold'>
-              Sign In
+            <CoreHeading variant="h2" className="">
+              Hello, Welcome Back{" "}
             </CoreHeading>
-            <CoreInput name='email' type='email' label='Email' register={register} {...register("email")} />
+            <CoreInput
+              name="email"
+              type="email"
+              register={register}
+              {...register("email")}
+              placeholder="Email"
+            />
             <CoreInput
               classes={{ root: "mt-2" }}
-              name='password'
+              name="password"
               register={register}
               required={"Password is required field"}
               {...register("password")}
-              type='password'
-              label='Password'
+              type="password"
+              placeholder="Password"
             />
-            <CoreButton classes={"w-full"}>Login</CoreButton>
-            <div className='flex justify-center '>
+            <CoreButton classes={"lg:w-[200px] w-full"} variant="outline">
+              Login
+            </CoreButton>
+            <div className="flex justify-center ">
               <CoreText>
                 First time here?
-                <Link href='/register' className='flex justify-center underline mx-2'>
+                <Link
+                  href="/register"
+                  className="flex justify-center underline mx-2"
+                >
                   Register first
                 </Link>
               </CoreText>
@@ -65,9 +77,7 @@ const ClientLogin = () => {
           </form>
         </div>
       </div>
-      <div className={styles.rightSide}>
-        <Image src={avatar} alt='My Photo' className={styles.image} width={400} height={300} />
-      </div>
+      <div className={`${styles.rightSide} lg:block !hidden`}></div>
     </div>
   );
 };

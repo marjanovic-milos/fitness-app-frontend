@@ -1,15 +1,17 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import { usePathname } from "next/navigation";
+import { ThemeContext } from "src/context/theme";
 import { Users, Dumbbell, Apple, Gauge } from "lucide-react";
 
 import Link from "next/link";
 
 const MobileNavigation = () => {
   const pathname = usePathname();
+  const { dark } = useContext(ThemeContext);
 
   return (
-    <div className="core-mobile-navigation">
+    <div className={`core-mobile-navigation`}>
       <Link
         href="/trainer"
         className={`${

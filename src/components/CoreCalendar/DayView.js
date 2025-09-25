@@ -30,7 +30,7 @@ const DayView = ({ events, dayCalendarRef, initialDate, handleEventClick }) => {
 
   return (
     <CoreCard>
-      <div className="day-view-calendar p-5">
+      <div className="day-view-calendar xl:p-5 p-0">
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView="timeGridDay"

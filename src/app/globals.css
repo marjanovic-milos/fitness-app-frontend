@@ -128,6 +128,9 @@
 .core-table .fc-theme-standard td {
   max-height: 50px;
 }
+.core-table .fc .fc-day {
+  @apply min-h-11 max-w-11;
+}
 
 .core-table .fc .fc-daygrid-day-frame {
   @apply flex flex-col bg-gray-900 lg:min-h-14 lg:max-w-14 min-h-10 max-w-10 flex items-center justify-center !rounded-full text-center m-auto;
@@ -184,6 +187,10 @@
 
   .core-table .fc-theme-standard h2 {
     font-size: 1.5rem;
+  }
+  .core-table .fc-theme-standard .fc-col-header-cell a {
+    /* color: red !important; */
+    font-size: 0.8rem;
   }
 }
 

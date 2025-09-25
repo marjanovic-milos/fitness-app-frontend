@@ -58,7 +58,9 @@ const CoreModal = ({ modalName, toggleModal, children, heading }) => {
         ) : (
           <button
             onClick={toggleModal}
-            className="absolute top-10 right-10 text-white text-2xl z-99 cursor-pointer"
+            className={`${
+              dark ? "text-white" : "text-gray-800"
+            } absolute top-10 right-10 text-2xl z-99 cursor-pointer`}
           >
             ✕
           </button>

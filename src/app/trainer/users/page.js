@@ -14,7 +14,7 @@ const UsersPage = () => {
     "",
     t("users.name"),
     t("users.email"),
-    "Platform Access",
+    t("users.platformAccess"),
     t("users.actions"),
   ];
 
@@ -28,7 +28,7 @@ const UsersPage = () => {
         createFn={saveUser}
         createForm={CreateUser}
         queryKey={["users"]}
-        buttonText={"Create User"}
+        buttonText={t("users.createUser")}
         heading={t("users.tableHeading")}
         icon={Users}
         modalName={"users-form"}

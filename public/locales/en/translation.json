@@ -72,7 +72,11 @@
     "email": "Email",
     "tableHeading": "Your clients",
     "actions": "Actions",
-    "links": "Links"
+    "links": "Links",
+    "createUser":"Create User",
+    "platformAccess":"Platform Access",
+    "backToUsers":"Back to Users",
+    "somethingWrongGoBack":"Something went wrong go back."
   },
   "excercises": {
     "tableHeading": "Your Excercises",

@@ -7,9 +7,10 @@ import CoreButton from "src/components/CoreButton/CoreButton";
 import { ArrowBigLeft } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { getUser } from "src/http/api/users";
-
+import { useTranslation } from "react-i18next";
 const UserPage = ({ params }) => {
   const userId = params?.userId;
+  const { t } = useTranslation();
 
   const { data: clientData } = useQuery({
     queryKey: ["client", userId],
@@ -32,12 +33,12 @@ const UserPage = ({ params }) => {
           variant="outline"
           position="left"
         >
-          <Link href={`/trainer/users/`}>Back to Users</Link>
+          <Link href={`/trainer/users/`}>{t("users.backToUsers")}</Link>
         </CoreButton>
       </div>
 
       {clientData?.ownerId !== userData?._id ? (
-        <div>Hmmm, something wrong, you dont manage this person. Go back</div>
+        <div>{t("users.somethingWrongGoBack")}</div>
       ) : (
         <MembershipList userId={userId} clientData={clientData} />
       )}

@@ -6,10 +6,24 @@
     "themeSwitch": "Change color theme",
     "translationsSelect": "Change language"
   },
+  "pages":{
+    "signup":"Sign Up",
+    "email":"Email",
+    "password": "Password",
+    "passwordRequired" : "Password is required field",
+    "register":"Register",
+    "signIn": "Sign in",
+    "welcome":"Hello, Welcome Back",
+    "logIn":"Login"
+
+  },
   "profile": {
     "userSettings": "User Settings",
-    "userDetails": "User Details"
+    "userDetails": "User Details",
+    "logout": "Logout"
+
   },
+
   "validation": {
     "nubmerOnly": "This input is number only.",
     "fieldRequired": "Field {{key}} is required."

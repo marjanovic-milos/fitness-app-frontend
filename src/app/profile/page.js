@@ -37,9 +37,6 @@ const ProfilePage = () => {
           <div className="flex flex-col justify-start text-start w-full lg:px-10 px-0 lg:pb-0 pb-10 lg:border-r lg:border-b-0 border-b border-gray-400">
             <div className="flex items-center justify-between">
               <CoreHeading type="h2">{t("profile.userDetails")}</CoreHeading>
-              {/* <div className="h-10 px-6 rounded-full text-white xl:text-sm text-xs font-semibold bg-linear-to-r from-cyan-500 to-blue-500 flex items-center gap-2">
-                <Crown className="w-5 h-5" strokeWidth={1.5} /> You are premium
-              </div> */}
             </div>
             <div className="flex items-center gap-4 my-5">
               <img
@@ -52,7 +49,7 @@ const ProfilePage = () => {
               </CoreText>
             </div>
             <div className="flex items-center gap-4" onClick={() => signOut()}>
-              Logout
+              {t("profile.logout")}
               <LogOut className="w-4 h-4 my-2" strokeWidth={1.5} />
             </div>
           </div>

@@ -6,13 +6,15 @@ import { signIn } from "../../http/api/auth";
 import { useForm } from "react-hook-form";
 import styles from "./register.module.css";
 import CoreInput from "src/components/CoreInput/CoreInput";
-import Image from "next/image";
+
 import CoreButton from "src/components/CoreButton/CoreButton";
 import { useRouter } from "next/navigation";
-import avatar from "../.././../public/sportive.png";
+
 import CoreText from "src/components/CoreText/CoreText";
 import CoreHeading from "src/components/CoreHeading/CoreHeading";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
+
 const Register = () => {
   const {
     register,
@@ -22,6 +24,7 @@ const Register = () => {
 
   const queryClient = useQueryClient();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const { mutate } = useMutation({
     mutationFn: signIn,
@@ -40,31 +43,30 @@ const Register = () => {
       <div className={styles.leftSide}>
         <div className={styles.formWrap}>
           <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-            <CoreHeading variant="h2">Sign Up</CoreHeading>
+            <CoreHeading variant="h2">{t("pages.signup")}</CoreHeading>
             <CoreInput
               name="email"
               type="email"
               register={register}
               {...register("email")}
-              placeholder="Email"
+              placeholder={t("pages.email")}
             />
             <CoreInput
               classes={{ root: "mt-2" }}
               name="password"
               register={register}
-              required={"Password is required field"}
+              required={t("pages.passwordRequired")}
               {...register("password")}
               type="password"
-              placeholder="Password"
+              placeholder={t("pages.password")}
             />
             <CoreButton classes={"lg:w-[200px] w-full"} variant="outline">
-              Register
+              {t("pages.register")}
             </CoreButton>
             <div className="flex justify-center ">
               <CoreText>
-                Already have an account?
                 <Link href="/" className="flex justify-center underline mx-2">
-                  Sign in
+                  {t("pages.signIn")}
                 </Link>
               </CoreText>
             </div>

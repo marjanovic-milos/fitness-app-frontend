@@ -9,6 +9,8 @@ import SelectEvent from "src/modules/events/SelectEvent";
 import { useQuery } from "@tanstack/react-query";
 import { getEvents } from "src/http/api/events";
 import { useModals } from "src/context/modal";
+import DaySlide from "../CoreCalendar/DaySlide/DaySlide";
+
 const CoreDashboard = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["events"],
@@ -30,7 +32,7 @@ const CoreDashboard = () => {
     setEventId(eventInfo?.id);
     toggleModal("edit-event");
   };
-
+  console.log(data, selectedDate, 22);
   return (
     <div className="">
       <CoreCard>
@@ -42,12 +44,13 @@ const CoreDashboard = () => {
               dayCalendarRef={dayCalendarRef}
               setSelectedDate={setSelectedDate}
             />
-            <DayView
+            <DaySlide />
+            {/* <DayView
               events={data}
               initialDate={selectedDate}
               dayCalendarRef={dayCalendarRef}
               handleEventClick={handleEventClick}
-            />
+            /> */}
 
             <CoreModal
               heading=""

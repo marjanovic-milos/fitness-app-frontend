@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-// import StaticMeter from "../StaticMeter/StaticMeter";
+
 import moment from "moment";
 
 import { getWeekRange } from "src/utils/calendar";
@@ -13,7 +13,6 @@ const CalendarWeekly = () => {
         <h2 className="text-2xl text-bold  text-gray-600  text-center ">
           {today}
         </h2>
-        {/* <StaticMeter /> */}
       </div>
       <div className="week-root">
         {weekDates.map((date, index) => (

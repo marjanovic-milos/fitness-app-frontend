@@ -3,4 +3,5 @@
 }
 .core-card-dark {
   @apply rounded-xl bg-gray-800 size-full shadow-sm;
+
 }

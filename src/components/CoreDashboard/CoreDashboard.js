@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 // import CalendarWeekly from "../CoreCalendar/CalendarWeekly";
 import CoreCard from "../CoreCard/CoreCard";
 import DayView from "../CoreCalendar/DayView";
@@ -10,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getEvents } from "src/http/api/events";
 import { useModals } from "src/context/modal";
 import DaySlide from "../CoreCalendar/DaySlide/DaySlide";
-
+import moment from "moment";
 const CoreDashboard = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["events"],
@@ -19,7 +19,7 @@ const CoreDashboard = () => {
 
   const { toggleModal } = useModals();
   const dayCalendarRef = useRef();
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(moment());
   const [eventId, setEventId] = useState("");
 
   useEffect(() => {
@@ -32,19 +32,28 @@ const CoreDashboard = () => {
     setEventId(eventInfo?.id);
     toggleModal("edit-event");
   };
-  console.log(data, selectedDate, 22);
+
+  const eventsForDate = useMemo(() => {
+    return data.filter((event) =>
+      moment(event.start).isSame(selectedDate, "day")
+    );
+  }, [data, selectedDate]);
+
   return (
     <div className="">
       <CoreCard>
         <div className="xl:p-6 p-2">
           <DashboardHeading />
-          <div className="grid lg:grid-cols-[2fr_3fr] gtid-cols-auto gap-6">
+          <div className="grid lg:grid-cols-[2fr_3fr] grid-cols-auto gap-6">
             <CoreCalendar
               events={data}
               dayCalendarRef={dayCalendarRef}
               setSelectedDate={setSelectedDate}
             />
-            <DaySlide />
+            <DaySlide
+              events={eventsForDate}
+              handleEventClick={handleEventClick}
+            />
             {/* <DayView
               events={data}
               initialDate={selectedDate}

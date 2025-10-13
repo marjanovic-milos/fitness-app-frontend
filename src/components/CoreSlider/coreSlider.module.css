@@ -19,3 +19,8 @@
 .core-root-slider .slick-list {
   margin: 0 -10px;
 }
+
+.core-root-slider  , .slick-list ,  .slick-track  , .slick-slide div , .core-day-slide{
+  height: 100%;
+}
+ 

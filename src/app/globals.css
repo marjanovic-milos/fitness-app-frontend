@@ -21,6 +21,7 @@
 @import "../components/CoreSlider/coreSlider.module.css";
 @import "../components/CoreCalendar/DayView.module.css";
 @import "../components/AppError/AppError.module.css";
+@import "../components/CoreCalendar/DaySlide/DaySlide.module.css";
 
 @layer base {
   h1 {
